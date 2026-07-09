@@ -17,7 +17,7 @@ export function Define({
       {/* Sculpture */}
       <div className="pointer-events-none relative mx-auto w-[78%] max-w-[760px] md:w-[52%]">
         <Image
-          src="/images/sculpture-aa.png"
+          src="/images/sculpture-aa.webp"
           alt="Điêu khắc àA — ànART"
           width={1200}
           height={1126}

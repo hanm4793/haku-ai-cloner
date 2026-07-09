@@ -37,7 +37,7 @@ export function Manifesto() {
           {/* Einstein column — hidden on mobile (per Mobile design) */}
           <div className="aa-reveal hidden flex-col gap-5 sm:flex" style={{ ["--reveal-delay" as string]: "120ms" }}>
             <Image
-              src="/images/einstein.png"
+              src="/images/einstein.webp"
               alt="Einstein đeo kính àA"
               width={428}
               height={428}

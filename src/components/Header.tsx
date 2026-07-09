@@ -43,7 +43,7 @@ export function Header() {
         <div className="aa-container flex items-center justify-between py-4">
           <Link href="/" aria-label="ànART" className="relative z-[60] shrink-0">
             <Image
-              src="/images/logo-lockup.png"
+              src="/images/logo-lockup.webp"
               alt="ànART® Creative Hub x Experiences"
               width={195}
               height={56}
