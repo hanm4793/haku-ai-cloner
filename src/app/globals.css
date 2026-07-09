@@ -2,6 +2,12 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* Design source files (large PSDs/PDFs/master SVGs, ~1GB) live under
+   src/anart-assets. They are NOT part of the app and must be excluded from
+   Tailwind v4's automatic content scan, otherwise reading the multi-hundred-MB
+   SVGs hangs every dev/build compile. */
+@source not "../anart-assets";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
