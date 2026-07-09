@@ -1,30 +1,40 @@
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Header } from "@/components/Header";
+import { SideTab } from "@/components/SideTab";
 import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Clients } from "@/components/Clients";
+import { Manifesto } from "@/components/Manifesto";
+import { GalleryMarquee } from "@/components/GalleryMarquee";
 import { Differentiator } from "@/components/Differentiator";
-import { Scale } from "@/components/Scale";
-import { Services } from "@/components/Services";
-import { Projects } from "@/components/Projects";
-import { CTA } from "@/components/CTA";
+import { ServicesHome } from "@/components/ServicesHome";
+import { ProjectsGrid } from "@/components/ProjectsGrid";
+import { Clients } from "@/components/Clients";
+import { Define } from "@/components/Define";
+import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
+import { PROJECTS } from "@/lib/data";
 
 export default function Home() {
   return (
     <div className="flex min-h-screen w-full flex-col bg-black text-white">
       <SmoothScroll />
       <Header />
+      <SideTab />
       <main className="flex-1">
         <Hero />
-        <About />
-        <Clients />
+        <Manifesto />
+        <GalleryMarquee />
         <Differentiator />
-        <Scale />
-        <Services />
-        <Projects />
-        <CTA />
+        <ServicesHome />
+        <section className="aa-container pb-28">
+          <p className="aa-reveal aa-eyebrow mb-8 text-base">
+            Dự án / khách hàng nổi bật
+          </p>
+          <ProjectsGrid projects={PROJECTS} />
+        </section>
+        <Clients />
+        <Define />
       </main>
+      <PreFooter />
       <Footer />
     </div>
   );

@@ -1,144 +1,171 @@
-import type { NavLink, Project, Service, Stat } from "@/types";
+import type { NavLink, Project, Service } from "@/types";
 
 export const NAV_LINKS: NavLink[] = [
-  { index: "01", label: "Về Zeit", href: "/vn/about" },
-  { index: "02", label: "Dự án", href: "/vn/works" },
-  { index: "03", label: "Dịch vụ", href: "/vn/services" },
-  { index: "04", label: "Blog", href: "/vn/blog" },
+  { index: "01", label: "về ànART", href: "/" },
+  { index: "02", label: "dịch vụ", href: "/dich-vu" },
+  { index: "03", label: "dự án", href: "/du-an" },
+  { index: "04", label: "liên hệ", href: "/lien-he" },
 ];
 
-/** Full menu overlay links (79px big nav on the original). */
+/** Fullscreen blue menu overlay links (Neue Kaine Black, right-aligned). */
 export const MENU_LINKS: { label: string; href: string }[] = [
-  { label: "Trang chủ", href: "/vn" },
-  { label: "Về Zeit", href: "/vn/about" },
-  { label: "Dự án", href: "/vn/works" },
-  { label: "Dịch vụ", href: "/vn/services" },
-  { label: "Blog", href: "/vn/blog" },
-  { label: "Liên hệ", href: "/vn/contact" },
+  { label: "về ànArt", href: "/" },
+  { label: "dịch vụ", href: "/dich-vu" },
+  { label: "dự án", href: "/du-an" },
+  { label: "liên hệ", href: "/lien-he" },
 ];
 
-export const FEATURED_LINKS: { tag: string; title: string; href: string; cta: string }[] = [
-  { tag: "New Project", title: "OSUN FEST", href: "/vn/work/osun-fest", cta: "Show reel" },
-  {
-    tag: "New Project",
-    title: "DỰ ÁN TÁI ĐỊNH VỊ THƯƠNG HIỆU PETROLIMEX",
-    href: "/vn/work/petrolimex-rebranding",
-    cta: "Watch showreel",
-  },
-];
-
-export const STATS: Stat[] = [
-  { value: "200+", label: "Sự kiện cho các doanh nghiệp trong và ngoài nước" },
-  { value: "1000+", label: "Ấn phẩm quảng cáo, truyền thông cho các thương hiệu" },
-  { value: "200+", label: "Nhân sự trẻ trung, giàu kinh nghiệm" },
-];
-
-export const CLIENTS: string[] = [
-  "VINGROUP", "BIM GROUP", "PETROLIMEX", "VIETINBANK", "VIETCOMBANK",
-  "TECHCOMBANK", "VPBANK", "MB", "TPBANK", "SHB", "HDBANK", "MSB",
-  "PJICO", "VIETTEL", "VNG", "VTC", "FPT", "VINAPHONE", "SAMSUNG",
-  "LG", "VIETNAM AIRLINES", "BAMBOO AIRWAYS", "SONY", "OPPO",
-  "HYUNDAI", "SABECO", "VINACONEX", "AND MORE...",
-];
-
-export const GOV_CLIENTS: string[] = [
-  "BỘ CÔNG AN",
-  "BỘ NGOẠI GIAO",
-  "BỘ VĂN HÓA THỂ THAO VÀ DU LỊCH",
-];
+export const CONTACT = {
+  office: "10 Pho Duc Chinh St, Ba Dinh, Hanoi, Vietnam",
+  hotline: "[+849] 02 007 113",
+  email: "hello@anart.vn",
+  socials: [
+    { label: "Instagram", href: "https://www.instagram.com" },
+    { label: "Facebook", href: "https://www.facebook.com" },
+    { label: "Behance", href: "https://www.behance.net" },
+  ],
+};
 
 export const SERVICES: Service[] = [
   {
     index: "01",
-    title: "Tổ chức sự kiện",
-    items: ["Xây dựng concept sự kiện sáng tạo", "Triển khai tổng thể sự kiện"],
-    image: "/images/svc-events.avif",
+    title: "thiết kế không gian triển lãm",
+    en: "Exhibition Design",
+    description:
+      "Chúng tôi tạo nên hệ ngôn ngữ thị giác độc bản — nơi màu sắc, hình khối và chất liệu... không chỉ để nhìn, mà đó là hệ thống cảm xúc cho cả một hành trình trải nghiệm.",
+    image: "/images/svc-exhibition.webp",
   },
   {
     index: "02",
-    title: "Truyền thông",
-    items: [
-      "Phát triển và triển khai chiến lược truyền thông marketing tích hợp",
-      "Định vị thương hiệu",
-    ],
-    image: "/images/svc-marcom.avif",
+    title: "thiết kế không gian sự kiện / lễ hội",
+    en: "Event Design",
+    description:
+      "Không chỉ tạo nên một sự kiện / lễ hội, chúng tôi kiến tạo những không gian truyền cảm hứng, kết nối con người với thương hiệu qua từng trải nghiệm.",
+    image: "/images/svc-event.webp",
   },
   {
     index: "03",
-    title: "Thiết kế sáng tạo",
-    items: ["Xây dựng bộ nhận diện thương hiệu", "Phát triển ý tưởng và tư vấn thiết kế"],
-    image: "/images/svc-cd.avif",
+    title: "thiết kế trang trí cảnh quan",
+    en: "Lanscape Design",
+    description:
+      "Mỗi thiết kế là sự kết hợp giữa tư duy nghệ thuật, bản sắc không gian và trải nghiệm con người, tạo nên những điểm đến mang giá trị bền vững theo thời gian.",
+    image: "/images/svc-landscape.webp",
   },
   {
     index: "04",
-    title: "Sản xuất",
-    items: ["Sản xuất TVC, Video doanh nghiệp", "Sản xuất chương trình truyền hình thực tế"],
-    image: "/images/svc-production.avif",
+    title: "mô hình nghệ thuật",
+    en: "Art Model",
+    description:
+      "Mỗi mô hình nghệ thuật là sự kết hợp giữa tư duy sáng tạo, kỹ thuật chế tác và ngôn ngữ thị giác để tạo nên những điểm nhấn giàu giá trị.",
+    image: "/images/svc-artmodel.webp",
+  },
+  {
+    index: "05",
+    title: "thiết kế thương hiệu",
+    en: "Branding Design",
+    description:
+      "Chúng tôi kết nối chiến lược, sáng tạo và thiết kế để xây dựng nên thương hiệu có bản sắc rõ ràng, giàu cảm xúc. Và mỗi điểm chạm đều truyền tải đúng giá trị của thương hiệu.",
+    image: "/images/svc-branding.webp",
+  },
+  {
+    index: "06",
+    title: "tổ chức sản xuất decor",
+    en: "Production Design",
+    description:
+      "Từ ý tưởng đến hiện thực, chúng tôi quản lý và tổ chức sản xuất đồng bộ để đảm bảo chất lượng, tiến độ và giá trị của từng dự án.",
+    image: "/images/svc-production.webp",
   },
 ];
+
+export const PROJECT_FILTERS = [
+  "All",
+  "Exhibition",
+  "Event",
+  "Lanscape",
+  "Branding",
+  "Productions",
+  "Photography",
+] as const;
 
 export const PROJECTS: Project[] = [
   {
-    year: "2026",
-    category: "Branding",
-    title: "DỰ ÁN TÁI ĐỊNH VỊ THƯƠNG HIỆU PETROLIMEX",
-    client: "PETROLIMEX",
-    href: "/vn/work/petrolimex-rebranding",
-    image: "/images/proj-petrolimex.webp",
+    slug: "vietcombank",
+    title: "VIETCOMBANK",
+    subtitle: "Vietcombank Instalation Art & Exhibition",
+    tags: "Visual Art / Exhibition / Production",
+    categories: ["Exhibition", "Event", "Productions"],
+    image: "/images/proj-vietcombank.webp",
+    size: "wide",
   },
   {
-    year: "2026",
-    category: "Events",
-    title: "DƯỚI LÁ CỜ VẺ VANG CỦA ĐẢNG",
-    client: "Ban Chấp hành Trung ương Đảng",
-    href: "/vn/work/duoi-la-co-ve-vang-cua-dang",
-    image: "/images/proj-dang.jpg",
+    slug: "ben-xuan",
+    title: "BẾN XUÂN",
+    subtitle: "Branding",
+    tags: "Branding",
+    categories: ["Branding"],
+    image: "/images/proj-benxuan.webp",
+    size: "small",
   },
   {
-    year: "2025",
-    category: "Events",
-    title: "CÔNG ƯỚC HÀ NỘI",
-    client: "Bộ Công an",
-    href: "/vn/work/hanoi-convention",
-    image: "/images/proj-hanoi.avif",
+    slug: "emerald-symphony",
+    title: "EMERALD SYMPHONY",
+    subtitle: "Sắc xanh lục bảo",
+    tags: "Branding | Keyvissual",
+    categories: ["Branding"],
+    image: "/images/proj-emerald.webp",
+    size: "small",
   },
   {
-    year: "2025",
-    category: "Production",
-    title: "CHIẾN SĨ QUẢ CẢM",
-    client: "Bộ Công an",
-    href: "/vn/work/reality-tv-shows-the-brave-warrior",
-    image: "/images/proj-chiensi.avif",
+    slug: "fendi",
+    title: "FENDI",
+    subtitle: "Event",
+    tags: "Event",
+    categories: ["Event", "Photography"],
+    image: "/images/proj-fendi.webp",
+    size: "small",
   },
   {
-    year: "2025",
-    category: "Production",
-    title: 'TVC VIETINBANK PREMIUM "SỐNG TRỌN TINH HOA"',
-    client: "VietinBank Premium",
-    href: "/vn/work/tvc-vietinbank-premiun-song-tron-tinh-hoa",
-    image: "/images/proj-vietinbank.webp",
+    slug: "kizciti",
+    title: "KIZCITI",
+    subtitle: "Học viện Môi trường",
+    tags: "Event | Branding",
+    categories: ["Event", "Branding"],
+    image: "/images/proj-kizciti.webp",
+    size: "small",
   },
   {
-    year: "2025",
-    category: "Events",
-    title: 'TRIỂN LÃM "95 NĂM CỜ ĐẢNG SOI ĐƯỜNG"',
-    client: "Ban Tuyên giáo và Dân vận Trung ương, Báo Nhân Dân",
-    href: "/vn/work/exhibition-95-years-beneath-the-partys-flag",
-    image: "/images/proj-trienlam.avif",
+    slug: "viettheatre",
+    title: "NHÀ HÁT VIỆT | VIETTHEATRE",
+    subtitle: "Culture Space",
+    tags: "Branding",
+    categories: ["Branding", "Exhibition"],
+    image: "/images/proj-viettheatre.webp",
+    size: "tall",
+  },
+  {
+    slug: "sonha",
+    title: "SONHA",
+    subtitle: "20 năm thành lập công ty",
+    tags: "Branding | Keyvissual",
+    categories: ["Branding", "Event"],
+    image: "/images/proj-sonha.webp",
+    size: "small",
+  },
+  {
+    slug: "vietnam-airlines",
+    title: "VIETNAM AIRLINES",
+    subtitle: "The Swan Lake — Vietnam Airlines Classic",
+    tags: "Branding",
+    categories: ["Branding", "Photography"],
+    image: "/images/proj-vna.webp",
+    size: "small",
   },
 ];
 
-export const CONTACT = {
-  addresses: [
-    "24 Tuệ Tĩnh, phường Hai Bà Trưng, Hà Nội",
-    "9 Đoàn Văn Bơ, phường Xóm Chiếu, TP.Hồ Chí Minh",
-  ],
-  email: "info@zeitmedia.vn",
-  hotline: "(+84) 84 848 8686",
-  socials: [
-    { label: "FB", href: "https://www.facebook.com/ZeitMediaVN" },
-    { label: "IG", href: "https://www.instagram.com/zeitmedia.vn" },
-    { label: "TIKTOK", href: "https://www.tiktok.com/@zeitmedia.vn" },
-    { label: "BEHANCE", href: "https://www.behance.net/ZeitMediaVN" },
-  ],
-};
+/** Client roster block on the home page (rendered line by line). */
+export const CLIENT_LINES: string[][] = [
+  ["Vietnam Airlines", "VietcomBank", "Vinhomes"],
+  ["Masteris Homes", "VietTheatre"],
+  ["SONHA", "NewX", "KizCITI", "The Q", "Ben Xuan"],
+  ["FENDI", "Mobiado", "MayHomes", "DojiLand"],
+];

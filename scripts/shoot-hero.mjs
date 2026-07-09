@@ -1,0 +1,10 @@
+import { chromium } from "playwright";
+const outDir = process.argv[2];
+const browser = await chromium.launch();
+const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
+await page.goto("http://localhost:3000/", { waitUntil: "networkidle" });
+await page.waitForTimeout(1500);
+const src = await page.evaluate(() => document.querySelector("section img")?.currentSrc);
+console.log("hero src:", src);
+await page.screenshot({ path: `${outDir}/hero-check.png` });
+await browser.close();

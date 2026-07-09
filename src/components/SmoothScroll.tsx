@@ -5,7 +5,7 @@ import Lenis from "lenis";
 
 /**
  * Lenis smooth scroll — mirrors the target site's @studio-freight/lenis setup.
- * Also drives scroll-reveal: any `.zeit-reveal` element whose top crosses the
+ * Also drives scroll-reveal: any `.aa-reveal` element whose top crosses the
  * reveal line gets `.is-in` (fade + slide up). Uses a scroll-position check
  * rather than IntersectionObserver edge-detection so fast scrolls never skip
  * an element.
@@ -13,7 +13,7 @@ import Lenis from "lenis";
 export function SmoothScroll() {
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const els = Array.from(document.querySelectorAll<HTMLElement>(".zeit-reveal"));
+    const els = Array.from(document.querySelectorAll<HTMLElement>(".aa-reveal"));
 
     if (prefersReduced) {
       els.forEach((el) => el.classList.add("is-in"));

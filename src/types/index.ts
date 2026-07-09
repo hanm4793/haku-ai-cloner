@@ -1,22 +1,23 @@
+export type ProjectSize = "wide" | "small" | "tall";
+
 export interface Project {
-  year: string;
-  category: string;
+  slug: string;
   title: string;
-  client: string;
-  href: string;
+  subtitle: string;
+  /** caption shown bottom-left of the tile, e.g. "Visual Art / Exhibition / Production" */
+  tags: string;
+  categories: string[];
   image: string;
+  size: ProjectSize;
 }
 
 export interface Service {
   index: string;
   title: string;
-  items: string[];
+  /** English watermark label, e.g. "Exhibition Design" */
+  en: string;
+  description: string;
   image: string;
-}
-
-export interface Stat {
-  value: string;
-  label: string;
 }
 
 export interface NavLink {

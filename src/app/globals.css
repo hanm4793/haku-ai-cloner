@@ -13,9 +13,12 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter-display), "Inter", Arial, sans-serif;
-  --font-mono: var(--font-inter-display), ui-monospace, monospace;
-  --font-heading: var(--font-inter-display), "Inter", Arial, sans-serif;
+  --font-sans: var(--font-neue-kaine), "Inter", Arial, sans-serif;
+  --font-mono: var(--font-neue-kaine), ui-monospace, monospace;
+  --font-heading: var(--font-neue-kaine), "Inter", Arial, sans-serif;
+  --font-manrope: var(--font-manrope), Arial, sans-serif;
+  --color-aa-blue: var(--aa-blue);
+  --color-aa-yellow: var(--aa-yellow);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -55,6 +58,10 @@
 }
 
 :root {
+  /* ànArt brand */
+  --aa-blue: #0000f8;
+  --aa-yellow: #ffd600;
+
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -138,73 +145,64 @@
   }
 }
 
-/* ---- Zeit Media clone globals ---- */
+/* ---- ànArt globals ---- */
 @layer components {
-  /* Page horizontal gutter + max width (container is 1440, gutter ~ clamp) */
-  .zeit-container {
+  /* Page horizontal gutter + max width (artboard is 1920, content ~1830 wide) */
+  .aa-container {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1920px;
     margin-inline: auto;
-    padding-inline: clamp(1.25rem, 4vw, 3.75rem);
+    padding-inline: clamp(1.25rem, 2.4vw, 2.875rem);
   }
 
-  /* Display headings */
-  .zeit-display {
+  /* Display headings — Neue Kaine */
+  .aa-display {
     font-weight: 500;
-    line-height: 1;
-    letter-spacing: -0.03em;
+    line-height: 1.04;
+    letter-spacing: 0.01em;
   }
 
-  /* Eyebrow / label small caps */
-  .zeit-eyebrow {
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  /* Pill button, e.g. [ Liên hệ ] / KẾT NỐI */
-  .zeit-pill {
+  /* Section eyebrow: "› Dịch vụ của ànART" */
+  .aa-eyebrow {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 999px;
-    padding: 0.75rem 1.5rem;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
     color: #fff;
-    transition: background-color 0.3s ease, color 0.3s ease;
   }
-  .zeit-pill:hover {
-    background: #fff;
-    color: #000;
+  .aa-eyebrow::before {
+    content: "›";
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* Outlined text (menu active item / big hollow headings) */
+  .aa-outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1.5px #fff;
   }
 }
 
-/* Marquee (clients + differentiator) */
-@keyframes zeit-marquee {
+/* Marquee (gallery + differentiator) */
+@keyframes aa-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
 }
-.zeit-marquee-track {
+.aa-marquee-track {
   display: flex;
   width: max-content;
-  animation: zeit-marquee var(--marquee-duration, 40s) linear infinite;
+  animation: aa-marquee var(--marquee-duration, 40s) linear infinite;
 }
-.zeit-marquee-track.reverse {
+.aa-marquee-track.reverse {
   animation-direction: reverse;
 }
 @media (prefers-reduced-motion: reduce) {
-  .zeit-marquee-track { animation: none; }
+  .aa-marquee-track { animation: none; }
 }
 
 /* Scroll reveal (JS toggles .is-in) */
-.zeit-reveal {
+.aa-reveal {
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
@@ -212,11 +210,22 @@
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
-.zeit-reveal.is-in {
+.aa-reveal.is-in {
   opacity: 1;
   transform: none;
 }
 
 /* Hide scrollbar on marquee overflow wrappers */
-.zeit-noscroll::-webkit-scrollbar { display: none; }
-.zeit-noscroll { scrollbar-width: none; }
+.aa-noscroll::-webkit-scrollbar { display: none; }
+.aa-noscroll { scrollbar-width: none; }
+
+/* Slow spin for the circular badge stamp */
+@keyframes aa-spin {
+  to { transform: rotate(360deg); }
+}
+.aa-spin-slow {
+  animation: aa-spin 18s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .aa-spin-slow { animation: none; }
+}

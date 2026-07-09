@@ -1,103 +1,82 @@
+import Image from "next/image";
 import Link from "next/link";
-import { CONTACT, NAV_LINKS } from "@/lib/data";
-import {
-  ZeitLogo,
-  FacebookIcon,
-  InstagramIcon,
-  TiktokIcon,
-  BehanceIcon,
-} from "@/components/icons";
+import { CONTACT } from "@/lib/data";
 
-const SOCIAL_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
-  FB: FacebookIcon,
-  IG: InstagramIcon,
-  TIKTOK: TiktokIcon,
-  BEHANCE: BehanceIcon,
-};
-
+/** "Let's make ART." + orange 3D A + blue info block with the big wordmark. */
 export function Footer() {
   return (
-    <footer className="w-full border-t border-white/10 bg-black pt-20 pb-10">
-      <div className="zeit-container">
-        {/* Top: brand statement + nav */}
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
-          <div>
-            <ZeitLogo className="h-8 w-auto text-white" />
-            <p className="mt-6 max-w-md text-base leading-relaxed text-white/60">
-              Mang đến sự khác biệt cho hành trình thành công của từng thương hiệu với
-              ý tưởng đột phá và năng lực sáng tạo vượt trội, giúp thương hiệu vươn đến
-              vị thế dẫn đầu.
-            </p>
-            <Link
-              href="/vn/contact"
-              className="zeit-pill mt-8 px-7 py-3.5 text-sm"
-            >
-              Kết nối với Zeit
-            </Link>
+    <footer className="relative mt-10">
+      {/* Let's make ART row */}
+      <div className="aa-container relative flex items-end justify-between pb-0">
+        <p className="aa-reveal pb-8 text-[clamp(2rem,3.4vw,4rem)] font-medium leading-none text-white">
+          Let&rsquo;s make ART.
+        </p>
+        <div className="flex items-center gap-5 pb-10">
+          <span className="hidden text-lg text-white/55 sm:block">not, done, yet</span>
+          <span className="hidden text-2xl text-aa-yellow sm:block" aria-hidden>
+            ⟶
+          </span>
+        </div>
+        {/* Orange 3D A straddling the blue block edge */}
+        <Image
+          src="/images/letter-a-orange.png"
+          alt=""
+          width={190}
+          height={215}
+          className="pointer-events-none absolute bottom-[-60px] right-[16%] z-10 w-[110px] md:w-[150px] lg:w-[180px]"
+          aria-hidden
+        />
+      </div>
+
+      {/* Blue block */}
+      <div className="bg-aa-blue">
+        <div className="aa-container pt-12">
+          <div className="grid gap-8 text-white sm:grid-cols-3">
+            <div>
+              <p className="text-lg font-bold">Office</p>
+              <p className="mt-1 text-sm text-white/90">{CONTACT.office}</p>
+            </div>
+            <div className="sm:text-center">
+              <p className="text-lg font-bold">Hotline</p>
+              <p className="mt-1 text-sm text-white/90">{CONTACT.hotline}</p>
+            </div>
+            <div className="sm:text-right">
+              <p className="text-lg font-bold">Email</p>
+              <a
+                href={`mailto:${CONTACT.email}`}
+                className="mt-1 inline-block text-sm text-white/90 transition-opacity hover:opacity-70"
+              >
+                {CONTACT.email}
+              </a>
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
-            <nav className="flex flex-col gap-3">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm uppercase tracking-wide text-white/60 transition-colors hover:text-white"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-            <div>
-              <p className="zeit-eyebrow">Địa chỉ</p>
-              <div className="mt-3 space-y-3 text-sm leading-relaxed text-white/60">
-                {CONTACT.addresses.map((addr) => (
-                  <p key={addr}>{addr}</p>
-                ))}
-              </div>
-            </div>
-            <div className="space-y-6">
-              <div>
-                <p className="zeit-eyebrow">Email</p>
-                <a
-                  href={`mailto:${CONTACT.email}`}
-                  className="mt-3 block text-sm text-white/60 transition-colors hover:text-white"
-                >
-                  {CONTACT.email}
-                </a>
-              </div>
-              <div>
-                <p className="zeit-eyebrow">Hotline</p>
-                <a
-                  href="tel:+84848488686"
-                  className="mt-3 block text-sm text-white/60 transition-colors hover:text-white"
-                >
-                  {CONTACT.hotline}
-                </a>
-              </div>
-            </div>
+          {/* Big wordmark row */}
+          <div className="mt-14 flex flex-wrap items-end justify-between gap-10 pb-12">
+            <Image
+              src="/images/wordmark.png"
+              alt="ànART®"
+              width={1087}
+              height={246}
+              className="h-auto w-full max-w-[620px] lg:max-w-[56%]"
+            />
+            <Image
+              src="/images/wordmark-anat.png"
+              alt="| àn Ạt |"
+              width={550}
+              height={210}
+              className="hidden h-auto w-full max-w-[300px] md:block lg:max-w-[28%]"
+            />
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-16 flex flex-col items-start justify-between gap-6 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
-          <p className="text-xs uppercase tracking-wide text-white/40">
-            © 2025 Zeit Media. All rights reserved
-          </p>
-          <div className="flex items-center gap-3">
-            {CONTACT.socials.map((social) => {
-              const Icon = SOCIAL_ICONS[social.label];
-              return (
-                <Link
-                  key={social.href}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white hover:text-white"
-                >
-                  {Icon ? <Icon className="h-4 w-4" /> : social.label}
-                </Link>
-              );
-            })}
+        {/* Copyright bar */}
+        <div className="border-t border-white/25">
+          <div className="aa-container flex flex-wrap items-center justify-between gap-2 py-4 text-xs text-white">
+            <p>© 2026 by ànArt. All Rights Reserved.</p>
+            <p>
+              — eng / <Link href="/" className="font-bold">vie</Link>
+            </p>
           </div>
         </div>
       </div>

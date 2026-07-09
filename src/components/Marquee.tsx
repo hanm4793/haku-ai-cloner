@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
-import { clamp, subscribeScroll, viewportProgress } from "@/lib/scrollTicker";
+import { subscribeScroll, viewportProgress } from "@/lib/scrollTicker";
 
 interface MarqueeProps {
   children: ReactNode;
@@ -71,7 +71,7 @@ export function Marquee({
   }, [direction, speedDivisor, scrollVw]);
 
   return (
-    <div ref={wrapRef} className="zeit-noscroll w-full overflow-hidden">
+    <div ref={wrapRef} className="aa-noscroll w-full overflow-hidden">
       <div ref={trackRef} className={`flex w-max flex-nowrap ${className}`}>
         <div className="flex flex-nowrap items-center">{children}</div>
         <div className="flex flex-nowrap items-center" aria-hidden>

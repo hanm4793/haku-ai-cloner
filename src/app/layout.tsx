@@ -2,30 +2,34 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-const interDisplay = localFont({
-  variable: "--font-inter-display",
+const neueKaine = localFont({
+  variable: "--font-neue-kaine",
   display: "swap",
   src: [
-    { path: "../../public/fonts/InterDisplay-Light.woff2", weight: "300", style: "normal" },
-    { path: "../../public/fonts/InterDisplay-Regular.woff2", weight: "400", style: "normal" },
-    { path: "../../public/fonts/InterDisplay-Medium.woff2", weight: "500", style: "normal" },
-    { path: "../../public/fonts/InterDisplay-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../../public/fonts/DFVN-NeueKaine-Light.woff2", weight: "300", style: "normal" },
+    { path: "../../public/fonts/DFVN-NeueKaine-Regular.woff2", weight: "400", style: "normal" },
+    { path: "../../public/fonts/DFVN-NeueKaine-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../../public/fonts/DFVN-NeueKaine-SemiBold.woff2", weight: "600", style: "normal" },
+    { path: "../../public/fonts/DFVN-NeueKaine-Bold.woff2", weight: "700", style: "normal" },
+    { path: "../../public/fonts/DFVN-NeueKaine-ExtraBold.woff2", weight: "800", style: "normal" },
+    { path: "../../public/fonts/DFVN-NeueKaine-Black.woff2", weight: "900", style: "normal" },
   ],
 });
 
+const manrope = localFont({
+  variable: "--font-manrope",
+  display: "swap",
+  src: [{ path: "../../public/fonts/Manrope-ExtraBold.woff2", weight: "800", style: "normal" }],
+});
+
 export const metadata: Metadata = {
-  title: "Zeit Media | Art Comes First",
+  title: "ànART® | Creative Hub x Experiences",
   description:
-    "ZEIT is a creative agency dedicated to crafting artistic experiences through a distinctive and innovative approach, always focusing on the audience and cultural values.",
-  icons: {
-    icon: "/seo/favicon.jpg",
-    apple: "/seo/webclip.jpg",
-  },
+    "ànART là creative hub kiến tạo trải nghiệm — Beyond Creativity Into Experiences. Vượt khỏi điểm nhìn của thị giác, mở rộng điểm chạm vào không gian, chuyển động, hình khối, âm thanh và hơn thế nữa.",
   openGraph: {
-    title: "Zeit Media | Art Comes First",
+    title: "ànART® | Creative Hub x Experiences",
     description:
-      "ZEIT is a creative agency dedicated to crafting artistic experiences through a distinctive and innovative approach.",
-    images: ["/seo/og-image.jpg"],
+      "Beyond Creativity Into Experiences — chúng tôi định hình bản sắc cho thương hiệu.",
   },
 };
 
@@ -35,7 +39,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="vi" className={`${interDisplay.variable} h-full antialiased dark`}>
+    <html
+      lang="vi"
+      className={`${neueKaine.variable} ${manrope.variable} h-full antialiased dark`}
+    >
       <body className="min-h-full flex flex-col bg-black text-white">{children}</body>
     </html>
   );
