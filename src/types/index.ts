@@ -14,8 +14,8 @@ export interface Project {
 export interface Service {
   index: string;
   title: string;
-  /** English watermark label, e.g. "Exhibition Design" */
-  en: string;
+  /** English category watermark: [horizontal word, vertical word] e.g. ["Exhibition", "Design"] */
+  cat: [string, string];
   description: string;
   image: string;
 }

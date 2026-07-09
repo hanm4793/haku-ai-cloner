@@ -83,12 +83,12 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Service rows */}
+        {/* Service rows — sticky stacked panels (zeit-style card deck on scroll) */}
         <section className="aa-container">
           {SERVICES.map((s) => (
             <article
               key={s.index}
-              className="aa-reveal grid items-center gap-10 border-t border-white/15 py-14 md:grid-cols-[minmax(120px,220px)_1fr_minmax(280px,500px)] md:py-16"
+              className="sticky top-20 grid items-center gap-10 border-t border-white/15 bg-black py-14 md:grid-cols-[minmax(120px,220px)_1fr_minmax(300px,590px)] md:py-16"
             >
               <p className="select-none text-[clamp(3.5rem,5vw,5rem)] font-light leading-none text-white/35">
                 {s.index}
@@ -103,19 +103,39 @@ export default function ServicesPage() {
                   {s.description}
                 </p>
               </div>
-              <div className="overflow-hidden">
-                <Image
-                  src={s.image}
-                  alt={s.en}
-                  width={497}
-                  height={336}
-                  className="h-auto w-full transition-transform duration-700 ease-out hover:scale-[1.03]"
-                  sizes="(max-width: 768px) 100vw, 500px"
-                />
+
+              {/* Image + category watermark (real text, not baked into the image) */}
+              <div className="relative pr-14 md:pr-[88px]">
+                <div className="overflow-hidden">
+                  <Image
+                    src={s.image}
+                    alt={`${s.cat[0]} ${s.cat[1]}`}
+                    width={497}
+                    height={336}
+                    className="h-auto w-full transition-transform duration-700 ease-out hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 100vw, 500px"
+                  />
+                </div>
+                <span className="pointer-events-none absolute right-0 top-0 select-none text-right leading-none text-white/25">
+                  <span className="block text-[clamp(1.5rem,2.5vw,3rem)] font-light">
+                    {s.cat[0]}
+                  </span>
+                  <span
+                    className="mt-2 inline-block text-[clamp(1.5rem,2.5vw,3rem)] font-light"
+                    style={{ writingMode: "vertical-rl" }}
+                  >
+                    {s.cat[1]}
+                  </span>
+                </span>
+                <span className="pointer-events-none absolute bottom-1 right-0 select-none text-[clamp(1rem,1.5vw,1.75rem)] font-light text-white/30">
+                  –(<span className="font-bold">C</span>
+                  <span className="text-[0.75em]">×</span>
+                  <span className="font-bold">E</span>)
+                </span>
               </div>
             </article>
           ))}
-          <div className="border-t border-white/15" />
+          <div className="relative z-10 border-t border-white/15 bg-black" />
         </section>
 
         {/* not speCiAL but DiFferent */}

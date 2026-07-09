@@ -30,7 +30,7 @@ export const SERVICES: Service[] = [
   {
     index: "01",
     title: "thiết kế không gian triển lãm",
-    en: "Exhibition Design",
+    cat: ["Exhibition", "Design"],
     description:
       "Chúng tôi tạo nên hệ ngôn ngữ thị giác độc bản — nơi màu sắc, hình khối và chất liệu... không chỉ để nhìn, mà đó là hệ thống cảm xúc cho cả một hành trình trải nghiệm.",
     image: "/images/svc-exhibition.webp",
@@ -38,7 +38,7 @@ export const SERVICES: Service[] = [
   {
     index: "02",
     title: "thiết kế không gian sự kiện / lễ hội",
-    en: "Event Design",
+    cat: ["Event", "Design"],
     description:
       "Không chỉ tạo nên một sự kiện / lễ hội, chúng tôi kiến tạo những không gian truyền cảm hứng, kết nối con người với thương hiệu qua từng trải nghiệm.",
     image: "/images/svc-event.webp",
@@ -46,7 +46,7 @@ export const SERVICES: Service[] = [
   {
     index: "03",
     title: "thiết kế trang trí cảnh quan",
-    en: "Lanscape Design",
+    cat: ["Lanscape", "Design"],
     description:
       "Mỗi thiết kế là sự kết hợp giữa tư duy nghệ thuật, bản sắc không gian và trải nghiệm con người, tạo nên những điểm đến mang giá trị bền vững theo thời gian.",
     image: "/images/svc-landscape.webp",
@@ -54,7 +54,7 @@ export const SERVICES: Service[] = [
   {
     index: "04",
     title: "mô hình nghệ thuật",
-    en: "Art Model",
+    cat: ["Sculpture", "Art Model"],
     description:
       "Mỗi mô hình nghệ thuật là sự kết hợp giữa tư duy sáng tạo, kỹ thuật chế tác và ngôn ngữ thị giác để tạo nên những điểm nhấn giàu giá trị.",
     image: "/images/svc-artmodel.webp",
@@ -62,7 +62,7 @@ export const SERVICES: Service[] = [
   {
     index: "05",
     title: "thiết kế thương hiệu",
-    en: "Branding Design",
+    cat: ["Branding", "Design"],
     description:
       "Chúng tôi kết nối chiến lược, sáng tạo và thiết kế để xây dựng nên thương hiệu có bản sắc rõ ràng, giàu cảm xúc. Và mỗi điểm chạm đều truyền tải đúng giá trị của thương hiệu.",
     image: "/images/svc-branding.webp",
@@ -70,7 +70,7 @@ export const SERVICES: Service[] = [
   {
     index: "06",
     title: "tổ chức sản xuất decor",
-    en: "Production Design",
+    cat: ["Production", "Design"],
     description:
       "Từ ý tưởng đến hiện thực, chúng tôi quản lý và tổ chức sản xuất đồng bộ để đảm bảo chất lượng, tiến độ và giá trị của từng dự án.",
     image: "/images/svc-production.webp",
