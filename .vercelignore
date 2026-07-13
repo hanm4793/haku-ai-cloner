@@ -1,0 +1,5 @@
+# Design source files (~1.1GB of PSD/PDF/master SVGs) — not needed at runtime
+src/anart-assets
+# local docs & scripts not needed for the build
+docs
+scripts/shoot*.mjs
