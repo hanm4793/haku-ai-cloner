@@ -11,24 +11,27 @@ export function ServicesHome() {
   return (
     <section className="aa-container pb-28">
       {/* Statement */}
-      <div className="grid gap-8 lg:grid-cols-[minmax(200px,320px)_1fr]">
-        <p className="aa-reveal aa-eyebrow self-start text-base">Dịch vụ của ànART</p>
-        <h2 className="aa-reveal text-[clamp(1.35rem,2.05vw,2rem)] font-medium uppercase leading-[1.35] text-white">
+      <div className="grid gap-8 lg:grid-cols-12 lg:gap-5">
+        <p className="aa-reveal aa-eyebrow self-start text-base lg:col-start-3 lg:col-span-2">Dịch vụ của ànART</p>
+        <h2 className="aa-reveal text-[clamp(1.35rem,2.05vw,2rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
           Chúng tôi kiến tạo nên những trải nghiệm độc đáo — nơi hình ảnh, không
           gian, câu chuyện tạo ra giá trị và dấu ấn bền vững cho thương hiệu.
         </h2>
       </div>
 
+      {/* Divider between the statement and the fields-of-work block */}
+      <div className="mt-14 border-t border-white/15" />
+
       {/* Fields of work */}
-      <div className="mt-20 grid gap-10 lg:grid-cols-[minmax(180px,300px)_minmax(0,420px)_1fr]">
+      <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-5">
         <p
-          className="aa-reveal select-none text-right text-[clamp(4rem,6vw,6rem)] font-light leading-none text-aa-blue"
+          className="aa-reveal select-none text-right text-[clamp(4rem,6vw,6rem)] font-light leading-none text-aa-blue lg:col-start-3 lg:col-span-1"
           aria-hidden
         >
           {SERVICES[active].index}
         </p>
 
-        <div className="aa-reveal border-t border-white/20 pt-8 lg:border-none lg:pt-0">
+        <div className="aa-reveal border-t border-white/20 pt-8 lg:col-start-5 lg:col-span-3 lg:border-none lg:pt-0">
           <p className="mb-7 text-lg font-medium uppercase tracking-wide text-white">
             Lĩnh vực triển khai
           </p>
@@ -40,11 +43,12 @@ export function ServicesHome() {
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
-                  className={`group flex items-baseline gap-4 text-left transition-colors ${
+                  className={`group relative flex items-baseline text-left transition-colors ${
                     active === i ? "text-white" : "text-white/45 hover:text-white/80"
                   }`}
                 >
-                  <span className="w-5 shrink-0 text-base">
+                  {/* Hanging bullet — sits outside the text column, doesn't shift the title */}
+                  <span className="absolute -left-10 w-5 text-right text-base" aria-hidden>
                     {active === i ? "+" : "—"}
                   </span>
                   <span
@@ -59,7 +63,7 @@ export function ServicesHome() {
           </ul>
         </div>
 
-        <div className="aa-reveal max-w-md lg:pt-16">
+        <div className="aa-reveal max-w-md lg:col-start-8 lg:col-span-5 lg:pt-16">
           <p key={active} className="text-sm leading-relaxed text-white/60">
             {SERVICES[active].description}
           </p>

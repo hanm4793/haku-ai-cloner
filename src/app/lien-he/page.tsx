@@ -22,11 +22,11 @@ export default function ContactPage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="aa-container pt-36 md:pt-44">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-            <h1 className="aa-reveal text-[clamp(3.5rem,7vw,7.75rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-5">
+            <h1 className="aa-reveal lg:col-span-5 text-[clamp(3.5rem,7vw,7.75rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
               Liên hệ
             </h1>
-            <div className="aa-reveal flex flex-col" style={{ ["--reveal-delay" as string]: "120ms" }}>
+            <div className="aa-reveal flex flex-col lg:col-start-6 lg:col-span-7" style={{ ["--reveal-delay" as string]: "120ms" }}>
               <p className="text-[clamp(1.3rem,1.9vw,1.875rem)] font-medium uppercase leading-[1.35] text-white">
                 Câu chuyện của bạn sẽ truyền cảm hứng cho chúng tôi.
               </p>

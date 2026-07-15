@@ -15,15 +15,13 @@ const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
  *  ever moves). Once the page is scrolled all the way down, further
  *  wheel/touch input is captured as a virtual progress: the A slides right →
  *  left into its design spot, dragging in a new line ("Contact us for more
- *  information. Let's make art together") while "not, done, yet" fades away,
- *  and the two logos below flip in place. Scrolling back rewinds it.
+ *  information. Let's make art together") while "not, done, yet" fades away.
+ *  Scrolling back rewinds it.
  */
 export function Footer() {
   const aRef = useRef<HTMLDivElement>(null);
   const noteRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const logo1Ref = useRef<HTMLDivElement>(null);
-  const logo2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -48,13 +46,6 @@ export function Footer() {
         const t = clamp((v - 0.25) / 0.55);
         ctaRef.current.style.opacity = String(t);
         ctaRef.current.style.transform = `translateX(${(1 - easeOut(t)) * 34}vw)`;
-      }
-      // logos keep their spot but flip with the scroll
-      if (logo1Ref.current) {
-        logo1Ref.current.style.transform = `perspective(1200px) rotateX(${e * 360}deg)`;
-      }
-      if (logo2Ref.current) {
-        logo2Ref.current.style.transform = `perspective(1200px) rotateX(${-e * 360}deg)`;
       }
     };
 
@@ -145,62 +136,61 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Blue block */}
-        <div className="bg-aa-blue">
-          <div className="aa-container pt-12">
-            <div className="grid gap-8 text-white sm:grid-cols-3">
-              <div>
-                <p className="text-lg font-bold">Office</p>
-                <p className="mt-1 text-sm text-white/90">{CONTACT.office}</p>
-              </div>
-              <div className="sm:text-center">
-                <p className="text-lg font-bold">Hotline</p>
-                <p className="mt-1 text-sm text-white/90">{CONTACT.hotline}</p>
-              </div>
-              <div className="sm:text-right">
-                <p className="text-lg font-bold">Email</p>
-                <a
-                  href={`mailto:${CONTACT.email}`}
-                  className="mt-1 inline-block text-sm text-white/90 transition-opacity hover:opacity-70"
-                >
-                  {CONTACT.email}
-                </a>
+        {/* Blue block — inset within the grid margins, not full-bleed */}
+        <div className="aa-container">
+          <div className="bg-aa-blue">
+            <div className="aa-container pt-12">
+              <div className="grid gap-8 text-white sm:grid-cols-3">
+                <div>
+                  <p className="text-lg font-bold">Office</p>
+                  <p className="mt-1 text-sm text-white/90">{CONTACT.office}</p>
+                </div>
+                <div className="sm:text-center">
+                  <p className="text-lg font-bold">Hotline</p>
+                  <p className="mt-1 text-sm text-white/90">{CONTACT.hotline}</p>
+                </div>
+                <div className="sm:text-right">
+                  <p className="text-lg font-bold">Email</p>
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    className="mt-1 inline-block text-sm text-white/90 transition-opacity hover:opacity-70"
+                  >
+                    {CONTACT.email}
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Big wordmark row — fixed position, flips in place on overscroll */}
-          <div className="aa-container mt-14 flex flex-wrap items-end justify-between gap-10 pb-12">
-            <div ref={logo1Ref} className="w-full max-w-[620px] will-change-transform lg:max-w-[56%]">
-              <Image
-                src="/images/wordmark.webp"
-                alt="ànART®"
-                width={1087}
-                height={246}
-                className="h-auto w-full"
-              />
+            {/* Big wordmark row */}
+            <div className="aa-container mt-14 flex flex-wrap items-end justify-between gap-10 pb-12">
+              <div className="w-full max-w-[620px] lg:max-w-[56%]">
+                <Image
+                  src="/images/wordmark.webp"
+                  alt="ànART®"
+                  width={1087}
+                  height={246}
+                  className="h-auto w-full"
+                />
+              </div>
+              <div className="hidden w-full max-w-[340px] md:block lg:max-w-[31%]">
+                <Image
+                  src="/images/wordmark-anat.webp"
+                  alt="| àn Ạt |"
+                  width={1728}
+                  height={468}
+                  className="h-auto w-full"
+                />
+              </div>
             </div>
-            <div
-              ref={logo2Ref}
-              className="hidden w-full max-w-[300px] will-change-transform md:block lg:max-w-[28%]"
-            >
-              <Image
-                src="/images/wordmark-anat.webp"
-                alt="| àn Ạt |"
-                width={550}
-                height={210}
-                className="h-auto w-full"
-              />
-            </div>
-          </div>
 
-          {/* Copyright bar */}
-          <div className="border-t border-white/25">
-            <div className="aa-container flex flex-wrap items-center justify-between gap-2 py-4 text-xs text-white">
-              <p>© 2026 by ànArt. All Rights Reserved.</p>
-              <p>
-                — eng / <Link href="/" className="font-bold">vie</Link>
-              </p>
+            {/* Copyright bar */}
+            <div className="border-t border-white/25">
+              <div className="aa-container flex flex-wrap items-center justify-between gap-2 py-4 text-xs text-white">
+                <p>© 2026 by ànArt. All Rights Reserved.</p>
+                <p>
+                  — eng / <Link href="/" className="font-bold">vie</Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>

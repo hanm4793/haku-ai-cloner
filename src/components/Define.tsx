@@ -27,7 +27,7 @@ export function Define({
 
       {/* Left word */}
       <div className="aa-reveal md:absolute md:left-[max(1.25rem,2.4vw)] md:top-[24%]">
-        <p className="whitespace-pre-line text-[clamp(3rem,7vw,7rem)] font-extrabold leading-[0.95] text-aa-blue">
+        <p className="whitespace-pre-line text-[clamp(3rem,7vw,8.5rem)] font-extrabold leading-[0.95] text-aa-blue">
           {words[0]}
         </p>
         <p className="mt-2 text-lg text-white/90">{captions[0]}</p>
@@ -38,7 +38,7 @@ export function Define({
         className="aa-reveal mt-10 text-right md:absolute md:bottom-[16%] md:right-[max(1.25rem,2.4vw)] md:mt-0"
         style={{ ["--reveal-delay" as string]: "150ms" }}
       >
-        <p className="whitespace-pre-line text-[clamp(3rem,7vw,7rem)] font-extrabold leading-[0.95] text-aa-blue">
+        <p className="whitespace-pre-line text-[clamp(3rem,7vw,8.5rem)] font-extrabold leading-[0.95] text-aa-blue">
           {words[1]}
         </p>
         <p className="mt-2 text-lg text-white/90">{captions[1]}</p>

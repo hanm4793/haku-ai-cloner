@@ -26,9 +26,11 @@ export default function Home() {
         <Differentiator />
         <ServicesHome />
         <section className="aa-container pb-28">
-          <p className="aa-reveal aa-eyebrow mb-8 text-base">
-            Dự án / khách hàng nổi bật
-          </p>
+          <div className="grid lg:grid-cols-12 lg:gap-5">
+            <p className="aa-reveal aa-eyebrow mb-8 text-base lg:col-start-3 lg:col-span-4">
+              Dự án / khách hàng nổi bật
+            </p>
+          </div>
           <ProjectsGrid projects={PROJECTS} />
         </section>
         <Clients />

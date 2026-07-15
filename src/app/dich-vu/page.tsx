@@ -41,9 +41,9 @@ export default function ServicesPage() {
 
         {/* Statement */}
         <section className="aa-container pt-24">
-          <div className="grid gap-8 lg:grid-cols-[minmax(200px,320px)_1fr]">
-            <p className="aa-reveal aa-eyebrow self-start text-base">Dịch vụ của ànART</p>
-            <h2 className="aa-reveal text-[clamp(1.35rem,2.05vw,2rem)] font-medium uppercase leading-[1.35] text-white">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-5">
+            <p className="aa-reveal aa-eyebrow self-start text-base lg:col-start-3 lg:col-span-2">Dịch vụ của ànART</p>
+            <h2 className="aa-reveal text-[clamp(1.35rem,2.05vw,2rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
               Chúng tôi kiến tạo nên những trải nghiệm độc đáo — nơi hình ảnh,
               không gian, câu chuyện tạo ra giá trị và dấu ấn bền vững cho
               thương hiệu.
@@ -88,14 +88,14 @@ export default function ServicesPage() {
           {SERVICES.map((s) => (
             <article
               key={s.index}
-              className="sticky top-20 grid items-center gap-10 border-t border-white/15 bg-black py-14 md:grid-cols-[minmax(120px,220px)_1fr_minmax(300px,590px)] md:py-16"
+              className="sticky top-20 grid items-center gap-10 border-t border-white/15 bg-black py-14 md:grid-cols-12 md:gap-5 md:py-16"
             >
-              <p className="select-none text-[clamp(3.5rem,5vw,5rem)] font-light leading-none text-white/35">
+              <p className="select-none text-[clamp(3.5rem,5vw,5rem)] font-light leading-none text-white/35 md:col-start-3 md:col-span-2">
                 {s.index}
               </p>
-              <div className="max-w-md">
-                <p className="flex items-baseline gap-4 text-lg font-bold text-white">
-                  <span className="text-white/50">—</span>
+              <div className="max-w-md md:col-start-5 md:col-span-4">
+                <p className="relative text-lg font-bold text-white">
+                  <span className="absolute -left-10 w-5 text-right text-white/50" aria-hidden>—</span>
                   {s.title}{" "}
                   <sup className="text-[0.6em] text-white/50">({s.index})</sup>
                 </p>
@@ -105,7 +105,7 @@ export default function ServicesPage() {
               </div>
 
               {/* Image + category watermark (real text, not baked into the image) */}
-              <div className="relative pr-14 md:pr-[88px]">
+              <div className="relative pr-14 md:col-start-9 md:col-span-4 md:pr-[88px]">
                 <div className="overflow-hidden">
                   <Image
                     src={s.image}

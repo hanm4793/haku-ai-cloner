@@ -40,8 +40,8 @@ export function Header() {
           scrolled && !open ? "bg-black/70 backdrop-blur-md" : "bg-transparent"
         }`}
       >
-        <div className="aa-container flex items-center justify-between py-4">
-          <Link href="/" aria-label="ànART" className="relative z-[60] shrink-0">
+        <div className="aa-container flex items-center justify-between py-4 lg:grid lg:grid-cols-12 lg:gap-5">
+          <Link href="/" aria-label="ànART" className="relative z-[60] shrink-0 lg:col-span-3">
             <Image
               src="/images/logo-lockup.webp"
               alt="ànART® Creative Hub x Experiences"
@@ -52,14 +52,14 @@ export function Header() {
             />
           </Link>
 
-          <div className="flex items-center gap-6 md:gap-10">
+          <div className="flex items-center gap-6 md:gap-10 lg:col-span-5 lg:col-start-8 lg:justify-between">
             <Link
               href="/lien-he"
               className="text-sm font-medium uppercase text-white/85 transition-colors hover:text-white md:hidden"
             >
               liên hệ
             </Link>
-            <nav className="hidden items-center gap-10 md:flex">
+            <nav className="hidden items-center md:flex lg:w-full lg:justify-between">
               {NAV_LINKS.map((link) => {
                 const active =
                   link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -92,7 +92,7 @@ export function Header() {
               aria-label={open ? "Đóng menu" : "Mở menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="relative z-[60] flex h-10 w-10 flex-col items-center justify-center gap-[6px]"
+              className="relative z-[60] flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-[6px]"
             >
               <span
                 className={`block h-[2px] w-6 transition-all duration-300 ${
