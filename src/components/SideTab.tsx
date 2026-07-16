@@ -10,7 +10,7 @@ export function SideTab() {
           )
         </span>
         <span
-          className="text-[0.7rem] font-medium tracking-wide text-white"
+          className="text-[0.7rem] font-medium tracking-wide text-white lg:text-[0.79rem]"
           style={{ writingMode: "sideways-lr" }}
         >
           Creative Hub

@@ -13,7 +13,7 @@ export function ServicesHome() {
       {/* Statement */}
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-5">
         <p className="aa-reveal aa-eyebrow self-start text-base lg:col-start-3 lg:col-span-2">Dịch vụ của ànART</p>
-        <h2 className="aa-reveal text-[clamp(1.35rem,2.05vw,2rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
+        <h2 className="aa-reveal text-[clamp(1.35rem,2.31vw,2.25rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
           Chúng tôi kiến tạo nên những trải nghiệm độc đáo — nơi hình ảnh, không
           gian, câu chuyện tạo ra giá trị và dấu ấn bền vững cho thương hiệu.
         </h2>
@@ -26,13 +26,13 @@ export function ServicesHome() {
       <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-5">
         {/* Big index numeral — desktop only; mobile has no room for it beside the list */}
         <p
-          className="aa-reveal hidden select-none text-right text-[clamp(4rem,6vw,6rem)] font-light leading-none text-aa-blue lg:col-start-3 lg:col-span-1 lg:block"
+          className="aa-reveal hidden select-none text-right text-[clamp(4rem,6.75vw,6.75rem)] font-light leading-none text-aa-blue lg:col-start-3 lg:col-span-1 lg:block"
           aria-hidden
         >
           {SERVICES[active].index}
         </p>
 
-        <div className="aa-reveal border-t border-white/20 pt-8 lg:col-start-5 lg:col-span-3 lg:border-none lg:pt-0">
+        <div className="aa-reveal pt-8 lg:col-start-5 lg:col-span-3 lg:pt-0">
           <p className="mb-7 text-lg font-medium uppercase tracking-wide text-white">
             Lĩnh vực triển khai
           </p>
@@ -82,12 +82,6 @@ export function ServicesHome() {
           <p key={active} className="text-sm leading-relaxed text-white">
             {SERVICES[active].description}
           </p>
-          <Link
-            href="/dich-vu"
-            className="mt-8 inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-white/70 transition-colors hover:text-white"
-          >
-            Xem tất cả dịch vụ <span aria-hidden>→</span>
-          </Link>
         </div>
 
         {/* Mobile: link lives under the whole list since there's no side panel */}

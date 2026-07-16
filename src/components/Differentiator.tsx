@@ -1,6 +1,6 @@
 import { Marquee } from "@/components/Marquee";
 
-const BIG = "whitespace-nowrap leading-none text-[clamp(2.5rem,5.2vw,5rem)]";
+const BIG = "whitespace-nowrap leading-none text-[clamp(2.5rem,5.85vw,5.63rem)]";
 
 /** "Bứt phá SáNG TẠO ( Beyond Creativity ) Kiến tạo TRảI NGHIỆM ( Into Experiences )" */
 function Unit() {

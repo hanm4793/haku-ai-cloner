@@ -23,12 +23,12 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
           </p>
         </div>
 
-        <nav className="aa-reveal flex flex-col">
+        <nav className="aa-reveal grid grid-flow-col grid-cols-2 grid-rows-2 gap-3 lg:flex lg:flex-col lg:gap-0">
           {MENU_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="group flex items-center justify-between border-t border-white/15 py-5 last:border-b"
+              className="group flex items-center justify-between border border-white/15 px-5 py-5 lg:border-x-0 lg:border-b-0 lg:border-t lg:px-0 lg:last:border-b"
             >
               <span className="flex items-start gap-1 text-base text-white/60 transition-colors group-hover:text-white">
                 {link.label === "về ànArt" ? (
@@ -42,7 +42,7 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
                   link.label
                 )}
               </span>
-              <ArrowUpRightIcon className="h-4 w-4 text-white/40 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white" />
+              <ArrowUpRightIcon className="h-6 w-6 shrink-0 text-white/40 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white" />
             </Link>
           ))}
         </nav>
@@ -52,10 +52,12 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
       <div className="aa-reveal mt-12 grid gap-px sm:grid-cols-2">
         <Link
           href="/lien-he"
-          className="group flex items-center justify-between bg-white/[0.06] px-8 py-6 transition-colors hover:bg-aa-blue"
+          className="group flex items-center justify-between bg-white/[0.06] px-8 py-7"
         >
-          <span className="text-base text-white">Kết nối với ànART</span>
-          <ArrowUpRightIcon className="h-5 w-5 text-white/60 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white" />
+          <span className="text-base text-white transition-transform duration-300 group-hover:translate-x-1">
+            Kết nối với ànART
+          </span>
+          <ArrowUpRightIcon className="h-9 w-9 shrink-0 text-white/70 transition-transform duration-300 group-hover:-translate-x-1 group-hover:translate-y-1" />
         </Link>
         <div className="flex flex-wrap items-center justify-between gap-4 bg-white/[0.06] px-8 py-6">
           <span className="text-base text-white/45">Follow us</span>

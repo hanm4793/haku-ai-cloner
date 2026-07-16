@@ -43,8 +43,9 @@ export function Clients() {
         y: rand(-60, 60), // %
         z: rand(500, 950), // px
         rx: rand(-90, 90), // deg
-        // small stagger so the first words appear the moment the pin starts
-        delay: Math.random() * 0.35,
+        // wide random stagger so words keep flying in across the whole pinned
+        // scroll — a few per wheel, not all at once
+        delay: Math.random(),
       })),
     [flat],
   );
@@ -64,19 +65,25 @@ export function Clients() {
       return;
     }
 
-    const REVEAL_WINDOW = 0.55;
+    const START_MAX = 0.7; // latest a word may begin (as a fraction of progress)
+    const WORD_WINDOW = 0.3; // each word flies in over this much progress
 
     const apply = () => {
       const rect = section.getBoundingClientRect();
-      // Progress runs across the pinned scroll distance so the whole effect
-      // plays while the section is pinned (like the original Zeit section).
-      const scrollable = rect.height - window.innerHeight;
-      const p = clamp(-rect.top / Math.max(scrollable, 1));
+      // Progress begins as the block enters the lower half of the viewport
+      // (so there's no long blank before it) and finishes near the end of the
+      // pin — letting the scatter play out gradually across the whole scroll,
+      // a few words per wheel, instead of all at once.
+      const vh = window.innerHeight;
+      const startTop = vh * 0.5;
+      const endTop = -(rect.height - vh) * 0.85;
+      const span = Math.max(startTop - endTop, 1);
+      const p = clamp((startTop - rect.top) / span);
       for (let i = 0; i < wordRefs.current.length; i++) {
         const el = wordRefs.current[i];
         if (!el) continue;
         const s = scatter[i];
-        const local = clamp((p - s.delay * (1 - REVEAL_WINDOW)) / REVEAL_WINDOW);
+        const local = clamp((p - s.delay * START_MAX) / WORD_WINDOW);
         const e = easeOutExpo(local);
         const inv = 1 - e;
         el.style.opacity = String(local);
@@ -103,7 +110,7 @@ export function Clients() {
   let tokenIndex = -1;
 
   return (
-    <section ref={sectionRef} className="relative h-[180vh] w-full">
+    <section ref={sectionRef} className="relative h-[170vh] w-full">
       <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
         <div className="aa-container flex flex-col items-center">
           <span
@@ -119,8 +126,8 @@ export function Clients() {
                 key={li}
                 className={
                   line[0]?.light
-                    ? "pt-1 text-[clamp(1.2rem,2vw,1.9rem)] font-light leading-snug text-white/90"
-                    : "text-[clamp(1.35rem,2.5vw,2.375rem)] font-extrabold leading-snug text-white"
+                    ? "pt-2 text-[clamp(1.5rem,2.8vw,2.5rem)] font-light leading-snug text-white/90"
+                    : "text-[clamp(1.75rem,4vw,3.75rem)] font-extrabold leading-[1.15] text-white"
                 }
               >
                 {line.map((tok) => {

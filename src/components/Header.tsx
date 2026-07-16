@@ -59,7 +59,11 @@ export function Header() {
             >
               liên hệ
             </Link>
-            <nav className="hidden items-center md:flex lg:w-full lg:justify-between">
+            <nav
+              className={`hidden items-center md:flex lg:w-full lg:justify-between ${
+                open ? "md:invisible" : ""
+              }`}
+            >
               {NAV_LINKS.map((link) => {
                 const active =
                   link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -79,7 +83,7 @@ export function Header() {
                       {link.label}
                     </span>
                     {link.href === "/" && (
-                      <span className="text-[0.5rem] leading-none text-white/60 mt-0.5">
+                      <span className="text-[0.5rem] leading-none text-white/60 mt-0.5 lg:text-[0.5625rem]">
                         /àn Ạt/
                       </span>
                     )}
@@ -132,7 +136,7 @@ export function Header() {
                   }}
                 >
                   <span className="block h-px w-16 bg-white" />
-                  <p className="mt-5 text-[1.75rem] font-extrabold uppercase leading-none tracking-tight text-white lg:text-[2.5rem]">
+                  <p className="mt-5 text-[1.75rem] font-extrabold uppercase leading-none tracking-tight text-white lg:text-[2.81rem]">
                     Beyond
                     <br />
                     Creativity
@@ -185,13 +189,13 @@ export function Header() {
                     }}
                   >
                     {/* Hollow outline label — default state, slides up and out on hover */}
-                    <span className="aa-outline-text block text-[clamp(2.75rem,5.7vw,6.875rem)] font-black leading-[1.05] transition-transform duration-500 ease-out group-hover:-translate-y-[125%]">
+                    <span className="aa-outline-text block text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] transition-transform duration-500 ease-out group-hover:-translate-y-[125%]">
                       {link.label}
                     </span>
                     {/* Solid duplicate — hidden below, slides up into view on hover */}
                     <span
                       aria-hidden
-                      className="absolute left-0 top-0 block translate-y-[110%] text-[clamp(2.75rem,5.7vw,6.875rem)] font-black leading-[1.05] text-white transition-transform duration-500 ease-out group-hover:translate-y-0"
+                      className="absolute left-0 top-0 block translate-y-[110%] text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] text-white transition-transform duration-500 ease-out group-hover:translate-y-0"
                     >
                       {link.label}
                     </span>

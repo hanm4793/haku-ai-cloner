@@ -184,6 +184,23 @@
   }
 }
 
+/* Desktop type scale — bump every base font size by +12.5% from the lg
+   breakpoint (>=1024px) up, without touching spacing or the mobile sizes.
+   These rules sit OUTSIDE any @layer so they win over Tailwind's layered
+   font-size utilities. The clamp()-based display headings are scaled at
+   their source (vw + max cap), and the "đối tác" (Clients) section is left
+   unchanged on purpose. */
+@media (min-width: 1024px) {
+  .text-xs { font-size: 0.84375rem; }
+  .text-sm { font-size: 0.984375rem; }
+  .text-base { font-size: 1.125rem; }
+  .text-lg { font-size: 1.265625rem; }
+  .text-xl { font-size: 1.40625rem; }
+  .text-2xl { font-size: 1.6875rem; }
+  .text-3xl { font-size: 2.109375rem; }
+  .aa-eyebrow { font-size: 1.125rem; }
+}
+
 /* Marquee (gallery + differentiator) */
 @keyframes aa-marquee {
   from { transform: translateX(0); }

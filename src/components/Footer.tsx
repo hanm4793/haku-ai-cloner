@@ -100,7 +100,7 @@ export function Footer() {
       <div className="overflow-hidden">
         {/* Let's make ART row */}
         <div className="aa-container relative flex items-end justify-between pb-0">
-          <p className="pb-8 text-[clamp(2rem,3.4vw,4rem)] font-medium leading-none text-white">
+          <p className="pb-8 text-[clamp(2rem,3.83vw,4.5rem)] font-medium leading-none text-white">
             Let&rsquo;s make ART.
           </p>
           {/* Initial note — fades away once the overscroll begins */}

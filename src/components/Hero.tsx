@@ -16,7 +16,7 @@ export function Hero() {
 
       {/* Centered headline */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center">
-        <h1 className="aa-reveal text-[clamp(2.25rem,4.8vw,4.5rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-white">
+        <h1 className="aa-reveal text-[clamp(2.25rem,5.4vw,5.06rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-white">
           Beyond Creativity
           <br />
           Into

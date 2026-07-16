@@ -23,11 +23,11 @@ export default function ContactPage() {
         {/* Hero */}
         <section className="aa-container pt-36 md:pt-44">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-5">
-            <h1 className="aa-reveal lg:col-span-5 text-[clamp(3.5rem,7vw,7.75rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
+            <h1 className="aa-reveal lg:col-span-5 text-[clamp(3.5rem,7.88vw,8.72rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
               Liên hệ
             </h1>
             <div className="aa-reveal flex flex-col lg:col-start-6 lg:col-span-7" style={{ ["--reveal-delay" as string]: "120ms" }}>
-              <p className="text-[clamp(1.3rem,1.9vw,1.875rem)] font-medium uppercase leading-[1.35] text-white">
+              <p className="text-[clamp(1.3rem,2.14vw,2.11rem)] font-medium uppercase leading-[1.35] text-white">
                 Câu chuyện của bạn sẽ truyền cảm hứng cho chúng tôi.
               </p>
 
@@ -38,7 +38,7 @@ export default function ContactPage() {
                   href={`mailto:${CONTACT.email}`}
                   className="group mt-3 flex items-center justify-between gap-6 border-b border-white/40 pb-5"
                 >
-                  <span className="text-[clamp(1.9rem,3.4vw,3.25rem)] font-medium leading-none text-aa-yellow transition-opacity group-hover:opacity-80">
+                  <span className="text-[clamp(1.9rem,3.83vw,3.66rem)] font-medium leading-none text-aa-yellow transition-opacity group-hover:opacity-80">
                     {CONTACT.email}
                   </span>
                   <svg

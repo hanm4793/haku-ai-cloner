@@ -23,7 +23,7 @@ export default function ServicesPage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="aa-container pt-32 md:pt-40">
-          <h1 className="aa-reveal text-center text-[clamp(4rem,12vw,13rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
+          <h1 className="aa-reveal text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
             Dịch vụ
           </h1>
           <div className="aa-reveal mt-4">
@@ -43,7 +43,7 @@ export default function ServicesPage() {
         <section className="aa-container pt-24">
           <div className="grid gap-8 lg:grid-cols-12 lg:gap-5">
             <p className="aa-reveal aa-eyebrow self-start text-base lg:col-start-3 lg:col-span-2">Dịch vụ của ànART</p>
-            <h2 className="aa-reveal text-[clamp(1.35rem,2.05vw,2rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
+            <h2 className="aa-reveal text-[clamp(1.35rem,2.31vw,2.25rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
               Chúng tôi kiến tạo nên những trải nghiệm độc đáo — nơi hình ảnh,
               không gian, câu chuyện tạo ra giá trị và dấu ấn bền vững cho
               thương hiệu.
@@ -55,10 +55,10 @@ export default function ServicesPage() {
         <section className="relative overflow-hidden py-24 md:py-32">
           <div className="flex flex-wrap items-center justify-between gap-10 px-[max(1.25rem,2vw)]">
             <div className="aa-reveal">
-              <p className="text-[clamp(2.25rem,4.4vw,4.25rem)] font-medium leading-none text-white">
+              <p className="text-[clamp(2.25rem,4.95vw,4.78rem)] font-medium leading-none text-white">
                 Dấu ấn khác biệt.
               </p>
-              <p className="mt-3 pl-[18%] text-[clamp(1rem,1.8vw,1.75rem)] font-medium uppercase text-aa-blue">
+              <p className="mt-3 pl-[18%] text-[clamp(1rem,2.03vw,1.97rem)] font-medium uppercase text-aa-blue">
                 → More than a trend.
               </p>
             </div>
@@ -73,10 +73,10 @@ export default function ServicesPage() {
               />
             </div>
             <div className="aa-reveal text-right" style={{ ["--reveal-delay" as string]: "200ms" }}>
-              <p className="text-[clamp(2.25rem,4.4vw,4.25rem)] font-medium leading-none text-white">
+              <p className="text-[clamp(2.25rem,4.95vw,4.78rem)] font-medium leading-none text-white">
                 Hiệu quả.
               </p>
-              <p className="mt-3 text-[clamp(1rem,1.8vw,1.75rem)] font-medium uppercase text-aa-blue">
+              <p className="mt-3 text-[clamp(1rem,2.03vw,1.97rem)] font-medium uppercase text-aa-blue">
                 It&rsquo;s a mindset.
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function ServicesPage() {
               key={s.index}
               className="sticky top-20 grid items-center gap-10 border-t border-white/15 bg-black py-14 md:grid-cols-12 md:gap-5 md:py-16"
             >
-              <p className="select-none text-[clamp(3.5rem,5vw,5rem)] font-light leading-none text-white/35 md:col-start-3 md:col-span-2">
+              <p className="select-none text-[clamp(3.5rem,5.63vw,5.63rem)] font-light leading-none text-white/35 md:col-start-3 md:col-span-2">
                 {s.index}
               </p>
               <div className="max-w-md md:col-start-5 md:col-span-4">
@@ -117,17 +117,17 @@ export default function ServicesPage() {
                   />
                 </div>
                 <span className="pointer-events-none absolute right-0 top-0 select-none text-right leading-none text-white/25">
-                  <span className="block text-[clamp(1.5rem,2.5vw,3rem)] font-light">
+                  <span className="block text-[clamp(1.5rem,2.81vw,3.38rem)] font-light">
                     {s.cat[0]}
                   </span>
                   <span
-                    className="mt-2 inline-block text-[clamp(1.5rem,2.5vw,3rem)] font-light"
+                    className="mt-2 inline-block text-[clamp(1.5rem,2.81vw,3.38rem)] font-light"
                     style={{ writingMode: "vertical-rl" }}
                   >
                     {s.cat[1]}
                   </span>
                 </span>
-                <span className="pointer-events-none absolute bottom-1 right-0 select-none text-[clamp(1rem,1.5vw,1.75rem)] font-light text-white/30">
+                <span className="pointer-events-none absolute bottom-1 right-0 select-none text-[clamp(1rem,1.69vw,1.97rem)] font-light text-white/30">
                   –(<span className="font-bold">C</span>
                   <span className="text-[0.75em]">×</span>
                   <span className="font-bold">E</span>)

@@ -18,13 +18,13 @@ export function GalleryMarquee() {
     <section className="overflow-hidden pt-32 md:pt-56">
       <Marquee direction="left" speedDivisor={18} scrollVw={8} className="items-baseline">
         <div className="flex flex-nowrap items-baseline gap-8 whitespace-nowrap px-4 leading-none">
-          <span className="text-[clamp(3rem,5.5vw,5.25rem)] font-extrabold text-white">
+          <span className="text-[clamp(3rem,6.19vw,5.91rem)] font-extrabold text-white">
             ànART
           </span>
-          <span className="text-[clamp(2rem,3.6vw,3.5rem)] font-light text-white/70">
+          <span className="text-[clamp(2rem,4.05vw,3.94rem)] font-light text-white/70">
             àn Ạt
           </span>
-          <span className="text-[clamp(3rem,5.5vw,5.25rem)] font-medium text-aa-blue">
+          <span className="text-[clamp(3rem,6.19vw,5.91rem)] font-medium text-aa-blue">
             ( Creative HUB x Experiences )
           </span>
         </div>
