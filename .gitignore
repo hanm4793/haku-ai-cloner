@@ -47,3 +47,6 @@ next-env.d.ts
 
 # Local temp files
 temp/
+
+# Design sources (large PDF/SVG masters) — local only, not committed or deployed
+src/anart-assets/design/

@@ -1,4 +1,6 @@
-# Design source files (~1.1GB of PSD/PDF/master SVGs) — not needed at runtime
+# Design source files (~580MB of PDF/master SVGs) — not needed at runtime
+src/anart-assets/design
+# other anart source packs (runtime assets live under public/)
 src/anart-assets
 # local docs & scripts not needed for the build
 docs
