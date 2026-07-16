@@ -46,7 +46,7 @@ export function Manifesto() {
             lg:mt pushes the image down so its bottom lands on the right
             column's bottom, per design (not top-aligned with the others). */}
         <div
-          className="aa-reveal col-span-2 hidden flex-col gap-5 sm:flex lg:col-start-6 lg:mt-[17rem]"
+          className="aa-reveal col-span-2 mx-auto hidden w-full max-w-[240px] flex-col gap-5 sm:flex lg:col-start-6 lg:mt-[17rem]"
           style={{ ["--reveal-delay" as string]: "120ms" }}
         >
           <Image
@@ -54,7 +54,7 @@ export function Manifesto() {
             alt="Einstein đeo kính àA"
             width={428}
             height={428}
-            className="h-auto w-full max-w-[240px]"
+            className="h-auto w-full"
           />
           <p className="text-[0.7rem] uppercase leading-relaxed tracking-wide text-white/45">
             Lấy nghệ thuật làm gốc.

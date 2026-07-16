@@ -13,7 +13,7 @@ export function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
+    onScroll();     
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -117,48 +117,65 @@ export function Header() {
       >
         <div className="aa-container flex h-full flex-col justify-between overflow-y-auto pb-10 pt-24 lg:pt-36">
           <div className="grid flex-1 content-start gap-12 lg:grid-cols-2 lg:content-stretch">
-            {/* Left column — shown below the nav on mobile (design: Mobile p6) */}
+            {/* Left column — shown below the nav on mobile (design: Mobile p6).
+                Each block slides up from behind its own overflow-hidden mask,
+                staggered like the nav links, instead of appearing instantly. */}
             <div className="order-2 flex flex-col justify-start gap-10 lg:order-1 lg:gap-16">
-              <div>
-                <span className="block h-px w-16 bg-white" />
-                <p className="mt-5 text-[1.75rem] font-extrabold uppercase leading-none tracking-tight text-white lg:text-[2.5rem]">
-                  Beyond
-                  <br />
-                  Creativity
-                  <br />
-                  Into
-                  <br />
-                  Experiences
-                </p>
-                <span className="mt-5 block h-px w-16 bg-white" />
+              <div className="overflow-hidden">
+                <div
+                  style={{
+                    transform: open ? "translateY(0)" : "translateY(110%)",
+                    opacity: open ? 1 : 0,
+                    transition: `transform 0.7s cubic-bezier(0.625,0.05,0,1) ${
+                      open ? 80 : 0
+                    }ms, opacity 0.7s ease ${open ? 80 : 0}ms`,
+                  }}
+                >
+                  <span className="block h-px w-16 bg-white" />
+                  <p className="mt-5 text-[1.75rem] font-extrabold uppercase leading-none tracking-tight text-white lg:text-[2.5rem]">
+                    Beyond
+                    <br />
+                    Creativity
+                    <br />
+                    Into
+                    <br />
+                    Experiences
+                  </p>
+                  <span className="mt-5 block h-px w-16 bg-white" />
+                </div>
               </div>
               <div className="flex flex-col gap-6 text-white">
-                <div>
-                  <p className="text-lg font-bold">Office</p>
-                  <p className="mt-1 text-sm text-white/90">{CONTACT.office}</p>
-                </div>
-                <div>
-                  <p className="text-lg font-bold">Hotline</p>
-                  <p className="mt-1 text-sm text-white/90">{CONTACT.hotline}</p>
-                </div>
-                <div>
-                  <p className="text-lg font-bold">Email</p>
-                  <p className="mt-1 text-sm text-white/90">{CONTACT.email}</p>
-                </div>
+                {[
+                  { label: "Office", value: CONTACT.office },
+                  { label: "Hotline", value: CONTACT.hotline },
+                  { label: "Email", value: CONTACT.email },
+                ].map((item, i) => (
+                  <div key={item.label} className="overflow-hidden">
+                    <div
+                      style={{
+                        transform: open ? "translateY(0)" : "translateY(110%)",
+                        opacity: open ? 1 : 0,
+                        transition: `transform 0.7s cubic-bezier(0.625,0.05,0,1) ${
+                          open ? 160 + i * 80 : 0
+                        }ms, opacity 0.7s ease ${open ? 160 + i * 80 : 0}ms`,
+                      }}
+                    >
+                      <p className="text-lg font-bold">{item.label}</p>
+                      <p className="mt-1 text-sm text-white/90">{item.value}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
             {/* Right column — big nav (right-aligned on all sizes, per design) */}
             <nav className="order-1 flex flex-col items-end gap-2 text-right lg:order-2">
-              {MENU_LINKS.map((link, i) => {
-                const active =
-                  link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
-                return (
+              {MENU_LINKS.map((link, i) => (
+                <div key={link.href} className="overflow-hidden py-0.5">
                   <Link
-                    key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="group overflow-hidden py-0.5"
+                    className="group relative block overflow-hidden"
                     style={{
                       transform: open ? "translateY(0)" : "translateY(110%)",
                       opacity: open ? 1 : 0,
@@ -167,42 +184,55 @@ export function Header() {
                       }ms, opacity 0.7s ease ${open ? 120 + i * 60 : 0}ms`,
                     }}
                   >
+                    {/* Hollow outline label — default state, slides up and out on hover */}
+                    <span className="aa-outline-text block text-[clamp(2.75rem,5.7vw,6.875rem)] font-black leading-[1.05] transition-transform duration-500 ease-out group-hover:-translate-y-[125%]">
+                      {link.label}
+                    </span>
+                    {/* Solid duplicate — hidden below, slides up into view on hover */}
                     <span
-                      className={`block text-[clamp(2.75rem,5.7vw,6.875rem)] font-black leading-[1.05] transition-all duration-300 ${
-                        active
-                          ? "aa-outline-text"
-                          : "text-white group-hover:opacity-75"
-                      }`}
+                      aria-hidden
+                      className="absolute left-0 top-0 block translate-y-[110%] text-[clamp(2.75rem,5.7vw,6.875rem)] font-black leading-[1.05] text-white transition-transform duration-500 ease-out group-hover:translate-y-0"
                     >
                       {link.label}
                     </span>
                   </Link>
-                );
-              })}
+                </div>
+              ))}
             </nav>
           </div>
 
           {/* Bottom row */}
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div className="flex items-center gap-6 text-sm text-white">
-              <span className="text-lg font-bold">Follow us</span>
-              {CONTACT.socials.map((s, i) => (
-                <span key={s.label} className="flex items-center gap-6">
-                  {i > 0 && <span className="font-black">|</span>}
-                  <a
-                    href={s.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="transition-opacity hover:opacity-70"
-                  >
-                    {s.label}
-                  </a>
-                </span>
-              ))}
+          <div className="overflow-hidden">
+            <div
+              className="flex flex-wrap items-end justify-between gap-6"
+              style={{
+                transform: open ? "translateY(0)" : "translateY(110%)",
+                opacity: open ? 1 : 0,
+                transition: `transform 0.7s cubic-bezier(0.625,0.05,0,1) ${
+                  open ? 480 : 0
+                }ms, opacity 0.7s ease ${open ? 480 : 0}ms`,
+              }}
+            >
+              <div className="flex items-center gap-6 text-sm text-white">
+                <span className="text-lg font-bold">Follow us</span>
+                {CONTACT.socials.map((s, i) => (
+                  <span key={s.label} className="flex items-center gap-6">
+                    {i > 0 && <span className="font-black">|</span>}
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="transition-opacity hover:opacity-70"
+                    >
+                      {s.label}
+                    </a>
+                  </span>
+                ))}
+              </div>
+              <p className="text-lg text-white">
+                — english / <span className="font-bold">vietnamese</span>
+              </p>
             </div>
-            <p className="text-lg text-white">
-              — english / <span className="font-bold">vietnamese</span>
-            </p>
           </div>
         </div>
       </div>
