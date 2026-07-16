@@ -91,7 +91,11 @@ export function Clients() {
       }
     };
 
-    const unsub = subscribeScroll(apply);
+    // keepAlive: without this the ticker's rAF loop goes idle between
+    // discrete wheel gestures and only "wakes" on the next native scroll
+    // event — combined with Lenis's ~1.1s eased scroll, that produced a
+    // visible lag (blank pin) until scrolling a couple more times.
+    const unsub = subscribeScroll(apply, true);
     apply();
     return unsub;
   }, [scatter]);

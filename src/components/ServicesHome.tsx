@@ -24,8 +24,9 @@ export function ServicesHome() {
 
       {/* Fields of work */}
       <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-5">
+        {/* Big index numeral — desktop only; mobile has no room for it beside the list */}
         <p
-          className="aa-reveal select-none text-right text-[clamp(4rem,6vw,6rem)] font-light leading-none text-aa-blue lg:col-start-3 lg:col-span-1"
+          className="aa-reveal hidden select-none text-right text-[clamp(4rem,6vw,6rem)] font-light leading-none text-aa-blue lg:col-start-3 lg:col-span-1 lg:block"
           aria-hidden
         >
           {SERVICES[active].index}
@@ -43,13 +44,20 @@ export function ServicesHome() {
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
-                  className={`group relative flex items-baseline text-left transition-colors ${
+                  className={`group relative flex items-baseline gap-3 text-left transition-colors lg:gap-0 ${
                     active === i ? "text-white" : "text-white/45 hover:text-white/80"
                   }`}
                 >
-                  {/* Hanging bullet — sits outside the text column, doesn't shift the title */}
-                  <span className="absolute -left-10 w-5 text-right text-base" aria-hidden>
-                    {active === i ? "+" : "—"}
+                  {/* Mobile: inline accordion bullet — "−" open / "+" closed, per design. */}
+                  <span className="w-4 shrink-0 text-base lg:hidden" aria-hidden>
+                    {active === i ? "−" : "+"}
+                  </span>
+                  {/* Desktop: hanging bullet outside the text column, doesn't shift the
+                      title. Uses the minus sign (−) rather than an em dash (—) so it
+                      matches the "+" glyph's advance width, per the design's equal-width
+                      bullets. Desktop's active state is the opposite of mobile's ("+" open). */}
+                  <span className="absolute -left-10 hidden w-5 text-right text-base lg:inline" aria-hidden>
+                    {active === i ? "+" : "−"}
                   </span>
                   <span
                     className={`text-base ${active === i ? "font-bold" : "font-medium"}`}
@@ -58,13 +66,20 @@ export function ServicesHome() {
                     <sup className="text-[0.6em] text-white/50">({s.index})</sup>
                   </span>
                 </button>
+                {/* Mobile: description opens inline under the active item (accordion) */}
+                {active === i && (
+                  <p className="mt-3 pl-7 text-sm leading-relaxed text-white lg:hidden">
+                    {s.description}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="aa-reveal max-w-md lg:col-start-8 lg:col-span-5 lg:pt-16">
-          <p key={active} className="text-sm leading-relaxed text-white/60">
+        {/* Desktop: shared description panel to the right of the list */}
+        <div className="aa-reveal hidden max-w-md lg:col-start-8 lg:col-span-5 lg:block lg:pt-16">
+          <p key={active} className="text-sm leading-relaxed text-white">
             {SERVICES[active].description}
           </p>
           <Link
@@ -74,6 +89,14 @@ export function ServicesHome() {
             Xem tất cả dịch vụ <span aria-hidden>→</span>
           </Link>
         </div>
+
+        {/* Mobile: link lives under the whole list since there's no side panel */}
+        <Link
+          href="/dich-vu"
+          className="aa-reveal inline-flex items-center gap-2 text-sm font-medium uppercase tracking-wide text-white/70 transition-colors hover:text-white lg:hidden"
+        >
+          Xem tất cả dịch vụ <span aria-hidden>→</span>
+        </Link>
       </div>
     </section>
   );
