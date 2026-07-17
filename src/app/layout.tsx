@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { PageLoader } from "@/components/PageLoader";
 import "./globals.css";
 
 const neueKaine = localFont({
@@ -43,7 +44,10 @@ export default function RootLayout({
       lang="vi"
       className={`${neueKaine.variable} ${manrope.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-black text-white">{children}</body>
+      <body className="min-h-full flex flex-col bg-black text-white">
+        <PageLoader />
+        {children}
+      </body>
     </html>
   );
 }

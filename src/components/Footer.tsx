@@ -14,9 +14,9 @@ const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
  *  its standard layout — orange A next to "not, done, yet ⟶" (nothing above
  *  ever moves). Once the page is scrolled all the way down, further
  *  wheel/touch input is captured as a virtual progress: the A slides right →
- *  left into its design spot, dragging in a new line ("Contact us for more
- *  information. Let's make art together") while "not, done, yet" fades away.
- *  Scrolling back rewinds it.
+ *  left into its design spot, dragging in "Chất riêng trải nghiệm" (same size
+ *  as "Let's make ART.") while "not, done, yet" fades away. Scrolling back
+ *  rewinds it.
  */
 export function Footer() {
   const aRef = useRef<HTMLDivElement>(null);
@@ -31,9 +31,11 @@ export function Footer() {
 
     const render = () => {
       const e = easeOut(v);
-      // A slides right -> left into the design spot beside "Let's make ART."
+      // A slides right -> left into the design spot beside "Let's make ART.".
+      // Slides further left than before so the now much-wider "Chất riêng
+      // trải nghiệm" line has room to its right without overlapping it.
       if (aRef.current) {
-        aRef.current.style.transform = `translateX(${-e * 24}vw)`;
+        aRef.current.style.transform = `translateX(${-e * 38}vw)`;
       }
       // "not, done, yet" fades away as the A departs
       if (noteRef.current) {
@@ -110,14 +112,16 @@ export function Footer() {
               ⟶
             </span>
           </div>
-          {/* New line dragged in from the right behind the A */}
+          {/* New line dragged in from the right behind the A — same size/weight as
+              "Let's make ART." TODO: an image goes here, to be swapped in later. */}
           <div
             ref={ctaRef}
-            className="pointer-events-none absolute bottom-10 right-[max(1.25rem,2.4vw)] hidden text-right will-change-[opacity,transform] sm:block"
+            className="pointer-events-none absolute bottom-8 right-[max(1.25rem,2.4vw)] hidden items-end gap-4 will-change-[opacity,transform] sm:flex"
             style={{ opacity: 0, transform: "translateX(34vw)" }}
           >
-            <p className="text-lg text-white/85">Contact us for more information.</p>
-            <p className="text-lg font-bold text-aa-yellow">Let&rsquo;s make art together</p>
+            <p className="whitespace-nowrap text-[clamp(2rem,3.83vw,4.5rem)] font-medium leading-none text-white">
+              Chất riêng trải nghiệm
+            </p>
           </div>
           {/* Orange 3D A — starts beside "not, done, yet", overscroll pushes it
               right → left into the design spot beside "Let's make ART." */}

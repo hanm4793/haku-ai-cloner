@@ -60,13 +60,27 @@ export function SmoothScroll() {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll, { passive: true });
-    reveal(); // initial pass for above-the-fold elements
+
+    // Above-the-fold elements (Hero) would otherwise reveal instantly on
+    // mount, hidden behind PageLoader — hold the initial pass until it's
+    // done so the entrance actually plays once the loader is gone. Fall
+    // back to a timer in case the loader never fires (e.g. it errored).
+    let initialRevealTimer = 0;
+    const runInitialReveal = () => {
+      window.clearTimeout(initialRevealTimer);
+      window.removeEventListener("pageloader:done", runInitialReveal);
+      reveal();
+    };
+    window.addEventListener("pageloader:done", runInitialReveal);
+    initialRevealTimer = window.setTimeout(runInitialReveal, 4000);
 
     return () => {
       cancelAnimationFrame(rafId);
       lenis?.destroy();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.removeEventListener("pageloader:done", runInitialReveal);
+      window.clearTimeout(initialRevealTimer);
     };
   }, []);
 
