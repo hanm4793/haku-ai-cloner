@@ -49,5 +49,6 @@ next-env.d.ts
 temp/
 .scratch/
 
-# Design sources (large PDF/SVG masters) — local only, not committed or deployed
+# Design sources & raw images (large masters) — local only, not committed or deployed
 src/anart-assets/design/
+src/anart-assets/images/
