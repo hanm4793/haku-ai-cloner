@@ -23,6 +23,12 @@ const manrope = localFont({
   src: [{ path: "../../public/fonts/Manrope-ExtraBold.woff2", weight: "800", style: "normal" }],
 });
 
+const caveat = localFont({
+  variable: "--font-caveat",
+  display: "swap",
+  src: [{ path: "../../public/fonts/Caveat-Bold.ttf", weight: "700", style: "normal" }],
+});
+
 export const metadata: Metadata = {
   title: "ànART® | Creative Hub x Experiences",
   description:
@@ -42,7 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="vi"
-      className={`${neueKaine.variable} ${manrope.variable} h-full antialiased dark`}
+      className={`${neueKaine.variable} ${manrope.variable} ${caveat.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col bg-black text-white">
         <PageLoader />

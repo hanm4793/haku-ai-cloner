@@ -8,6 +8,15 @@ import { clamp, subscribeScroll } from "@/lib/scrollTicker";
 
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 
+const CTA_TEXT = "Chất riêng trải nghiệm";
+// Deterministic pseudo-random jitter per letter (no Math.random — must match
+// between server render and client hydration).
+const LETTER_JITTER = CTA_TEXT.split("").map((_, i) => ({
+  x: ((i * 47) % 33) - 16,
+  y: ((i * 71) % 43) - 21,
+  r: ((i * 29) % 37) - 18,
+}));
+
 /** "Let's make ART." + orange 3D A + blue info block with the big wordmark.
  *
  *  Virtual overscroll ending: the footer sits naturally at the page bottom in
@@ -22,6 +31,7 @@ export function Footer() {
   const aRef = useRef<HTMLDivElement>(null);
   const noteRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -43,11 +53,19 @@ export function Footer() {
         noteRef.current.style.opacity = String(1 - t);
         noteRef.current.style.transform = `translateX(${-easeOut(t) * 60}px)`;
       }
-      // new line dragged in from the right behind the A
+      // new line dragged in from the right behind the A. Letters ride in
+      // scattered (random rotate/offset) and straighten out as the overscroll
+      // continues, settling flush by the time the line is fully opaque.
       if (ctaRef.current) {
         const t = clamp((v - 0.25) / 0.55);
         ctaRef.current.style.opacity = String(t);
         ctaRef.current.style.transform = `translateX(${(1 - easeOut(t)) * 34}vw)`;
+        const k = 1 - easeOut(t);
+        letterRefs.current.forEach((el, i) => {
+          if (!el) return;
+          const j = LETTER_JITTER[i];
+          el.style.transform = `translate(${j.x * k}px, ${j.y * k}px) rotate(${j.r * k}deg)`;
+        });
       }
     };
 
@@ -106,21 +124,51 @@ export function Footer() {
             Let&rsquo;s make ART.
           </p>
           {/* Initial note — fades away once the overscroll begins */}
-          <div ref={noteRef} className="flex items-center gap-5 pb-10 will-change-[opacity,transform]">
-            <span className="hidden text-lg text-white/55 sm:block">not, done, yet</span>
-            <span className="hidden text-2xl text-aa-yellow sm:block" aria-hidden>
-              ⟶
+          <div ref={noteRef} className="flex items-center gap-3 pb-10 will-change-[opacity,transform]">
+            <span
+              className="hidden text-3xl text-white/70 sm:block"
+              style={{ fontFamily: "var(--font-caveat)" }}
+            >
+              not, done, yet
             </span>
+            <svg
+              viewBox="0 0 60 24"
+              className="aa-arrow-doodle hidden h-6 w-14 text-aa-yellow sm:block"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden
+            >
+              <path d="M2 15c10-3 20-4.5 30-4 8 .4 16 2 26 1" />
+              <path d="M46 4c4 3 8 5.5 12 8-4 2-8 5-11 9" />
+            </svg>
           </div>
           {/* New line dragged in from the right behind the A — same size/weight as
-              "Let's make ART." TODO: an image goes here, to be swapped in later. */}
+              "Let's make ART.". Each letter starts scattered and straightens as
+              the overscroll continues. TODO: an image goes here, to be swapped
+              in later. */}
           <div
             ref={ctaRef}
             className="pointer-events-none absolute bottom-8 right-[max(1.25rem,2.4vw)] hidden items-end gap-4 will-change-[opacity,transform] sm:flex"
             style={{ opacity: 0, transform: "translateX(34vw)" }}
           >
             <p className="whitespace-nowrap text-[clamp(2rem,3.83vw,4.5rem)] font-medium leading-none text-white">
-              Chất riêng trải nghiệm
+              {CTA_TEXT.split("").map((ch, i) => (
+                <span
+                  key={i}
+                  ref={(el) => {
+                    letterRefs.current[i] = el;
+                  }}
+                  className="inline-block will-change-transform"
+                  style={{
+                    transform: `translate(${LETTER_JITTER[i].x}px, ${LETTER_JITTER[i].y}px) rotate(${LETTER_JITTER[i].r}deg)`,
+                  }}
+                >
+                  {ch === " " ? " " : ch}
+                </span>
+              ))}
             </p>
           </div>
           {/* Orange 3D A — starts beside "not, done, yet", overscroll pushes it

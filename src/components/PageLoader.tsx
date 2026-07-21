@@ -9,8 +9,10 @@ import { useEffect, useRef, useState } from "react";
  *
  * Every path/polygon in the logo starts collapsed onto the mark's center
  * (stacked on top of each other, scaled down, invisible), then each piece
- * flies out to its real position in a staggered cascade — the letters
- * visibly "separate" and assemble the logo, rather than a simple wipe/fade.
+ * flies out to its real position — the letters visibly "separate" and
+ * assemble the logo, rather than a simple wipe/fade. The reveal runs in
+ * three phases: "ànART" letter by letter, then the "Creative Hub X
+ * Experiences" tagline as a loose cascade, then the "®" badge last of all.
  * Once settled, the whole overlay fades to reveal the page.
  */
 
@@ -73,12 +75,37 @@ export function PageLoader() {
     const cx = box.x + box.width / 2;
     const cy = box.y + box.height / 2;
 
-    // Shuffle the reveal order so the cascade doesn't just read left-to-right.
-    const order = shapes.map((_, i) => i);
-    for (let i = order.length - 1; i > 0; i--) {
+    // Shape indices within LOGO_SHAPES, identified by hand: the "ànART" word
+    // mark (in reading order), then the "®" badge (circle + inner R), with
+    // everything else being the "Creative Hub X Experiences" tagline.
+    const WORDMARK = [23, 22, 26, 28, 25]; // à, n, A, R, T
+    const REGISTERED_MARK = [24, 27]; // circle, R
+    const special = new Set([...WORDMARK, ...REGISTERED_MARK]);
+    const tagline = shapes.map((_, i) => i).filter((i) => !special.has(i));
+    for (let i = tagline.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      [order[i], order[j]] = [order[j], order[i]];
+      [tagline[i], tagline[j]] = [tagline[j], tagline[i]];
     }
+
+    // Three phases, in order: the "ànART" letters one at a time, then the
+    // tagline as a loose cascade, then the "®" badge last of all.
+    const SHAPE_MS = 700;
+    const WORDMARK_GAP = 110;
+    const TAGLINE_GAP = 22;
+    const MARK_GAP = 90;
+    const PHASE_GAP = 150;
+
+    const delayByIndex = new Map<number, number>();
+    WORDMARK.forEach((idx, i) => delayByIndex.set(idx, i * WORDMARK_GAP));
+    const phase1End = (WORDMARK.length - 1) * WORDMARK_GAP + SHAPE_MS;
+
+    const phase2Start = phase1End + PHASE_GAP;
+    tagline.forEach((idx, i) => delayByIndex.set(idx, phase2Start + i * TAGLINE_GAP));
+    const phase2End = phase2Start + (tagline.length - 1) * TAGLINE_GAP + SHAPE_MS;
+
+    const phase3Start = phase2End + PHASE_GAP;
+    REGISTERED_MARK.forEach((idx, i) => delayByIndex.set(idx, phase3Start + i * MARK_GAP));
+    const phase3End = phase3Start + (REGISTERED_MARK.length - 1) * MARK_GAP + SHAPE_MS;
 
     // Set the "stacked at center" starting point with no transition yet, so
     // the browser has a committed frame to animate *from*. Without this,
@@ -94,7 +121,7 @@ export function PageLoader() {
       el.style.transformOrigin = "center";
       el.style.transform = `translate(${(cx - ex).toFixed(2)}px, ${(cy - ey).toFixed(2)}px) scale(0.15)`;
       el.style.opacity = "0";
-      el.dataset.delay = String(order.indexOf(i) * 28);
+      el.dataset.delay = String(delayByIndex.get(i));
     });
 
     // Force layout so the collapsed state above is actually committed before
@@ -105,14 +132,14 @@ export function PageLoader() {
       requestAnimationFrame(() => {
         shapes.forEach((el) => {
           const delay = el.dataset.delay;
-          el.style.transition = `transform 700ms cubic-bezier(0.16,1,0.3,1) ${delay}ms, opacity 380ms ease ${delay}ms`;
+          el.style.transition = `transform ${SHAPE_MS}ms cubic-bezier(0.16,1,0.3,1) ${delay}ms, opacity 380ms ease ${delay}ms`;
           el.style.transform = "translate(0px,0px) scale(1)";
           el.style.opacity = "1";
         });
       }),
     );
 
-    const CASCADE_MS = shapes.length * 28 + 700;
+    const CASCADE_MS = phase3End;
     const HOLD_MS = 350;
     const FADE_MS = 600;
     let fadeTimer = 0;
