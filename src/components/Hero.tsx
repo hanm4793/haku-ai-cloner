@@ -1,16 +1,15 @@
-import Image from "next/image";
 import { CONTACT } from "@/lib/data";
 
 export function Hero() {
   return (
     <section className="relative flex min-h-screen w-full flex-col overflow-hidden">
-      <Image
-        src="/images/hero-exhibition.webp"
-        alt="ànART — không gian triển lãm Vietcombank"
-        fill
-        priority
-        className="object-cover"
-        sizes="100vw"
+      <video
+        src="/videos/hero_banner_video.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 bg-black/25" />
 
