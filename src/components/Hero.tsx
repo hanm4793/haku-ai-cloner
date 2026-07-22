@@ -1,4 +1,5 @@
 import { CONTACT } from "@/lib/data";
+import { RevealTitle } from "@/components/RevealTitle";
 
 export function Hero() {
   return (
@@ -15,15 +16,12 @@ export function Hero() {
 
       {/* Centered headline */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center">
-        <h1 className="text-[clamp(2.25rem,5.4vw,5.06rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-white">
-          <span className="aa-reveal block">Beyond Creativity</span>
-          <span className="aa-reveal block" style={{ ["--reveal-delay" as string]: "150ms" }}>
-            Into
-          </span>
-          <span className="aa-reveal block" style={{ ["--reveal-delay" as string]: "300ms" }}>
-            Experiences
-          </span>
-        </h1>
+        <RevealTitle
+          as="h1"
+          lines={["Beyond Creativity", "Into", "Experiences"]}
+          stagger={130}
+          className="text-[clamp(2.25rem,5.4vw,5.06rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-white"
+        />
         <svg
           viewBox="0 0 48 20"
           className="aa-reveal mt-8 h-5 w-12 text-white"

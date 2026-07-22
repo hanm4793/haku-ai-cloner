@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types";
+import { PROJECT_DETAILS } from "@/lib/data";
 
 const SIZE_CLASS: Record<Project["size"], string> = {
   wide: "md:col-span-2 md:row-span-2",
@@ -17,9 +18,10 @@ const IMAGE_SIZES: Record<Project["size"], string> = {
 };
 
 function Tile({ project, index }: { project: Project; index: number }) {
+  const href = PROJECT_DETAILS[project.slug] ? `/du-an/${project.slug}` : "/du-an";
   return (
     <Link
-      href="/du-an"
+      href={href}
       className={`aa-reveal group relative block overflow-hidden bg-white/[0.04] ${SIZE_CLASS[project.size]}`}
       style={{ ["--reveal-delay" as string]: `${(index % 3) * 90}ms` }}
     >

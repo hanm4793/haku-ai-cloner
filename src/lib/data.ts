@@ -1,4 +1,4 @@
-import type { NavLink, Project, Service } from "@/types";
+import type { NavLink, Project, ProjectDetail, Service } from "@/types";
 
 export const NAV_LINKS: NavLink[] = [
   { index: "01", label: "về ànART", href: "/" },
@@ -161,6 +161,54 @@ export const PROJECTS: Project[] = [
     size: "small",
   },
 ];
+
+/** Full case-study content, keyed by project slug. Only projects with an entry
+ *  here get a /du-an/[slug] detail page; the rest link back to the list. */
+export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
+  vietcombank: {
+    slug: "vietcombank",
+    titleLines: ["Vietcombank", "Instalation Art", "& Exhibition"],
+    scope: ["Exhibition", "Visual Art", "Branding Design", "Production"],
+    intro:
+      "Mỗi không gian là một chương truyện, mỗi tác phẩm là một mảnh ghép của bản sắc Việt. Trong cuộc gặp gỡ giữa dân gian và đương đại, quá khứ không đứng sau chúng ta mà đang đồng hành cùng chúng ta trên hành trình đi tới tương lai.",
+    overview: [
+      "Triển lãm giới thiệu 31 tác phẩm hội họa về chủ đề Ngựa, nơi mỗi bức tranh là một câu chuyện riêng, tái hiện những ký ức, niềm tin và khát vọng đã đồng hành cùng dân tộc Việt qua nhiều giai đoạn lịch sử.",
+      "Hành trình trưng bày được dẫn dắt qua ba mạch nội dung: Lịch sử & Truyền thuyết, Văn hóa & Tín ngưỡng, và Giao thương & Phát triển. Từ những huyền tích xa xưa, đời sống tâm linh đến tinh thần khai mở và vươn mình của dân tộc, hình tượng ngựa hiện lên như một biểu tượng của sức sống, ý chí và khát vọng tiến bước.",
+      "Các tác phẩm mang tinh thần dân gian dân tộc được đặt trong một ngôn ngữ trưng bày đương đại, tạo nên sự đối thoại giữa truyền thống và hiện tại, giữa những giá trị đã được gìn giữ qua thời gian và cách cảm nhận của con người hôm nay.",
+      "Bằng sự giao thoa giữa Dân gian dân tộc × Contemporary Art, triển lãm mong muốn tôn vinh những giá trị bền vững của văn hóa Việt, kết nối con người với cội nguồn và lan tỏa tinh thần gìn giữ, tiếp nối di sản như một nguồn năng lượng để kiến tạo bản sắc và phát triển trong thời đại mới.",
+    ],
+    captionLines: ["Vietcombank", "Instalation Art", "& Exhibition"],
+    year: "#2026",
+    blocks: [
+      { type: "full", image: "/images/service-vcb/Vietcombank-01.webp" },
+      { type: "full", image: "/images/service-vcb/Vietcombank-02.webp" },
+      {
+        type: "text",
+        align: "split",
+        heading:
+          "Từ huyền tích đến đời thường, vó ngựa khắc sâu trong lịch sử dân tộc.",
+        paragraphs: [
+          "Lấy cảm hứng từ hình tượng con ngựa – linh vật đã xuất hiện từ thuở truyền thuyết, đồng hành xuyên suốt chiều dài lịch sử và tiếp tục hiện diện mạnh mẽ trong đời sống hiện đại, triển lãm giới thiệu 31 tác phẩm hội họa tái hiện 31 cảnh tượng về những Quý Mã của người Việt. Mỗi bức tranh là một câu chuyện, một sự tích, một lát cắt văn hóa, gửi gắm niềm tin vào Quý Mã – biểu tượng của bình an, phước lành và sự song hành tương trợ trên hành trình cùng người Việt rẽ gió tiến xa.",
+          "Bước sang năm Bính Ngọ 2026, đất nước bước vào kỷ nguyên vươn mình, hướng tới mục tiêu phát triển giàu mạnh, thịnh vượng. Song để đi xa với những bước tiến vững vàng, hành trình ấy luôn cần điểm tựa từ cội nguồn – những giá trị truyền thống, những tinh hoa văn hóa làm nên bản sắc Việt Nam.",
+        ],
+      },
+      { type: "full", image: "/images/service-vcb/Vietcombank-03.webp" },
+      { type: "full", image: "/images/service-vcb/Vietcombank-04.webp" },
+      { type: "full", image: "/images/service-vcb/Vietcombank-05.webp" },
+      {
+        type: "text",
+        align: "right",
+        paragraphs: [
+          "Thấu hiểu ý nghĩa đó, Vietcombank luôn tận tâm gìn giữ, lan tỏa và phát huy các giá trị văn hóa dân tộc. Đó không chỉ là trách nhiệm, mà còn là tâm niệm và niềm tin. Cũng như những “Quý Mã” trong lịch sử, Vietcombank không ngừng mạnh mẽ tiến lên, đồng hành cùng sự phát triển của đất nước và mỗi khách hàng.",
+          "Nhân dịp năm mới, Vietcombank hân hạnh được đồng hành và giới thiệu triển lãm MÃ ĐÀO. Qua đây, xin kính chúc Quý vị một năm mới có MÃ ĐÀO ắt sẽ THÀNH CÔNG!",
+        ],
+      },
+      { type: "full", image: "/images/service-vcb/Vietcombank-06.webp" },
+      { type: "full", image: "/images/service-vcb/Vietcombank-07.webp" },
+      { type: "full", image: "/images/service-vcb/Vietcombank-09.webp" },
+    ],
+  },
+};
 
 /** Client roster block on the home page (rendered line by line). */
 export const CLIENT_LINES: string[][] = [

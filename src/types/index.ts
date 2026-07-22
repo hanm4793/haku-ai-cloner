@@ -20,6 +20,33 @@ export interface Service {
   image: string;
 }
 
+/** A content block inside a project case-study page. */
+export type DetailBlock =
+  /** grid of images — column count = images.length (max 3) */
+  | { type: "images"; images: string[] }
+  /** paragraph block — "split" = heading left + copy right, "right" = copy in right column only */
+  | { type: "text"; heading?: string; paragraphs: string[]; align?: "split" | "right" }
+  /** full-bleed image with the project caption + year overlaid (caay-style figure) */
+  | { type: "full"; image: string };
+
+/** Full case-study content for /du-an/[slug]. */
+export interface ProjectDetail {
+  slug: string;
+  /** big title, one entry per rendered line */
+  titleLines: string[];
+  /** S.O.W (scope of work) list */
+  scope: string[];
+  /** intro statement (white, uppercase) shown top-right */
+  intro: string;
+  /** "TỔNG QUAN" paragraphs */
+  overview: string[];
+  /** caption overlaid on full-bleed images, one entry per line */
+  captionLines: string[];
+  /** year tag shown bottom-right of full images, e.g. "#2026" */
+  year: string;
+  blocks: DetailBlock[];
+}
+
 export interface NavLink {
   index: string;
   label: string;

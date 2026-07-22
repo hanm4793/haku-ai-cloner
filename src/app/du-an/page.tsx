@@ -19,35 +19,7 @@ export default function ProjectsPage() {
       <Header />
       <SideTab />
       <main className="flex-1">
-        {/* Hero */}
-        <section className="aa-container pt-36 md:pt-44">
-          <div className="grid gap-10 lg:grid-cols-12 lg:gap-5">
-            <div className="aa-reveal lg:col-span-5">
-              <h1 className="text-[clamp(3.5rem,7.88vw,8.72rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
-                Dự án
-              </h1>
-            </div>
-            <div className="aa-reveal flex flex-col gap-8 lg:col-start-6 lg:col-span-7" style={{ ["--reveal-delay" as string]: "120ms" }}>
-              <p className="text-[clamp(1.1rem,1.74vw,1.69rem)] font-medium uppercase leading-[1.4] text-white">
-                Mỗi dự án tại ànART là một hành trình sáng tạo, chuyển hóa từ
-                nghệ thuật thành trải nghiệm.
-              </p>
-              <p className="text-[clamp(1.1rem,1.74vw,1.69rem)] font-medium uppercase leading-[1.4] text-white">
-                Chúng tôi luôn theo đuổi những giá trị có khả năng chạm đến cảm
-                xúc tạo nên các trải nghiệm độc đáo — nơi hình ảnh, không gian,
-                câu chuyện tạo ra giá trị và dấu ấn bền vững cho thương hiệu.
-              </p>
-              <p className="text-base font-bold text-white">
-                — ànART <sup className="text-[0.6em]">®</sup>
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Filter + grid */}
-        <section className="aa-container pt-14">
-          <ProjectsExplorer />
-        </section>
+        <ProjectsExplorer />
       </main>
       <PreFooter />
       <Footer />

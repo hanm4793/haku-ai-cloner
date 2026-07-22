@@ -3,6 +3,7 @@ import Image from "next/image";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { Header } from "@/components/Header";
 import { SideTab } from "@/components/SideTab";
+import { RevealTitle } from "@/components/RevealTitle";
 import { Define } from "@/components/Define";
 import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
@@ -22,7 +23,7 @@ export default function ServicesPage() {
       <SideTab />
       <main className="flex-1">
         {/* Hero */}
-        <section className="aa-container pt-32 md:pt-40">
+        <section className="aa-container">
           <div className="aa-reveal relative">
             <Image
               src="/images/service-image/service_01.webp"
@@ -39,9 +40,11 @@ export default function ServicesPage() {
               <span>Production.</span>
             </div>
           </div>
-          <h1 className="aa-reveal mt-8 text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
-            Dịch vụ
-          </h1>
+          <RevealTitle
+            as="h1"
+            lines={["Dịch vụ"]}
+            className="relative z-10 -mt-[10vw] text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white"
+          />
         </section>
 
         {/* Statement */}
@@ -64,14 +67,14 @@ export default function ServicesPage() {
               alt=""
               width={1342}
               height={898}
-              className="aa-reveal h-[220px] w-[140px] rounded-md object-cover"
+              className="aa-reveal h-auto w-[250px] rounded-md"
               aria-hidden
             />
             <div className="aa-reveal" style={{ ["--reveal-delay" as string]: "80ms" }}>
               <p className="text-[clamp(2.25rem,4.95vw,4.78rem)] font-medium leading-none text-white">
                 Dấu ấn khác biệt.
               </p>
-              <p className="mt-3 flex items-center gap-3 pl-[18%] text-[clamp(1rem,2.03vw,1.97rem)] font-medium uppercase text-aa-blue">
+              <p className="mt-3 flex items-center gap-3 pl-[18%] text-[clamp(1rem,2.03vw,1.97rem)] font-semibold uppercase text-aa-blue">
                 <Image
                   src="/images/service-image/service_04.webp"
                   alt=""
@@ -97,7 +100,7 @@ export default function ServicesPage() {
               <p className="text-[clamp(2.25rem,4.95vw,4.78rem)] font-medium leading-none text-white">
                 Hiệu quả.
               </p>
-              <p className="mt-3 text-[clamp(1rem,2.03vw,1.97rem)] font-medium uppercase text-aa-blue">
+              <p className="mt-3 text-[clamp(1rem,2.03vw,1.97rem)] font-semibold uppercase text-aa-blue">
                 It&rsquo;s a mindset.
               </p>
             </div>
@@ -120,7 +123,7 @@ export default function ServicesPage() {
                   {s.title}{" "}
                   <sup className="text-[0.6em] text-white/50">({s.index})</sup>
                 </p>
-                <p className="mt-4 pl-8 text-sm leading-relaxed text-white/55">
+                <p className="mt-4 text-sm leading-relaxed text-white/55">
                   {s.description}
                 </p>
               </div>
