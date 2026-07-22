@@ -188,14 +188,14 @@ export function Header() {
                       }ms, opacity 0.7s ease ${open ? 120 + i * 60 : 0}ms`,
                     }}
                   >
-                    {/* Hollow outline label — default state, slides up and out on hover */}
-                    <span className="aa-outline-text block text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] transition-transform duration-500 ease-out group-hover:-translate-y-[125%]">
+                    {/* Solid label — default state, slides up and out on hover */}
+                    <span className="block text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] text-white transition-transform duration-500 ease-out group-hover:-translate-y-[125%]">
                       {link.label}
                     </span>
-                    {/* Solid duplicate — hidden below, slides up into view on hover */}
+                    {/* Hollow outline duplicate — hidden below, slides up into view on hover */}
                     <span
                       aria-hidden
-                      className="absolute left-0 top-0 block translate-y-[110%] text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] text-white transition-transform duration-500 ease-out group-hover:translate-y-0"
+                      className="aa-outline-text absolute left-0 top-0 block translate-y-[110%] text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] transition-transform duration-500 ease-out group-hover:translate-y-0"
                     >
                       {link.label}
                     </span>

@@ -7,10 +7,10 @@ function Unit() {
   return (
     <span className="flex items-baseline gap-[0.45em] px-[0.3em]">
       <span className={`${BIG} font-light text-white/80`}>Bứt phá</span>
-      <span className={`${BIG} font-extrabold text-white`}>SáNG TẠO</span>
+      <span className={`${BIG} ml-[0.3em] font-extrabold text-white`}>SáNG TẠO</span>
       <span className={`${BIG} font-medium text-aa-blue`}>( Beyond Creativity )</span>
       <span className={`${BIG} font-light text-white/80`}>Kiến tạo</span>
-      <span className={`${BIG} font-extrabold text-white`}>TRảI NGHIỆM</span>
+      <span className={`${BIG} ml-[0.3em] font-extrabold text-white`}>TRảI NGHIỆM</span>
       <span className={`${BIG} font-medium text-aa-blue`}>( Into Experiences )</span>
     </span>
   );

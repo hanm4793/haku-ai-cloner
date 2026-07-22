@@ -38,6 +38,7 @@ export function Footer() {
   const trainRef = useRef<HTMLDivElement>(null);
   const noteGroupRef = useRef<HTMLDivElement>(null);
   const ctaGroupRef = useRef<HTMLParagraphElement>(null);
+  const starRef = useRef<HTMLImageElement>(null);
   const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
@@ -58,7 +59,18 @@ export function Footer() {
       const viewportWidth = viewportRef.current?.clientWidth ?? 0;
       const noteWidth = noteGroupRef.current?.offsetWidth ?? 0;
       const ctaOffset = ctaGroupRef.current?.offsetLeft ?? 0;
-      const ctaWidth = ctaGroupRef.current?.offsetWidth ?? 0;
+      // ctaGroupRef.offsetWidth undercounts here: the <p> is a flex item
+      // with white-space:nowrap and a trailing inline <img> (the star) —
+      // that combination overflows the flex item's own content-box in a way
+      // offsetWidth doesn't reflect. Measure the star's true right edge
+      // directly instead (the delta from the <p>'s left edge is
+      // transform-invariant, so this is safe even mid-glide).
+      let ctaWidth = ctaGroupRef.current?.offsetWidth ?? 0;
+      if (starRef.current && ctaGroupRef.current) {
+        const pLeft = ctaGroupRef.current.getBoundingClientRect().left;
+        const starRight = starRef.current.getBoundingClientRect().right;
+        ctaWidth = starRight - pLeft;
+      }
       startX = viewportWidth - noteWidth;
       endX = viewportWidth - (ctaOffset + ctaWidth);
       viewportLeftPage = (viewportRect?.left ?? 0) + window.scrollX;
@@ -74,6 +86,15 @@ export function Footer() {
     measure();
     window.addEventListener("resize", measure, { passive: true });
     document.fonts?.ready?.then(measure).catch(() => {});
+    // the trailing star image reserves its box via width/height immediately,
+    // but re-measure once it actually decodes just in case — a stale
+    // pre-load ctaWidth would leave the settled position short by the
+    // star's width, clipping it at the viewport edge.
+    const starEl = starRef.current;
+    if (starEl) {
+      if (starEl.complete) measure();
+      else starEl.addEventListener("load", measure);
+    }
 
     let vTarget = 0; // raw progress, monotonically increasing 0..1
     let vShown = 0; // eased/smoothed progress actually rendered
@@ -149,6 +170,7 @@ export function Footer() {
 
     return () => {
       cancelAnimationFrame(rafId);
+      starEl?.removeEventListener("load", measure);
       window.removeEventListener("resize", measure);
       window.removeEventListener("wheel", onWheel);
       window.removeEventListener("touchstart", onTouchStart);
@@ -157,10 +179,17 @@ export function Footer() {
   }, []);
 
   return (
-    <footer className="relative mt-10">
-      <div className="overflow-hidden" style={{ paddingTop: 220, marginTop: -220 }}>
+    <footer className="relative mt-10 mb-[clamp(1.25rem,2.4vw,2.875rem)]">
+      {/* pointer-events-none: the negative top margin below makes this box's
+          own (visually empty) area overlap whatever sits right above the
+          footer in the page — without this it silently eats hover/click on
+          that content. Children re-enable pointer-events themselves. */}
+      <div
+        className="pointer-events-none overflow-hidden"
+        style={{ paddingTop: 220, marginTop: -220 }}
+      >
         {/* Let's make ART row */}
-        <div className="aa-container relative flex items-end justify-between gap-6 pb-0">
+        <div className="pointer-events-auto aa-container relative flex items-end justify-between gap-6 pb-0">
           <p
             ref={artRef}
             className="shrink-0 pb-8 text-[clamp(2rem,3.83vw,4.5rem)] font-medium leading-none text-white will-change-transform"
@@ -180,7 +209,7 @@ export function Footer() {
                 margins) keeps the pop-out A image and jittered letters near
                 every other edge from ever being clipped mid-shape. */}
             <div
-              className="overflow-hidden"
+              className="pointer-events-none overflow-hidden"
               style={{
                 paddingTop: 220,
                 marginTop: -220,
@@ -198,19 +227,14 @@ export function Footer() {
                 <span className="text-3xl text-white/70" style={{ fontFamily: "var(--font-caveat)" }}>
                   not done, yet
                 </span>
-                <svg
-                  viewBox="0 0 60 24"
-                  className="aa-arrow-doodle h-6 w-14 text-aa-yellow"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+                <Image
+                  src="/images/home-image/home-arrow.webp"
+                  alt=""
+                  width={253}
+                  height={157}
                   aria-hidden
-                >
-                  <path d="M2 15c10-3 20-4.5 30-4 8 .4 16 2 26 1" />
-                  <path d="M46 4c4 3 8 5.5 12 8-4 2-8 5-11 9" />
-                </svg>
+                  className="aa-arrow-doodle h-6 w-14 object-contain"
+                />
                 {/* Exact-width spacer reserving A's footprint in normal flow,
                     so the gap-3 above is the only spacing — no eyeballed
                     padding guess. */}
@@ -249,6 +273,16 @@ export function Footer() {
                     {ch === " " ? " " : ch}
                   </span>
                 ))}
+                <Image
+                  ref={starRef}
+                  src="/images/home-image/home-star.webp"
+                  alt=""
+                  width={231}
+                  height={207}
+                  aria-hidden
+                  priority
+                  className="ml-3 inline-block h-[0.85em] w-auto align-middle"
+                />
               </p>
             </div>
             </div>
@@ -256,7 +290,7 @@ export function Footer() {
         </div>
 
         {/* Blue block — inset within the grid margins, not full-bleed */}
-        <div className="aa-container">
+        <div className="pointer-events-auto aa-container">
           <div className="bg-aa-blue">
             <div className="aa-container pt-12">
               <div className="grid gap-8 text-white sm:grid-cols-3">
@@ -284,10 +318,10 @@ export function Footer() {
             <div className="aa-container mt-14 flex flex-wrap items-end justify-between gap-10 pb-12">
               <div className="w-full max-w-[620px] lg:max-w-[56%]">
                 <Image
-                  src="/images/wordmark.webp"
+                  src="/images/home-image/home-logo.webp"
                   alt="ànART®"
-                  width={1087}
-                  height={246}
+                  width={1920}
+                  height={417}
                   className="h-auto w-full"
                 />
               </div>

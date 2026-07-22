@@ -23,20 +23,25 @@ export default function ServicesPage() {
       <main className="flex-1">
         {/* Hero */}
         <section className="aa-container pt-32 md:pt-40">
-          <h1 className="aa-reveal text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
-            Dịch vụ
-          </h1>
-          <div className="aa-reveal mt-4">
+          <div className="aa-reveal relative">
             <Image
-              src="/images/services-hero.webp"
-              alt="ànART — không gian pixel art với chữ à và A"
-              width={1480}
-              height={615}
+              src="/images/service-image/service_01.webp"
+              alt="ànART — không gian triển lãm"
+              width={1920}
+              height={1089}
               priority
               className="h-auto w-full"
               sizes="100vw"
             />
+            <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center justify-between px-[max(1.25rem,3vw)] text-sm uppercase tracking-wide text-white sm:text-base">
+              <span>Concept.</span>
+              <span>Design.</span>
+              <span>Production.</span>
+            </div>
           </div>
+          <h1 className="aa-reveal mt-8 text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white">
+            Dịch vụ
+          </h1>
         </section>
 
         {/* Statement */}
@@ -54,20 +59,36 @@ export default function ServicesPage() {
         {/* Dấu ấn khác biệt / Hiệu quả + pixel horse */}
         <section className="relative overflow-hidden py-24 md:py-32">
           <div className="flex flex-wrap items-center justify-between gap-10 px-[max(1.25rem,2vw)]">
-            <div className="aa-reveal">
+            <Image
+              src="/images/service-image/service_02.webp"
+              alt=""
+              width={1342}
+              height={898}
+              className="aa-reveal h-[220px] w-[140px] rounded-md object-cover"
+              aria-hidden
+            />
+            <div className="aa-reveal" style={{ ["--reveal-delay" as string]: "80ms" }}>
               <p className="text-[clamp(2.25rem,4.95vw,4.78rem)] font-medium leading-none text-white">
                 Dấu ấn khác biệt.
               </p>
-              <p className="mt-3 pl-[18%] text-[clamp(1rem,2.03vw,1.97rem)] font-medium uppercase text-aa-blue">
-                → More than a trend.
+              <p className="mt-3 flex items-center gap-3 pl-[18%] text-[clamp(1rem,2.03vw,1.97rem)] font-medium uppercase text-aa-blue">
+                <Image
+                  src="/images/service-image/service_04.webp"
+                  alt=""
+                  width={286}
+                  height={199}
+                  className="h-[0.6em] w-auto"
+                  aria-hidden
+                />
+                More than a trend.
               </p>
             </div>
             <div className="aa-reveal" style={{ ["--reveal-delay" as string]: "120ms" }}>
               <Image
-                src="/images/pixel-horse.webp"
+                src="/images/service-image/service_03.webp"
                 alt=""
-                width={395}
-                height={265}
+                width={1868}
+                height={1098}
                 className="h-auto w-[220px] md:w-[320px]"
                 aria-hidden
               />
@@ -88,7 +109,7 @@ export default function ServicesPage() {
           {SERVICES.map((s) => (
             <article
               key={s.index}
-              className="sticky top-20 grid items-center gap-10 border-t border-white/15 bg-black py-14 md:grid-cols-12 md:gap-5 md:py-16"
+              className="sticky top-20 grid items-start gap-10 border-t border-white/15 bg-black py-14 md:grid-cols-12 md:gap-5 md:py-16"
             >
               <p className="select-none text-[clamp(3.5rem,5.63vw,5.63rem)] font-light leading-none text-white/35 md:col-start-3 md:col-span-2">
                 {s.index}

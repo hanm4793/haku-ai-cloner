@@ -4,6 +4,25 @@ import { useState } from "react";
 import Link from "next/link";
 import { SERVICES } from "@/lib/data";
 
+/** Plus/minus bullet built from two equal-size bars (à la caay.co's toggle
+ *  tabs) instead of the "+"/"−" glyphs — those render at mismatched visual
+ *  weights depending on font, which was the "+ too small" bug. The
+ *  horizontal bar is always on; the vertical bar cross-fades in/out, so
+ *  toggling between plus and minus is a smooth opacity animation rather than
+ *  a character swap. */
+function PlusMinusIcon({ isPlus, className }: { isPlus: boolean; className?: string }) {
+  return (
+    <span className={`relative inline-block h-4 w-4 shrink-0 ${className ?? ""}`} aria-hidden>
+      <span className="absolute left-1/2 top-1/2 h-[2px] w-4 -translate-x-1/2 -translate-y-1/2 bg-current" />
+      <span
+        className={`absolute left-1/2 top-1/2 h-4 w-[2px] -translate-x-1/2 -translate-y-1/2 bg-current transition-opacity duration-500 ease-in-out ${
+          isPlus ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </span>
+  );
+}
+
 /** "› Dịch vụ của ànART" statement + LĨNH VỰC TRIỂN KHAI interactive list (home). */
 export function ServicesHome() {
   const [active, setActive] = useState(0);
@@ -24,13 +43,27 @@ export function ServicesHome() {
 
       {/* Fields of work */}
       <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-5">
-        {/* Big index numeral — desktop only; mobile has no room for it beside the list */}
-        <p
-          className="aa-reveal hidden select-none text-right text-[clamp(4rem,6.75vw,6.75rem)] font-light leading-none text-aa-blue lg:col-start-3 lg:col-span-1 lg:block"
+        {/* Big index numeral — desktop only; mobile has no room for it beside the list.
+            Each number is its own stacked layer (à la caay.co) that slides up + fades
+            in as it becomes active, rather than the text just snapping to the new
+            value — the outgoing number slides down + fades out the same way. */}
+        <div
+          className="aa-reveal relative hidden h-[clamp(4rem,6.75vw,6.75rem)] select-none text-right lg:col-start-3 lg:col-span-1 lg:block"
           aria-hidden
         >
-          {SERVICES[active].index}
-        </p>
+          {SERVICES.map((s, i) => (
+            <p
+              key={s.index}
+              className="absolute inset-0 text-[clamp(4rem,6.75vw,6.75rem)] font-light leading-none text-aa-blue transition-all duration-500 ease-[cubic-bezier(0.3,0.86,0.36,0.95)]"
+              style={{
+                opacity: active === i ? 1 : 0,
+                transform: `translateY(${active === i ? 0 : 32}px)`,
+              }}
+            >
+              {s.index}
+            </p>
+          ))}
+        </div>
 
         <div className="aa-reveal pt-8 lg:col-start-5 lg:col-span-3 lg:pt-0">
           <p className="mb-7 text-lg font-medium uppercase tracking-wide text-white">
@@ -48,16 +81,12 @@ export function ServicesHome() {
                     active === i ? "text-white" : "text-white/45 hover:text-white/80"
                   }`}
                 >
-                  {/* Mobile: inline accordion bullet — "−" open / "+" closed, per design. */}
-                  <span className="w-4 shrink-0 text-base lg:hidden" aria-hidden>
-                    {active === i ? "−" : "+"}
-                  </span>
+                  {/* Mobile: inline accordion bullet — minus open / plus closed, per design. */}
+                  <PlusMinusIcon isPlus={active !== i} className="lg:hidden" />
                   {/* Desktop: hanging bullet outside the text column, doesn't shift the
-                      title. Uses the minus sign (−) rather than an em dash (—) so it
-                      matches the "+" glyph's advance width, per the design's equal-width
-                      bullets. Desktop's active state is the opposite of mobile's ("+" open). */}
-                  <span className="absolute -left-10 hidden w-5 text-right text-base lg:inline" aria-hidden>
-                    {active === i ? "+" : "−"}
+                      title. Desktop's active state is the opposite of mobile's (plus open). */}
+                  <span className="absolute -left-10 hidden w-5 lg:flex lg:justify-end">
+                    <PlusMinusIcon isPlus={active === i} />
                   </span>
                   <span
                     className={`text-base ${active === i ? "font-bold" : "font-medium"}`}

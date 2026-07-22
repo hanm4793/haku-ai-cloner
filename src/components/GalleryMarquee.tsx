@@ -1,14 +1,21 @@
 import Image from "next/image";
 import { Marquee } from "@/components/Marquee";
 
-/** Gallery tiles cropped from the design strip — natural widths at 201px height. */
+/** Gallery tiles from the home-page project stills — natural widths at 201px height.
+ *  Only home_page_01..13 (home_page_08 doesn't exist); 14+ are used elsewhere. */
 const GALLERY_ITEMS: { src: string; w: number }[] = [
-  { src: "/images/gal-1.webp", w: 147 },
-  { src: "/images/gal-2.webp", w: 301 },
-  { src: "/images/gal-3.webp", w: 201 },
-  { src: "/images/gal-4.webp", w: 302 },
-  { src: "/images/gal-5.webp", w: 422 },
-  { src: "/images/gal-6.webp", w: 200 },
+  { src: "/images/home-image/home_page_01.webp", w: 201 },
+  { src: "/images/home-image/home_page_02.webp", w: 302 },
+  { src: "/images/home-image/home_page_03.webp", w: 201 },
+  { src: "/images/home-image/home_page_04.webp", w: 302 },
+  { src: "/images/home-image/home_page_05.webp", w: 423 },
+  { src: "/images/home-image/home_page_06.webp", w: 201 },
+  { src: "/images/home-image/home_page_07.webp", w: 302 },
+  { src: "/images/home-image/home_page_09.webp", w: 201 },
+  { src: "/images/home-image/home_page_10.webp", w: 201 },
+  { src: "/images/home-image/home_page_11.webp", w: 460 },
+  { src: "/images/home-image/home_page_12.webp", w: 431 },
+  { src: "/images/home-image/home_page_13.webp", w: 283 },
 ];
 
 /** Big "ànART àn Ạt ( Creative HUB x Experiences )" text marquee (left) +

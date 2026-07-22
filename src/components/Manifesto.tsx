@@ -10,15 +10,27 @@ export function Manifesto() {
         chuyển động, hình khối, âm thanh và hơn thế nữa.
       </p>
 
-      {/* Spinning badge stamp */}
+      {/* Spinning badge stamp — only the outer ring (with the "ànArt Creative
+          Agency" text) spins; the "aA." mark in the center is a separate,
+          static layer stacked on top. */}
       <div className="aa-reveal mt-16 flex justify-center">
-        <Image
-          src="/images/badge-stamp.webp"
-          alt="ànArt Creative Agency"
-          width={148}
-          height={155}
-          className="aa-spin-slow h-auto w-[120px] md:w-[140px]"
-        />
+        <div className="relative h-[180px] w-[180px] md:h-[210px] md:w-[210px]">
+          <Image
+            src="/images/badge-stamp.webp"
+            alt="ànArt Creative Agency"
+            width={520}
+            height={520}
+            className="aa-spin-slow absolute inset-0 h-full w-full"
+          />
+          <Image
+            src="/images/badge-stamp-logo.webp"
+            alt=""
+            width={200}
+            height={200}
+            aria-hidden
+            className="absolute left-1/2 top-1/2 h-[38.5%] w-[38.5%] -translate-x-1/2 -translate-y-1/2"
+          />
+        </div>
       </div>
 
       {/* Mobile "Chúng tôi là" — centered single column per Mobile design p1:

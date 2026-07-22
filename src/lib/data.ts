@@ -94,7 +94,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Vietcombank Instalation Art & Exhibition",
     tags: "Visual Art / Exhibition / Production",
     categories: ["Exhibition", "Event", "Productions"],
-    image: "/images/proj-vietcombank.webp",
+    image: "/images/home-image/home_page_15.webp",
     size: "wide",
   },
   {
@@ -103,7 +103,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Branding",
     tags: "Branding",
     categories: ["Branding"],
-    image: "/images/proj-benxuan.webp",
+    image: "/images/home-image/home_page_16.webp",
     size: "small",
   },
   {
@@ -112,7 +112,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Sắc xanh lục bảo",
     tags: "Branding | Keyvissual",
     categories: ["Branding"],
-    image: "/images/proj-emerald.webp",
+    image: "/images/home-image/home_page_17.webp",
     size: "small",
   },
   {
@@ -121,7 +121,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Event",
     tags: "Event",
     categories: ["Event", "Photography"],
-    image: "/images/proj-fendi.webp",
+    image: "/images/home-image/home_page_18.webp",
     size: "small",
   },
   {
@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Học viện Môi trường",
     tags: "Event | Branding",
     categories: ["Event", "Branding"],
-    image: "/images/proj-kizciti.webp",
+    image: "/images/home-image/home_page_19.webp",
     size: "small",
   },
   {
@@ -139,7 +139,7 @@ export const PROJECTS: Project[] = [
     subtitle: "Culture Space",
     tags: "Branding",
     categories: ["Branding", "Exhibition"],
-    image: "/images/proj-viettheatre.webp",
+    image: "/images/home-image/home_page_22.webp",
     size: "tall",
   },
   {
@@ -148,7 +148,7 @@ export const PROJECTS: Project[] = [
     subtitle: "20 năm thành lập công ty",
     tags: "Branding | Keyvissual",
     categories: ["Branding", "Event"],
-    image: "/images/proj-sonha.webp",
+    image: "/images/home-image/home_page_20.webp",
     size: "small",
   },
   {
@@ -157,7 +157,7 @@ export const PROJECTS: Project[] = [
     subtitle: "The Swan Lake — Vietnam Airlines Classic",
     tags: "Branding",
     categories: ["Branding", "Photography"],
-    image: "/images/proj-vna.webp",
+    image: "/images/home-image/home_page_21.webp",
     size: "small",
   },
 ];

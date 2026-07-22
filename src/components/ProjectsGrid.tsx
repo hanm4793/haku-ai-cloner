@@ -8,6 +8,14 @@ const SIZE_CLASS: Record<Project["size"], string> = {
   small: "",
 };
 
+// "wide" tiles span 2 of the 3 grid columns (~66vw); tall/small span 1 (~33vw).
+// A flat 33vw for every tile under-fetched the wide ones (blurry upscale).
+const IMAGE_SIZES: Record<Project["size"], string> = {
+  wide: "(max-width: 768px) 100vw, 66vw",
+  tall: "(max-width: 768px) 100vw, 33vw",
+  small: "(max-width: 768px) 100vw, 33vw",
+};
+
 function Tile({ project, index }: { project: Project; index: number }) {
   return (
     <Link
@@ -26,7 +34,7 @@ function Tile({ project, index }: { project: Project; index: number }) {
         width={1213}
         height={901}
         className="relative h-full w-full object-cover transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.05] group-hover:grayscale group-hover:mix-blend-screen"
-        sizes="(max-width: 768px) 100vw, 33vw"
+        sizes={IMAGE_SIZES[project.size]}
       />
 
       {/* Blue wash on top of the screened image — tames bright artwork (white

@@ -52,12 +52,12 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
       <div className="aa-reveal mt-12 grid gap-px sm:grid-cols-2">
         <Link
           href="/lien-he"
-          className="group flex items-center justify-between bg-white/[0.06] px-8 py-7"
+          className="group flex items-center justify-between bg-white px-8 py-7"
         >
-          <span className="text-base text-white transition-transform duration-300 group-hover:translate-x-1">
+          <span className="text-base text-black transition-transform duration-300 group-hover:translate-x-1">
             Kết nối với ànART
           </span>
-          <ArrowUpRightIcon className="h-9 w-9 shrink-0 text-white/70 transition-transform duration-300 group-hover:-translate-x-1 group-hover:translate-y-1" />
+          <ArrowUpRightIcon className="h-9 w-9 shrink-0 text-black/70 transition-transform duration-300 group-hover:-translate-x-1 group-hover:translate-y-1" />
         </Link>
         <div className="flex flex-wrap items-center justify-between gap-4 bg-white/[0.06] px-8 py-6">
           <span className="text-base text-white/45">Follow us</span>
