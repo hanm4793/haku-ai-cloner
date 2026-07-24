@@ -2,9 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { clamp, subscribeScroll } from "@/lib/scrollTicker";
-
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+import { subscribeScroll } from "@/lib/scrollTicker";
 
 const WORD_CLASS =
   "text-[1.875rem] font-extrabold leading-[0.92] text-aa-blue md:text-[clamp(3rem,7.88vw,9.56rem)]";
@@ -133,6 +131,8 @@ export function Define({
   const bgRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const sculptRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -145,6 +145,12 @@ export function Define({
     let mty = 0;
     let mcx = 0;
     let mcy = 0;
+    // per-layer smoothed scroll offset (each eases at its own rate → the lag
+    // between layers is what reads as parallax)
+    let cBg = 0;
+    let cSculpt = 0;
+    let cLeft = 0;
+    let cRight = 0;
     const onMove = (e: PointerEvent) => {
       mtx = (e.clientX / window.innerWidth - 0.5) * 2;
       mty = (e.clientY / window.innerHeight - 0.5) * 2;
@@ -159,37 +165,42 @@ export function Define({
       const mobile = window.innerWidth < 768;
       if (rect.bottom < -60 || rect.top > vh + 60) return;
 
-      // Entrance keyed to the sculpture's CENTRE rising to mid-viewport, so it
-      // only resolves once you've actually scrolled to it (not early).
+      // Sculpture centre → centred progress (par). The block stays FULLY
+      // visible the whole time — it only turns + parallax-drifts as you scroll.
       const wr = wrap.getBoundingClientRect();
       const cy = wr.top + wr.height / 2;
-      const par = (cy - vh / 2) / vh; // -~0.5..0.5, 0 when centred
-      const ep = prefersReduced
-        ? 1
-        : easeOutCubic(clamp((vh - cy) / (vh * 0.55)));
-      const ie = 1 - ep;
+      const par = prefersReduced ? 0 : (cy - vh / 2) / vh; // -~0.5..0.5
 
       const useMouse = !mobile && !prefersReduced;
       mcx += ((useMouse ? mtx : 0) - mcx) * 0.08;
       mcy += ((useMouse ? mty : 0) - mcy) * 0.08;
 
-      // Background: scroll-trails slowly AND drifts opposite the cursor (small)
-      // while the sculpture drifts toward it (large) — the split reads as depth.
+      // Multi-layer parallax: each layer chases its own scroll target at its
+      // own easing, so they drift up out of sync (different speed + lag). The
+      // sculpture moves most (foreground), the text less, the bg opposite/back.
+      cBg += (par * 82 - cBg) * 0.10;
+      cSculpt += (par * -94 - cSculpt) * 0.135;
+      cLeft += (par * -40 - cLeft) * 0.075;
+      cRight += (par * -66 - cRight) * 0.11;
+
+      // Background parallax (trails on scroll + drifts opposite the cursor).
       if (bgRef.current) {
         bgRef.current.style.transform =
-          `translate3d(${mcx * -26}px, ${par * 70 + mcy * -18}px, 0) scale(1.16)`;
+          `translate3d(${mcx * -26}px, ${cBg + mcy * -18}px, 0) scale(1.16)`;
       }
-      const ry = mcx * 26 + ie * -42;
-      const rx = -mcy * 20 + ie * 24;
+
+      // Sculpture: always visible; parallax drift + a *gentle* scale that grows
+      // a touch as it scrolls in, plus 3D tilt only on cursor hover.
+      const ry = mcx * 26;
+      const rx = -mcy * 20;
       const tx = mcx * 48;
-      const ty = par * -60 + mcy * 30 + ie * 120;
-      const scale = 1.04 * (0.7 + 0.3 * ep);
-      sculpt.style.opacity = String(clamp(ep * 1.4));
-      // entrance blur + a grounding shadow so it reads as a solid, lifted object
-      sculpt.style.filter =
-        `blur(${ie * 18}px) drop-shadow(0 28px 48px rgba(0,0,0,0.6))`;
+      const scale = 1.03 - par * 0.05; // ~1.005 (entering) → ~1.055 (past centre)
       sculpt.style.transform =
-        `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`;
+        `translate3d(${tx}px, ${cSculpt + mcy * 30}px, 0) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`;
+      sculpt.style.filter = "drop-shadow(0 28px 48px rgba(0,0,0,0.6))";
+
+      if (leftRef.current) leftRef.current.style.transform = `translate3d(0, ${cLeft}px, 0)`;
+      if (rightRef.current) rightRef.current.style.transform = `translate3d(0, ${cRight}px, 0)`;
     };
 
     const unsub = subscribeScroll(apply, true);
@@ -248,8 +259,7 @@ export function Define({
       >
         <div
           ref={sculptRef}
-          className="h-full w-full will-change-[transform,opacity,filter] [transform-style:preserve-3d]"
-          style={{ opacity: 0 }}
+          className="h-full w-full will-change-[transform,filter] [transform-style:preserve-3d]"
         >
           <Image
             src="/images/sculpture-aa.webp"
@@ -262,12 +272,18 @@ export function Define({
       </div>
 
       {/* Left word + description — reveal together from a mask when scrolled to */}
-      <div className="absolute left-[max(0.75rem,2vw)] top-auto bottom-[32%] z-10 md:bottom-auto md:left-[max(1.25rem,2.4vw)] md:top-[38%]">
+      <div
+        ref={leftRef}
+        className="absolute left-[max(0.75rem,2vw)] top-auto bottom-[32%] z-10 will-change-transform md:bottom-auto md:left-[max(1.25rem,2.4vw)] md:top-[38%]"
+      >
         <RevealGroup lines={leftLines} rootMargin={REVEAL_MARGIN} />
       </div>
 
       {/* Right word + description — same, bottom-right */}
-      <div className="absolute bottom-[2%] right-[max(0.75rem,2vw)] z-10 text-right md:bottom-0 md:right-[max(1.25rem,2.4vw)]">
+      <div
+        ref={rightRef}
+        className="absolute bottom-[2%] right-[max(0.75rem,2vw)] z-10 text-right will-change-transform md:bottom-0 md:right-[max(1.25rem,2.4vw)]"
+      >
         <RevealGroup lines={rightLines} rootMargin={REVEAL_MARGIN} />
       </div>
     </section>
