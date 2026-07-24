@@ -17,6 +17,8 @@ interface RevealLine {
   className: string;
   /** ms after the group triggers */
   delay: number;
+  /** cap this line's width to the widest title line (lines without the flag) */
+  matchTitleWidth?: boolean;
 }
 
 /** A group of masked lines that all reveal from ONE in-view trigger (each line
@@ -35,6 +37,7 @@ function RevealGroup({
   const [shown, setShown] = useState(false);
   const [settled, setSettled] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const innerRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -59,6 +62,33 @@ function RevealGroup({
     return () => io.disconnect();
   }, [lines, rootMargin]);
 
+  // Cap flagged lines (descriptions) to the widest title line, so the copy
+  // block wraps to roughly the title's width at every breakpoint.
+  useEffect(() => {
+    const measure = () => {
+      let maxTitle = 0;
+      lines.forEach((l, i) => {
+        if (!l.matchTitleWidth) {
+          const el = innerRefs.current[i];
+          if (el) maxTitle = Math.max(maxTitle, el.getBoundingClientRect().width);
+        }
+      });
+      lines.forEach((l, i) => {
+        if (l.matchTitleWidth) {
+          const el = innerRefs.current[i];
+          if (el) el.style.maxWidth = maxTitle ? `${Math.ceil(maxTitle)}px` : "";
+        }
+      });
+    };
+    const raf = requestAnimationFrame(measure);
+    window.addEventListener("resize", measure);
+    document.fonts?.ready?.then(measure).catch(() => {});
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", measure);
+    };
+  }, [lines]);
+
   return (
     <div ref={ref} className={className}>
       {lines.map((l, i) => (
@@ -67,7 +97,10 @@ function RevealGroup({
           className={`block ${settled ? "overflow-visible" : "overflow-hidden"} ${l.className}`}
         >
           <span
-            className="block will-change-transform"
+            ref={(el) => {
+              innerRefs.current[i] = el;
+            }}
+            className="inline-block max-w-full align-top will-change-transform"
             style={{
               transform: shown ? "translateY(0)" : "translateY(110%)",
               transition: `transform ${REVEAL_DUR}ms ${REVEAL_EASE} ${l.delay}ms`,
@@ -97,6 +130,7 @@ export function Define({
   captions = ["Không trang trí thương hiệu", "chúng tôi định hình bản sắc cho thương hiệu"],
 }: DefineProps) {
   const sectionRef = useRef<HTMLElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const sculptRef = useRef<HTMLDivElement>(null);
 
@@ -139,13 +173,21 @@ export function Define({
       mcx += ((useMouse ? mtx : 0) - mcx) * 0.08;
       mcy += ((useMouse ? mty : 0) - mcy) * 0.08;
 
-      const ry = mcx * 15 + ie * -42;
-      const rx = -mcy * 12 + ie * 24;
-      const tx = mcx * 24;
-      const ty = par * -50 + mcy * 16 + ie * 120;
+      // Background: scroll-trails slowly AND drifts opposite the cursor (small)
+      // while the sculpture drifts toward it (large) — the split reads as depth.
+      if (bgRef.current) {
+        bgRef.current.style.transform =
+          `translate3d(${mcx * -26}px, ${par * 70 + mcy * -18}px, 0) scale(1.16)`;
+      }
+      const ry = mcx * 26 + ie * -42;
+      const rx = -mcy * 20 + ie * 24;
+      const tx = mcx * 48;
+      const ty = par * -60 + mcy * 30 + ie * 120;
       const scale = 1.04 * (0.7 + 0.3 * ep);
       sculpt.style.opacity = String(clamp(ep * 1.4));
-      sculpt.style.filter = `blur(${ie * 18}px)`;
+      // entrance blur + a grounding shadow so it reads as a solid, lifted object
+      sculpt.style.filter =
+        `blur(${ie * 18}px) drop-shadow(0 28px 48px rgba(0,0,0,0.6))`;
       sculpt.style.transform =
         `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx}deg) rotateY(${ry}deg) scale(${scale})`;
     };
@@ -165,8 +207,9 @@ export function Define({
     {
       text: captions[0],
       className:
-        "mt-1 max-w-[11rem] text-[0.6875rem] leading-snug text-white/90 md:mt-2 md:max-w-none md:text-lg",
+        "mt-2 text-[clamp(0.95rem,2.3vw,2rem)] leading-snug text-white/90 md:mt-4",
       delay: leftTitle.length * 110 + 120,
+      matchTitleWidth: true,
     },
   ];
   const rightLines: RevealLine[] = [
@@ -174,23 +217,26 @@ export function Define({
     {
       text: captions[1],
       className:
-        "mt-1 ml-auto max-w-[12rem] text-[0.6875rem] leading-snug text-white/90 md:mt-2 md:max-w-none md:text-lg",
+        "mt-2 text-[clamp(0.95rem,2.3vw,2rem)] leading-snug text-white/90 md:mt-4",
       delay: rightTitle.length * 110 + 120,
+      matchTitleWidth: true,
     },
   ];
 
   return (
     <section ref={sectionRef} className="aa-container relative overflow-hidden pt-1 pb-8 md:py-28">
-      {/* Background photo — bottom-aligned, faded into the black toward the top */}
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
-        <Image
-          src="/images/home-image/home_page_23.webp"
-          alt=""
-          fill
-          sizes="100vw"
-          className="object-cover object-bottom"
-          style={{ filter: "brightness(3.2)" }}
-        />
+      {/* Background photo — parallax-trails slower than the sculpture */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+        <div ref={bgRef} className="absolute inset-0 will-change-transform">
+          <Image
+            src="/images/home-image/home_page_23.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover object-bottom"
+            style={{ filter: "brightness(3.2)" }}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-black/30 to-black" />
       </div>
 
