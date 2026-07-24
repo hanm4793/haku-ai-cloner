@@ -4,6 +4,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Header } from "@/components/Header";
 import { SideTab } from "@/components/SideTab";
 import { RevealTitle } from "@/components/RevealTitle";
+import { ServicesStamp } from "@/components/ServicesStamp";
 import { Define } from "@/components/Define";
 import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
@@ -22,90 +23,39 @@ export default function ServicesPage() {
       <Header />
       <SideTab />
       <main className="flex-1">
-        {/* Hero */}
-        <section className="aa-container">
-          <div className="aa-reveal relative">
-            <Image
-              src="/images/service-image/service_01.webp"
-              alt="ànART — không gian triển lãm"
-              width={1920}
-              height={1089}
-              priority
-              className="h-auto w-full"
-              sizes="100vw"
-            />
-            <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center justify-between px-[max(1.25rem,3vw)] text-sm uppercase tracking-wide text-white sm:text-base">
-              <span>Concept.</span>
-              <span>Design.</span>
-              <span>Production.</span>
-            </div>
-          </div>
-          <RevealTitle
-            as="h1"
-            lines={["Dịch vụ"]}
-            className="relative z-10 -mt-[10vw] text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white"
+        {/* Hero — ~1 viewport, cover banner; title + description overlay top */}
+        <section className="relative h-dvh min-h-svh w-full overflow-hidden">
+          <Image
+            src="/images/service-image/service_01.webp"
+            alt="ànART — không gian triển lãm"
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
           />
-        </section>
+          {/* Concept / Design / Production — desktop only */}
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 z-[1] hidden -translate-y-1/2 items-center justify-between px-[max(1.25rem,3vw)] text-sm uppercase tracking-wide text-white sm:text-base md:flex">
+            <span>Concept.</span>
+            <span>Design.</span>
+            <span>Production.</span>
+          </div>
 
-        {/* Statement */}
-        <section className="aa-container pt-24">
-          <div className="grid gap-8 lg:grid-cols-12 lg:gap-5">
-            <p className="aa-reveal aa-eyebrow self-start text-base lg:col-start-3 lg:col-span-2">Dịch vụ của ànART</p>
-            <h2 className="aa-reveal text-[clamp(1.35rem,2.31vw,2.25rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
+          <div className="aa-container relative z-10 flex h-full flex-col items-center px-5 pt-[max(5.5rem,12vh)] text-center">
+            <RevealTitle
+              as="h1"
+              lines={["Dịch vụ"]}
+              className="text-[clamp(3rem,14vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white"
+            />
+            <p className="aa-reveal mt-5 max-w-[34rem] text-[0.8125rem] font-medium uppercase leading-[1.45] text-white md:mt-8 md:max-w-[42rem] md:text-base lg:text-lg">
               Chúng tôi kiến tạo nên những trải nghiệm độc đáo — nơi hình ảnh,
               không gian, câu chuyện tạo ra giá trị và dấu ấn bền vững cho
               thương hiệu.
-            </h2>
+            </p>
           </div>
         </section>
 
-        {/* Dấu ấn khác biệt / Hiệu quả + pixel horse */}
-        <section className="relative overflow-hidden py-24 md:py-32">
-          <div className="flex flex-wrap items-center justify-between gap-10 px-[max(1.25rem,2vw)]">
-            <Image
-              src="/images/service-image/service_02.webp"
-              alt=""
-              width={1342}
-              height={898}
-              className="aa-reveal h-auto w-[250px] rounded-md"
-              aria-hidden
-            />
-            <div className="aa-reveal" style={{ ["--reveal-delay" as string]: "80ms" }}>
-              <p className="text-[clamp(2.25rem,4.95vw,4.78rem)] font-medium leading-none text-white">
-                Dấu ấn khác biệt.
-              </p>
-              <p className="mt-3 flex items-center gap-3 pl-[18%] text-[clamp(1rem,2.03vw,1.97rem)] font-semibold uppercase text-aa-blue">
-                <Image
-                  src="/images/service-image/service_04.webp"
-                  alt=""
-                  width={286}
-                  height={199}
-                  className="h-[0.6em] w-auto"
-                  aria-hidden
-                />
-                More than a trend.
-              </p>
-            </div>
-            <div className="aa-reveal" style={{ ["--reveal-delay" as string]: "120ms" }}>
-              <Image
-                src="/images/service-image/service_03.webp"
-                alt=""
-                width={1868}
-                height={1098}
-                className="h-auto w-[220px] md:w-[320px]"
-                aria-hidden
-              />
-            </div>
-            <div className="aa-reveal text-right" style={{ ["--reveal-delay" as string]: "200ms" }}>
-              <p className="text-[clamp(2.25rem,4.95vw,4.78rem)] font-medium leading-none text-white">
-                Hiệu quả.
-              </p>
-              <p className="mt-3 text-[clamp(1rem,2.03vw,1.97rem)] font-semibold uppercase text-aa-blue">
-                It&rsquo;s a mindset.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Dấu ấn khác biệt / Hiệu quả — single-row, scroll-pin horizontal */}
+        <ServicesStamp />
 
         {/* Service rows — sticky stacked panels (zeit-style card deck on scroll) */}
         <section className="aa-container">

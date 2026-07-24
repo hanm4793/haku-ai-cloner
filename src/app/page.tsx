@@ -25,9 +25,9 @@ export default function Home() {
         <GalleryMarquee />
         <Differentiator />
         <ServicesHome />
-        <section className="aa-container pb-28">
+        <section className="aa-container pb-12 pt-0 md:pb-28 lg:pt-4">
           <div className="grid lg:grid-cols-12 lg:gap-5">
-            <p className="aa-reveal aa-eyebrow mb-8 text-base lg:col-start-3 lg:col-span-4">
+            <p className="aa-reveal aa-eyebrow mb-6 text-[1.125rem] font-medium uppercase leading-[1.35] lg:col-start-3 lg:col-span-4 lg:mb-8 lg:text-base lg:normal-case">
               Dự án / khách hàng nổi bật
             </p>
           </div>

@@ -1,22 +1,27 @@
 import { chromium } from "playwright";
-const outDir = process.argv[2];
+import { mkdirSync } from "node:fs";
+
+const outDir = process.argv[2] || "temp/mobile";
+const base = process.argv[3] || "http://localhost:3000";
+const width = Number(process.argv[4] || 390);
+const path = process.argv[5] || "/";
+mkdirSync(outDir, { recursive: true });
+
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
-for (const [name, path] of [["m-home","/"],["m-duan","/du-an"]]) {
-  await page.goto("http://localhost:3000" + path, { waitUntil: "networkidle" });
-  await page.evaluate(async () => {
-    const h = document.body.scrollHeight;
-    for (let y = 0; y < h; y += 600) { window.scrollTo(0, y); await new Promise(r => setTimeout(r, 100)); }
-    window.scrollTo(0, 0);
-    document.querySelectorAll(".aa-reveal").forEach(e => e.classList.add("is-in"));
-  });
-  await page.waitForTimeout(1000);
-  await page.screenshot({ path: `${outDir}/${name}.png`, fullPage: true });
-  console.log(name);
-}
-await page.goto("http://localhost:3000/", { waitUntil: "networkidle" });
-await page.click('button[aria-label="Mở menu"]');
-await page.waitForTimeout(900);
-await page.screenshot({ path: `${outDir}/m-menu.png` });
-console.log("m-menu");
+const page = await browser.newPage({
+  viewport: { width, height: 844 },
+  deviceScaleFactor: 2,
+  isMobile: true,
+  hasTouch: true,
+});
+await page.goto(base + path, { waitUntil: "networkidle", timeout: 60000 });
+await page.waitForTimeout(3500);
+
+// Full page screenshot
+await page.screenshot({ path: `${outDir}/full-${width}.png`, fullPage: true });
+
+// Above-the-fold (first screen) screenshot
+await page.screenshot({ path: `${outDir}/fold-${width}.png`, fullPage: false });
+
+console.log(`shot ${path} @ ${width} -> ${outDir}`);
 await browser.close();

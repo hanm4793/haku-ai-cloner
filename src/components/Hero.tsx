@@ -1,17 +1,13 @@
 import { CONTACT } from "@/lib/data";
 import { RevealTitle } from "@/components/RevealTitle";
+import { HeroBackground } from "@/components/HeroBackground";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen w-full flex-col overflow-hidden">
-      <video
-        src="/videos/hero_banner_video.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+    /* h-dvh tracks browser chrome show/hide; min-h-svh keeps a full first
+       screen even when the dynamic viewport temporarily shrinks. */
+    <section className="relative flex h-dvh min-h-svh w-full flex-col overflow-hidden">
+      <HeroBackground />
       <div className="absolute inset-0 bg-black/25" />
 
       {/* Centered headline */}
@@ -34,12 +30,12 @@ export function Hero() {
         </svg>
       </div>
 
-      {/* Bottom bar */}
-      <div className="aa-container relative z-10 flex flex-wrap items-center justify-between gap-4 pb-6">
-        <div className="flex items-center gap-3 text-sm sm:gap-5">
-          <span className="font-medium text-aa-blue">Follow us</span>
+      {/* Bottom bar — always pinned to the first-screen foot */}
+      <div className="aa-container relative z-10 flex items-center justify-between gap-2 pb-[max(1.25rem,env(safe-area-inset-bottom))] text-[0.65rem] leading-none sm:gap-4 sm:pb-6 sm:text-sm">
+        <div className="flex min-w-0 flex-nowrap items-center gap-x-1.5 overflow-hidden sm:gap-x-5">
+          <span className="shrink-0 font-medium text-aa-blue">Follow us</span>
           {CONTACT.socials.map((s, i) => (
-            <span key={s.label} className="flex items-center gap-5 text-white">
+            <span key={s.label} className="flex shrink-0 items-center gap-x-1.5 text-white sm:gap-x-5">
               {i > 0 && <span className="text-white/60">|</span>}
               <a
                 href={s.href}
@@ -52,7 +48,7 @@ export function Hero() {
             </span>
           ))}
         </div>
-        <p className="hidden text-sm font-medium text-aa-blue sm:block">— ànArt © 2026</p>
+        <p className="shrink-0 font-medium text-aa-blue">— ànArt © 2026</p>
       </div>
     </section>
   );

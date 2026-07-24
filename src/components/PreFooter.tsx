@@ -7,11 +7,23 @@ interface PreFooterProps {
   partner?: string;
 }
 
-/** "— ànART® x Bạn" block + stacked nav rows + "Kết nối với ànART" bar. */
+/** "— ànART® x Bạn" block + stacked nav rows + "Kết nối với ànART" bar.
+ *  Mobile order matches the design: connect bar → brand line → 2×2 nav → follow. */
 export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
   return (
-    <section className="aa-container pb-6 pt-24">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
+    <section className="aa-container pb-6 pt-16 md:pt-24">
+      {/* Mobile: Kết nối first (full-bleed bar). Desktop: sits with Follow us below. */}
+      <Link
+        href="/lien-he"
+        className="aa-reveal group mb-10 flex items-center justify-between bg-white/[0.08] px-5 py-5 md:hidden"
+      >
+        <span className="text-base text-white transition-transform duration-300 group-hover:translate-x-1">
+          Kết nối với ànART
+        </span>
+        <ArrowUpRightIcon className="h-7 w-7 shrink-0 text-white/70 transition-transform duration-300 group-hover:-translate-x-1 group-hover:translate-y-1" />
+      </Link>
+
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
         <div className="aa-reveal">
           <p className="text-xl text-white">
             — ànART <sup className="text-[0.6em]">®</sup>{" "}
@@ -28,9 +40,9 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="group flex items-center justify-between border border-white/15 px-5 py-5 lg:border-x-0 lg:border-b-0 lg:border-t lg:px-0 lg:last:border-b"
+              className="group flex items-center justify-between border border-white/15 px-4 py-4 lg:border-x-0 lg:border-b-0 lg:border-t lg:px-0 lg:py-5 lg:last:border-b"
             >
-              <span className="flex items-start gap-1 text-base text-white/60 transition-colors group-hover:text-white">
+              <span className="flex items-start gap-1 text-sm text-white/60 transition-colors group-hover:text-white lg:text-base">
                 {link.label === "về ànArt" ? (
                   <>
                     về ànART
@@ -42,14 +54,34 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
                   link.label
                 )}
               </span>
-              <ArrowUpRightIcon className="h-6 w-6 shrink-0 text-white/40 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white" />
+              <ArrowUpRightIcon className="h-5 w-5 shrink-0 text-white/40 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white lg:h-6 lg:w-6" />
             </Link>
           ))}
         </nav>
       </div>
 
-      {/* Kết nối bar + follow us */}
-      <div className="aa-reveal mt-12 grid gap-px sm:grid-cols-2">
+      {/* Follow us — mobile standalone row under the nav (design). Desktop keeps
+          the paired Kết nối + Follow us strip. */}
+      <div className="aa-reveal mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 md:hidden">
+        <span className="text-sm text-white/45">Follow us</span>
+        <div className="flex items-center gap-3 text-sm text-white/80">
+          {CONTACT.socials.map((s, i) => (
+            <span key={s.label} className="flex items-center gap-3">
+              {i > 0 && <span className="text-white/30">|</span>}
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                className="transition-colors hover:text-white"
+              >
+                {s.label}
+              </a>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="aa-reveal mt-12 hidden gap-px sm:grid-cols-2 md:grid">
         <Link
           href="/lien-he"
           className="group flex items-center justify-between bg-white px-8 py-7"

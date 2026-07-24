@@ -22,22 +22,38 @@ const GALLERY_ITEMS: { src: string; w: number }[] = [
  *  gallery image marquee (right) — two rows drifting in opposite directions. */
 export function GalleryMarquee() {
   return (
-    <section className="overflow-hidden pt-32 md:pt-56">
-      <Marquee direction="left" speedDivisor={18} scrollVw={8} className="items-baseline">
-        <div className="flex flex-nowrap items-baseline gap-8 whitespace-nowrap px-4 leading-none">
-          <span className="text-[clamp(3rem,6.19vw,5.91rem)] font-extrabold text-white">
-            ànART
-          </span>
-          <span className="text-[clamp(2rem,4.05vw,3.94rem)] font-light text-white/70">
-            àn Ạt
-          </span>
-          <span className="text-[clamp(3rem,6.19vw,5.91rem)] font-medium text-aa-blue">
-            ( Creative HUB x Experiences )
-          </span>
+    <section className="overflow-hidden pt-12 md:pt-56">
+      {/* Background is a SHORT band hugging just the two marquee rows + image
+          strip — not the section's tall black padding, and it must not bleed
+          into neighbouring sections. */}
+      <div className="relative py-8">
+        <div className="absolute inset-0">
+          <Image
+            src="/images/home-image/home_page_14.webp"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
-      </Marquee>
 
-      <div className="mt-10 md:mt-14">
+        <div className="relative">
+        <Marquee direction="left" speedDivisor={18} scrollVw={8} className="items-baseline">
+          <div className="flex flex-nowrap items-start gap-8 whitespace-nowrap px-4 leading-[1.1]">
+            <span className="text-[clamp(3rem,6.19vw,5.91rem)] font-extrabold text-white">
+              ànART
+            </span>
+            <span className="text-[clamp(1.25rem,2.4vw,2.3rem)] font-light leading-[1.45] text-white/70">
+              àn Ạt
+            </span>
+            <span className="text-[clamp(3rem,6.19vw,5.91rem)] font-medium text-aa-blue">
+              (Creative HUB x Experiences)
+            </span>
+          </div>
+        </Marquee>
+
+        <div className="mt-10 md:mt-14">
         <Marquee direction="right" speedDivisor={22} scrollVw={6}>
           <div className="flex flex-nowrap gap-5 pr-5">
             {GALLERY_ITEMS.map((item) => (
@@ -52,6 +68,8 @@ export function GalleryMarquee() {
             ))}
           </div>
         </Marquee>
+        </div>
+        </div>
       </div>
     </section>
   );

@@ -2,7 +2,12 @@
 export function SideTab() {
   return (
     <div className="fixed right-0 top-[345px] z-30 hidden lg:block" aria-hidden>
-      <div className="flex flex-col items-center gap-4 bg-aa-blue px-2.5 py-5">
+      {/* Bar width tracks the site's horizontal gutter exactly (max 46px),
+          so it sits flush in the same margin strip as the page content. */}
+      <div
+        className="flex flex-col items-center gap-4 bg-aa-blue py-5"
+        style={{ width: "clamp(1.25rem, 2.4vw, 2.875rem)" }}
+      >
         <span
           className="text-lg font-medium leading-none text-white"
           style={{ writingMode: "sideways-lr" }}
@@ -22,12 +27,8 @@ export function SideTab() {
         >
           (
         </span>
-        <span
-          className="text-sm font-black text-white"
-          style={{ writingMode: "sideways-lr" }}
-        >
-          àA.
-        </span>
+        {/* Logo stays upright (normal reading direction), centered in the bar */}
+        <span className="text-sm font-black leading-none text-white">àA.</span>
       </div>
     </div>
   );

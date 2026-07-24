@@ -28,14 +28,14 @@ function Tile({ project, index }: { project: Project; index: number }) {
       {/* Blue ground revealed on hover — the image screens over it (design mock) */}
       <span className="pointer-events-none absolute inset-0 bg-aa-blue opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-      {/* Clean artwork — only the image scales on hover; on hover it turns into
-          a grayscale screen over the blue ground = bright blue duotone */}
+      {/* Clean artwork — on hover it turns into a grayscale screen over the
+          blue ground = bright blue duotone (no scale) */}
       <Image
         src={project.image}
         alt={`${project.title} — ${project.subtitle}`}
         width={1213}
         height={901}
-        className="relative h-full w-full object-cover transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.05] group-hover:grayscale group-hover:mix-blend-screen"
+        className="relative h-full w-full object-cover transition-[filter] duration-700 ease-out group-hover:grayscale group-hover:mix-blend-screen"
         sizes={IMAGE_SIZES[project.size]}
       />
 

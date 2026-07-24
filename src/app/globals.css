@@ -162,12 +162,11 @@
     letter-spacing: 0.01em;
   }
 
-  /* Section eyebrow: "› Dịch vụ của ànART" */
+  /* Section eyebrow: "› Dịch vụ của ànART" — size set per-instance via utilities */
   .aa-eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1rem;
     font-weight: 500;
     color: #fff;
   }
@@ -198,7 +197,6 @@
   .text-xl { font-size: 1.40625rem; }
   .text-2xl { font-size: 1.6875rem; }
   .text-3xl { font-size: 2.109375rem; }
-  .aa-eyebrow { font-size: 1.125rem; }
 }
 
 /* Marquee (gallery + differentiator) */
@@ -257,4 +255,52 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .aa-arrow-doodle { animation: none; }
+}
+
+/* "wasted" display face — footer "not.done.yet" (à la digitalists.at) */
+@font-face {
+  font-family: "wasted";
+  src: url("/fonts/wastedyear-webfont.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* not.done.yet: wasted font + a looping 4-frame arrow sprite floated above it.
+   Sprite footer-arrow.avif is 336×36 = 4 frames of 84×36 (background-size
+   400% 100%). Each frame is held for a quarter of the cycle with hard cuts —
+   a flipbook that loops frame0→1→2→3→0, matching the reference's
+   `play-arrow .4s steps(4)` without the percentage-alignment pitfalls. */
+.aa-notdoneyet {
+  font-family: "wasted", var(--font-caveat), cursive;
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+  /* Wasted Year is an all-caps display face — force uppercase so lowercase
+     input doesn't fall back glyph-by-glyph to the cursive fallback. */
+  text-transform: uppercase;
+  font-size: clamp(1.75rem, 2.2vw, 2.4rem);
+}
+.aa-notdoneyet::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 26px;
+  min-height: 20px;
+  aspect-ratio: 84 / 36;
+  transform: translateY(calc(-100% - 8px));
+  background-image: url("/images/footer-arrow.avif");
+  background-repeat: no-repeat;
+  background-size: 400% 100%;
+  animation: aa-play-arrow 0.4s infinite;
+}
+@keyframes aa-play-arrow {
+  0%,  24.99% { background-position-x: 0%; }
+  25%, 49.99% { background-position-x: 33.333%; }
+  50%, 74.99% { background-position-x: 66.667%; }
+  75%, 100%   { background-position-x: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .aa-notdoneyet::after { animation: none; }
 }

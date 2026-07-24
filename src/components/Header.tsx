@@ -13,7 +13,7 @@ export function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();     
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -40,8 +40,8 @@ export function Header() {
           scrolled && !open ? "bg-black/70 backdrop-blur-md" : "bg-transparent"
         }`}
       >
-        <div className="aa-container flex items-center justify-between py-4 lg:grid lg:grid-cols-12 lg:gap-5">
-          <Link href="/" aria-label="ànART" className="relative z-[60] shrink-0 lg:col-span-3">
+        <div className="aa-container grid h-[4.5rem] grid-cols-[1fr_auto] items-center lg:grid lg:h-[4.75rem] lg:grid-cols-12 lg:gap-5">
+          <Link href="/" aria-label="ànART" className="relative z-[60] flex items-center self-center lg:col-span-3">
             <Image
               src="/images/logo-lockup.webp"
               alt="ànART® Creative Hub x Experiences"
@@ -52,10 +52,10 @@ export function Header() {
             />
           </Link>
 
-          <div className="flex items-center gap-6 md:gap-10 lg:col-span-5 lg:col-start-8 lg:justify-between">
+          <div className="flex items-center gap-5 self-center md:gap-10 lg:col-span-5 lg:col-start-8 lg:justify-between">
             <Link
               href="/lien-he"
-              className="text-sm font-medium uppercase text-white/85 transition-colors hover:text-white md:hidden"
+              className="text-sm font-medium uppercase leading-none text-white/85 transition-colors hover:text-white md:hidden"
             >
               liên hệ
             </Link>
@@ -83,7 +83,7 @@ export function Header() {
                       {link.label}
                     </span>
                     {link.href === "/" && (
-                      <span className="text-[0.5rem] leading-none text-white/60 mt-0.5 lg:text-[0.5625rem]">
+                      <span className="mt-0.5 text-[0.5rem] leading-none text-white/60 lg:text-[0.5625rem]">
                         /àn Ạt/
                       </span>
                     )}
@@ -96,7 +96,7 @@ export function Header() {
               aria-label={open ? "Đóng menu" : "Mở menu"}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="relative z-[60] flex h-10 w-10 shrink-0 flex-col items-center justify-center gap-[6px]"
+              className="relative z-[60] flex h-9 w-10 shrink-0 flex-col items-center justify-center gap-[6px]"
             >
               <span
                 className={`block h-[2px] w-6 transition-all duration-300 ${
@@ -119,12 +119,10 @@ export function Header() {
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <div className="aa-container flex h-full flex-col justify-between overflow-y-auto pb-10 pt-24 lg:pt-36">
-          <div className="grid flex-1 content-start gap-12 lg:grid-cols-2 lg:content-stretch">
-            {/* Left column — shown below the nav on mobile (design: Mobile p6).
-                Each block slides up from behind its own overflow-hidden mask,
-                staggered like the nav links, instead of appearing instantly. */}
-            <div className="order-2 flex flex-col justify-start gap-10 lg:order-1 lg:gap-16">
+        <div className="aa-container flex h-full flex-col pb-8 pt-24 lg:justify-between lg:pb-10 lg:pt-36">
+          <div className="grid min-h-0 flex-1 content-start gap-10 lg:grid-cols-2 lg:content-stretch lg:gap-12">
+            {/* Desktop left: Beyond + contact. Hidden on mobile (Beyond moves to bottom). */}
+            <div className="order-2 hidden flex-col justify-start gap-16 lg:order-1 lg:flex">
               <div className="overflow-hidden">
                 <div
                   style={{
@@ -136,7 +134,7 @@ export function Header() {
                   }}
                 >
                   <span className="block h-px w-16 bg-white" />
-                  <p className="mt-5 text-[1.75rem] font-extrabold uppercase leading-none tracking-tight text-white lg:text-[2.81rem]">
+                  <p className="mt-5 text-[2.81rem] font-extrabold uppercase leading-none tracking-tight text-white">
                     Beyond
                     <br />
                     Creativity
@@ -172,43 +170,80 @@ export function Header() {
               </div>
             </div>
 
-            {/* Right column — big nav (right-aligned on all sizes, per design) */}
-            <nav className="order-1 flex flex-col items-end gap-2 text-right lg:order-2">
-              {MENU_LINKS.map((link, i) => (
-                <div key={link.href} className="overflow-hidden py-0.5">
-                  <Link
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="group relative block overflow-hidden"
-                    style={{
-                      transform: open ? "translateY(0)" : "translateY(110%)",
-                      opacity: open ? 1 : 0,
-                      transition: `transform 0.7s cubic-bezier(0.625,0.05,0,1) ${
-                        open ? 120 + i * 60 : 0
-                      }ms, opacity 0.7s ease ${open ? 120 + i * 60 : 0}ms`,
-                    }}
-                  >
-                    {/* Solid label — default state, slides up and out on hover */}
-                    <span className="block text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] text-white transition-transform duration-500 ease-out group-hover:-translate-y-[125%]">
-                      {link.label}
-                    </span>
-                    {/* Hollow outline duplicate — hidden below, slides up into view on hover */}
-                    <span
-                      aria-hidden
-                      className="aa-outline-text absolute left-0 top-0 block translate-y-[110%] text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] transition-transform duration-500 ease-out group-hover:translate-y-0"
+            {/* Nav + language (under nav on mobile) */}
+            <div className="order-1 flex flex-col items-end gap-6 lg:order-2 lg:gap-2">
+              <nav className="flex flex-col items-end gap-2 text-right">
+                {MENU_LINKS.map((link, i) => (
+                  <div key={link.href} className="overflow-hidden py-0.5">
+                    <Link
+                      href={link.href}
+                      onClick={() => setOpen(false)}
+                      className="group relative block overflow-hidden"
+                      style={{
+                        transform: open ? "translateY(0)" : "translateY(110%)",
+                        opacity: open ? 1 : 0,
+                        transition: `transform 0.7s cubic-bezier(0.625,0.05,0,1) ${
+                          open ? 120 + i * 60 : 0
+                        }ms, opacity 0.7s ease ${open ? 120 + i * 60 : 0}ms`,
+                      }}
                     >
-                      {link.label}
-                    </span>
-                  </Link>
-                </div>
-              ))}
-            </nav>
+                      <span className="block text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] text-white transition-transform duration-500 ease-out group-hover:-translate-y-[125%]">
+                        {link.label}
+                      </span>
+                      <span
+                        aria-hidden
+                        className="aa-outline-text absolute left-0 top-0 block translate-y-[110%] text-[clamp(2.75rem,6.41vw,7.73rem)] font-black leading-[1.05] transition-transform duration-500 ease-out group-hover:translate-y-0"
+                      >
+                        {link.label}
+                      </span>
+                    </Link>
+                  </div>
+                ))}
+              </nav>
+              <div className="overflow-hidden lg:hidden">
+                <p
+                  className="text-right text-base text-white"
+                  style={{
+                    transform: open ? "translateY(0)" : "translateY(110%)",
+                    opacity: open ? 1 : 0,
+                    transition: `transform 0.7s cubic-bezier(0.625,0.05,0,1) ${
+                      open ? 360 : 0
+                    }ms, opacity 0.7s ease ${open ? 360 : 0}ms`,
+                  }}
+                >
+                  — english / <span className="font-bold">vietnamese</span>
+                </p>
+              </div>
+            </div>
           </div>
 
-          {/* Bottom row */}
-          <div className="overflow-hidden">
+          {/* Bottom-left: Beyond (mobile) + Follow us — always visible at the foot */}
+          <div className="mt-auto shrink-0 pt-6">
             <div
-              className="flex flex-wrap items-end justify-between gap-6"
+              className="overflow-hidden lg:hidden"
+              style={{
+                transform: open ? "translateY(0)" : "translateY(110%)",
+                opacity: open ? 1 : 0,
+                transition: `transform 0.7s cubic-bezier(0.625,0.05,0,1) ${
+                  open ? 400 : 0
+                }ms, opacity 0.7s ease ${open ? 400 : 0}ms`,
+              }}
+            >
+              <span className="block h-px w-16 bg-white" />
+              <p className="mt-5 text-[1.75rem] font-extrabold uppercase leading-none tracking-tight text-white">
+                Beyond
+                <br />
+                Creativity
+                <br />
+                Into
+                <br />
+                Experiences
+              </p>
+              <span className="mt-5 block h-px w-16 bg-white" />
+            </div>
+
+            <div
+              className="mt-8 overflow-hidden"
               style={{
                 transform: open ? "translateY(0)" : "translateY(110%)",
                 opacity: open ? 1 : 0,
@@ -217,25 +252,27 @@ export function Header() {
                 }ms, opacity 0.7s ease ${open ? 480 : 0}ms`,
               }}
             >
-              <div className="flex items-center gap-6 text-sm text-white">
-                <span className="text-lg font-bold">Follow us</span>
-                {CONTACT.socials.map((s, i) => (
-                  <span key={s.label} className="flex items-center gap-6">
-                    {i > 0 && <span className="font-black">|</span>}
-                    <a
-                      href={s.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="transition-opacity hover:opacity-70"
-                    >
-                      {s.label}
-                    </a>
-                  </span>
-                ))}
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-white">
+                  <span className="font-bold">Follow us</span>
+                  {CONTACT.socials.map((s, i) => (
+                    <span key={s.label} className="flex items-center gap-3 lg:gap-6">
+                      {i > 0 && <span className="font-black">|</span>}
+                      <a
+                        href={s.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="transition-opacity hover:opacity-70"
+                      >
+                        {s.label}
+                      </a>
+                    </span>
+                  ))}
+                </div>
+                <p className="hidden text-lg text-white lg:block">
+                  — english / <span className="font-bold">vietnamese</span>
+                </p>
               </div>
-              <p className="text-lg text-white">
-                — english / <span className="font-bold">vietnamese</span>
-              </p>
             </div>
           </div>
         </div>

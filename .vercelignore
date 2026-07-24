@@ -5,3 +5,7 @@ src/anart-assets
 # local docs & scripts not needed for the build
 docs
 scripts/shoot*.mjs
+scripts/measure.mjs
+# design source files at repo root
+_mobile_design.pdf
+*.pdf

@@ -3,17 +3,23 @@ import Image from "next/image";
 /** Intro line + spinning badge + Tôn chỉ / Tầm nhìn / Sứ mệnh block (home). */
 export function Manifesto() {
   return (
-    <section className="aa-container pb-28 pt-24">
-      {/* Intro sentence */}
-      <p className="aa-reveal mx-auto max-w-3xl text-center text-[1.125rem] leading-relaxed text-white/85 md:text-[1.40625rem]">
-        Vượt khỏi điểm nhìn của thị giác — mở rộng điểm chạm vào không gian,
-        chuyển động, hình khối, âm thanh và hơn thế nữa.
+    <section className="aa-container pb-8 pt-20 md:pb-28 md:pt-24">
+      {/* Intro sentence — explicit breaks on <=480px match the design's line
+          rhythm (leading "—" and "và" start their own lines). Slightly smaller
+          type keeps each design-line from wrapping mid-phrase. */}
+      <p className="aa-reveal mx-auto max-w-3xl text-center text-[1.125rem] leading-relaxed text-white/85 max-[480px]:text-[0.9375rem] md:text-[1.40625rem]">
+        <span className="block min-[481px]:inline">Vượt khỏi điểm nhìn của thị giác </span>
+        <span className="block whitespace-nowrap min-[481px]:inline min-[481px]:whitespace-normal">
+          — mở rộng điểm chạm vào không gian,{" "}
+        </span>
+        <span className="block min-[481px]:inline">chuyển động, hình khối, âm thanh </span>
+        <span className="block min-[481px]:inline">và hơn thế nữa.</span>
       </p>
 
       {/* Spinning badge stamp — only the outer ring (with the "ànArt Creative
           Agency" text) spins; the "aA." mark in the center is a separate,
           static layer stacked on top. */}
-      <div className="aa-reveal mt-16 flex justify-center">
+      <div className="aa-reveal mt-14 flex justify-center lg:mt-8">
         <div className="relative h-[180px] w-[180px] md:h-[210px] md:w-[210px]">
           <Image
             src="/images/badge-stamp.webp"
@@ -36,8 +42,8 @@ export function Manifesto() {
       {/* Mobile "Chúng tôi là" — centered single column per Mobile design p1:
           eyebrow → Tôn chỉ / Tầm nhìn / Sứ mệnh (equal weight) → tagline → àA
           badge line → Einstein. Desktop keeps the offset 12-col grid below. */}
-      <div className="mt-20 flex flex-col items-center gap-12 text-center lg:hidden">
-        <p className="aa-reveal aa-eyebrow justify-center text-xl">Chúng tôi là</p>
+      <div className="mt-14 flex flex-col items-center gap-10 text-center lg:hidden">
+        <p className="aa-reveal aa-eyebrow justify-center text-[1.35rem] uppercase">Chúng tôi là</p>
 
         <div className="aa-reveal max-w-md">
           <p className="text-base text-white/85">— Tôn chỉ (01)</p>
@@ -67,26 +73,28 @@ export function Manifesto() {
 
         <span className="aa-reveal block h-px w-10 bg-white/40" />
 
-        <p className="aa-reveal text-xs uppercase leading-relaxed tracking-wide text-white/45">
-          Lấy nghệ thuật làm gốc.
-          <br />
-          Sáng tạo có mục đích.
-          <br />
-          Trải nghiệm là trung tâm.
-          <br />
-          Hiệu quả là đích đến.
-        </p>
-        <p className="aa-reveal text-xs text-white/60">
-          — ànART <sup className="text-[0.6em]">®</sup>
-        </p>
+        <div className="aa-reveal flex flex-col items-center gap-5">
+          <p className="text-base uppercase leading-relaxed tracking-wide text-white/60">
+            Lấy nghệ thuật làm gốc.
+            <br />
+            Sáng tạo có mục đích.
+            <br />
+            Trải nghiệm là trung tâm.
+            <br />
+            Hiệu quả là đích đến.
+          </p>
+          <p className="text-sm text-white/70">
+            — ànART <sup className="text-[0.6em]">®</sup>
+          </p>
 
-        <Image
-          src="/images/einstein.webp"
-          alt="Einstein đeo kính àA"
-          width={428}
-          height={428}
-          className="aa-reveal h-auto w-[200px]"
-        />
+          <Image
+            src="/images/einstein.webp"
+            alt="Einstein đeo kính àA"
+            width={428}
+            height={428}
+            className="h-auto w-[300px]"
+          />
+        </div>
       </div>
 
       {/* Tôn chỉ + Chúng tôi là — 12-col grid: text(2-5) / einstein(6-7) / text(8-11).
