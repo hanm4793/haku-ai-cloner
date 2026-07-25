@@ -237,18 +237,20 @@ export function Define({
   return (
     <section ref={sectionRef} className="aa-container relative overflow-hidden pt-1 pb-8 md:py-28">
       {/* Background photo — parallax-trails slower than the sculpture */}
-      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden" aria-hidden>
+      <div
+        className="pointer-events-none absolute inset-y-0 left-1/2 z-0 w-screen -translate-x-1/2 overflow-hidden"
+        aria-hidden
+      >
         <div ref={bgRef} className="absolute inset-0 will-change-transform">
           <Image
-            src="/images/home-image/home_page_23.webp"
+            src="/images/home-image/home_page_23.jpg"
             alt=""
             fill
             sizes="100vw"
             className="object-cover object-bottom"
-            style={{ filter: "brightness(3.2)" }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-black/30 to-black" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/0 via-black/30 to-black" />
       </div>
 
       {/* Sculpture — 3D tilt toward cursor + scroll entrance (perspective wrap) */}

@@ -23,7 +23,7 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
         <ArrowUpRightIcon className="h-7 w-7 shrink-0 text-white/70 transition-transform duration-300 group-hover:-translate-x-1 group-hover:translate-y-1" />
       </Link>
 
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-20">
+      <div className="grid gap-10 lg:grid-cols-2 lg:gap-x-0">
         <div className="aa-reveal">
           <p className="text-xl text-white">
             — ànART <sup className="text-[0.6em]">®</sup>{" "}
@@ -40,7 +40,7 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="group flex items-center justify-between border border-white/15 px-4 py-4 lg:border-x-0 lg:border-b-0 lg:border-t lg:px-0 lg:py-5 lg:last:border-b"
+              className="group flex items-center justify-between border border-white/15 px-4 py-4 lg:border-x-0 lg:border-b-0 lg:border-t lg:px-8 lg:py-5 lg:last:border-b"
             >
               <span className="flex items-start gap-1 text-sm text-white/60 transition-colors group-hover:text-white lg:text-base">
                 {link.label === "về ànArt" ? (
@@ -91,7 +91,7 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
           </span>
           <ArrowUpRightIcon className="h-9 w-9 shrink-0 text-black/70 transition-transform duration-300 group-hover:-translate-x-1 group-hover:translate-y-1" />
         </Link>
-        <div className="flex flex-wrap items-center justify-between gap-4 bg-white/[0.06] px-8 py-6">
+        <div className="flex flex-wrap items-center justify-center gap-8 bg-white/6 px-8 py-6">
           <span className="text-base text-white/45">Follow us</span>
           <div className="flex items-center gap-4 text-xs text-white/80">
             {CONTACT.socials.map((s, i) => (
