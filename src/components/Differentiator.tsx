@@ -21,11 +21,14 @@ export function Differentiator() {
   return (
     // spacing per design: strip → marquee ≈ 46px, marquee → services ≈ 306px
     <section className="relative w-full overflow-hidden pt-10 pb-24 md:pt-12 md:pb-72">
-      {/* Background band continues up from GalleryMarquee and covers only the
-          text row — the tall bottom padding stays black (no bleed into the
-          next section). */}
-      <div className="relative pb-6">
-        <div className="absolute inset-x-0 -top-10 bottom-0 md:-top-12">
+      {/* Background band around the text row. No top padding/fade of its
+          own — starts flush at the same black/20 tint GalleryMarquee's band
+          ends at, so the two merge into one strip with only this section's
+          own pt-10/12 as the gap (matching GalleryMarquee's internal
+          mt-10/14 rhythm). Bottom fades out gradually over more room before
+          the tall padding that separates it from ServicesHome. */}
+      <div className="relative pb-20 md:pb-36">
+        <div className="absolute inset-0">
           <Image
             src="/images/home-image/home_page_14.webp"
             alt=""
@@ -33,7 +36,7 @@ export function Differentiator() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/20 to-black" />
         </div>
         <div className="relative">
           <Marquee direction="left" speedDivisor={15} scrollVw={10}>

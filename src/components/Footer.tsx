@@ -272,9 +272,6 @@ export function Footer() {
                     never slices its top — -mb hangs it into the blue block.
                     Mobile: items-center, no hang into the blue card. */}
                 <div ref={noteGroupRef} className="relative flex shrink-0 items-end gap-3 max-md:items-center max-md:gap-1.5">
-                  <span className="aa-notdoneyet text-white/70">
-                    not.done.yet
-                  </span>
                   <Image
                     src="/images/letter-a-orange.webp"
                     alt=""
@@ -283,6 +280,9 @@ export function Footer() {
                     className="relative -mb-[60px] w-[150px] lg:w-[180px] max-md:mb-0 max-md:w-[44px]"
                     aria-hidden
                   />
+                  <span className="aa-notdoneyet text-white/70">
+                    not.done.yet
+                  </span>
                 </div>
                 {/* Queued immediately after the note+A group — off-screen only
                     by this small gap, so it starts sliding into view on the
