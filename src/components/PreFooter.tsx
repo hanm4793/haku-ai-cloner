@@ -29,9 +29,10 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
             — ànART <sup className="text-[0.6em]">®</sup>{" "}
             <span className="font-bold">x {partner}</span>
           </p>
-          <p className="mt-4 max-w-sm text-base leading-relaxed text-white/55">
-            Chúng ta hãy cùng hiện thực hoá những ý tưởng và tạo ra những điểm chạm giá
-            trị cho thương hiệu.
+          <p className="mt-4 text-base leading-relaxed text-white/55">
+            Chúng ta hãy cùng hiện thực hoá những ý tưởng
+            <br />
+            và tạo ra những điểm chạm giá trị cho thương hiệu.
           </p>
         </div>
 
@@ -40,7 +41,7 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="group flex items-center justify-between border border-white/15 px-4 py-4 lg:border-x-0 lg:border-b-0 lg:border-t lg:px-8 lg:py-5 lg:last:border-b"
+              className="group flex items-center justify-between border border-white/15 px-4 py-4 lg:border-x-0 lg:border-b-0 lg:border-t lg:px-8 lg:py-5"
             >
               <span className="flex items-start gap-1 text-sm text-white/60 transition-colors group-hover:text-white lg:text-base">
                 {link.label === "về ànArt" ? (
@@ -81,7 +82,7 @@ export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
         </div>
       </div>
 
-      <div className="aa-reveal mt-12 hidden gap-px sm:grid-cols-2 md:grid">
+      <div className="aa-reveal hidden gap-px sm:grid-cols-2 md:grid">
         <Link
           href="/lien-he"
           className="group flex items-center justify-between bg-white px-8 py-7"

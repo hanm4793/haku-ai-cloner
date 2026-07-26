@@ -245,7 +245,7 @@ export function Clients() {
         ref={stickyRef}
         className="sticky top-0 flex h-[55vh] flex-col items-center justify-center overflow-hidden md:h-screen"
       >
-        <div className="flex w-full max-w-[1920px] flex-col items-center px-3 md:px-[clamp(1.25rem,2.4vw,2.875rem)]">
+        <div className="flex w-full flex-col items-center px-3 md:px-[clamp(1.25rem,2.4vw,2.875rem)]">
           <span
             ref={(el) => {
               dashRefs.current[0] = el;
