@@ -113,15 +113,7 @@ function TextBlock({
   );
 }
 
-function FullImage({
-  src,
-  captionLines,
-  year,
-}: {
-  src: string;
-  captionLines: string[];
-  year: string;
-}) {
+function FullImage({ src, captionLines }: { src: string; captionLines: string[] }) {
   return (
     <section className="aa-container pt-5 md:pt-6">
       <div className="aa-reveal relative overflow-hidden">
@@ -133,18 +125,6 @@ function FullImage({
           className="h-auto w-full"
           sizes="100vw"
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between p-5 md:p-7">
-          <span className="text-[0.7rem] uppercase leading-[1.35] tracking-wide text-white/85 md:text-xs">
-            {captionLines.map((l) => (
-              <span key={l} className="block">
-                {l}
-              </span>
-            ))}
-          </span>
-          <span className="text-[0.7rem] uppercase tracking-wide text-white/85 md:text-xs">
-            {year}
-          </span>
-        </div>
       </div>
     </section>
   );
@@ -164,11 +144,7 @@ function Block({ block, detail }: { block: DetailBlock; detail: ProjectDetail })
       );
     case "full":
       return (
-        <FullImage
-          src={block.image}
-          captionLines={detail.captionLines}
-          year={detail.year}
-        />
+        <FullImage src={block.image} captionLines={detail.captionLines} />
       );
   }
 }
