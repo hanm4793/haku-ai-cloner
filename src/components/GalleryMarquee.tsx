@@ -22,26 +22,25 @@ const GALLERY_ITEMS: { src: string; w: number }[] = [
  *  gallery image marquee (right) — two rows drifting in opposite directions. */
 export function GalleryMarquee() {
   return (
-    <section className="overflow-hidden pt-12 md:pt-56">
-      {/* Background band around the two marquee rows + image strip. Generous
-          fade-in at the top (into this section's own black padding above).
-          The bottom has no padding/fade of its own — it stays flush at the
-          same black/20 tint so it merges directly into Differentiator's
-          band right below (that section's own pt-10/12 is the only gap,
-          matching this component's own mt-10/14 rhythm between its two
-          rows, instead of stacking two gaps on top of each other). */}
-      <div className="relative pt-24 md:pt-36">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/home-image/home_page_14.webp"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-linear-to-b from-black via-black/20 to-black/20" />
-        </div>
+    <section className="relative overflow-hidden pt-12 md:pt-56">
+      {/* Background photo (native 1920×725, content centred with black bars
+          baked into the file). object-contain so the WHOLE photo — including
+          its own top/bottom black — always shows intact at every section
+          height/viewport, instead of object-cover cropping into those bars
+          on shorter sections. Any leftover space is just page-black, which
+          blends straight into the photo's own bars. */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/home-image/home_page_14.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-contain"
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
 
+      <div className="relative pt-24 md:pt-36">
         <div className="relative">
         <Marquee direction="left" speedDivisor={18} scrollVw={8} className="items-baseline">
           <div className="flex flex-nowrap items-start gap-8 whitespace-nowrap px-4 leading-[1.1]">
