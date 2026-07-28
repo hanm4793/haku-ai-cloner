@@ -4,6 +4,7 @@ import { SmoothScroll } from "@/components/SmoothScroll";
 import { Header } from "@/components/Header";
 import { SideTab } from "@/components/SideTab";
 import { RevealTitle } from "@/components/RevealTitle";
+import { ServiceHeroBackground } from "@/components/ServiceHeroBackground";
 import { ServicesStamp } from "@/components/ServicesStamp";
 import { Define } from "@/components/Define";
 import { PreFooter } from "@/components/PreFooter";
@@ -23,34 +24,40 @@ export default function ServicesPage() {
       <Header />
       <SideTab />
       <main className="flex-1">
-        {/* Hero — ~1 viewport, cover banner; title + description overlay top */}
-        <section className="relative h-dvh min-h-svh w-full overflow-hidden">
-          <Image
-            src="/images/service-image/service_01.webp"
-            alt="ànART — không gian triển lãm"
-            fill
-            priority
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-          {/* Concept / Design / Production — desktop only */}
-          <div className="pointer-events-none absolute inset-x-0 top-1/2 z-[1] hidden -translate-y-1/2 items-center justify-between px-[max(1.25rem,3vw)] text-sm uppercase tracking-wide text-white sm:text-base md:flex">
-            <span>Concept.</span>
-            <span>Design.</span>
-            <span>Production.</span>
-          </div>
-
-          <div className="aa-container relative z-10 flex h-full flex-col items-center px-5 pt-[max(5.5rem,12vh)] text-center">
-            <RevealTitle
-              as="h1"
-              lines={["Dịch vụ"]}
-              className="text-[clamp(3rem,14vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white"
+        {/* Hero — image at its natural ratio (with a parallax photo layer),
+            title overlapping its bottom edge (matches the rest of the
+            site's hero pattern, e.g. Hero.tsx). The overlay text below never
+            moves — only the photo inside ServiceHeroBackground parallaxes. */}
+        <section className="aa-container">
+          <div className="aa-reveal relative">
+            <ServiceHeroBackground
+              src="/images/service-image/service_01.webp"
+              alt="ànART — không gian triển lãm"
             />
-            <p className="aa-reveal mt-5 max-w-[34rem] text-[0.8125rem] font-medium uppercase leading-[1.45] text-white md:mt-8 md:max-w-[42rem] md:text-base lg:text-lg">
+            <div className="absolute inset-x-0 top-1/2 flex -translate-y-1/2 items-center justify-between px-[max(1.25rem,3vw)] text-sm uppercase tracking-wide text-white sm:text-base">
+              <span>Concept.</span>
+              <span>Design.</span>
+              <span>Production.</span>
+            </div>
+          </div>
+          <RevealTitle
+            as="h1"
+            lines={["Dịch vụ"]}
+            className="relative z-10 -mt-[10vw] text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white"
+          />
+        </section>
+
+        {/* Statement */}
+        <section className="aa-container pt-24">
+          <div className="grid gap-8 lg:grid-cols-12 lg:gap-5">
+            <p className="aa-reveal aa-eyebrow self-start text-base lg:col-start-3 lg:col-span-2">
+              Dịch vụ của ànART
+            </p>
+            <h2 className="aa-reveal text-[clamp(1.35rem,2.31vw,2.25rem)] font-medium uppercase leading-[1.35] text-white lg:col-start-5 lg:col-span-8">
               Chúng tôi kiến tạo nên những trải nghiệm độc đáo — nơi hình ảnh,
               không gian, câu chuyện tạo ra giá trị và dấu ấn bền vững cho
               thương hiệu.
-            </p>
+            </h2>
           </div>
         </section>
 
