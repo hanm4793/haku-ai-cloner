@@ -24,11 +24,12 @@ export default function ServicesPage() {
       <Header />
       <SideTab />
       <main className="flex-1">
-        {/* Hero — image at its natural ratio (with a parallax photo layer),
-            title overlapping its bottom edge (matches the rest of the
-            site's hero pattern, e.g. Hero.tsx). The overlay text below never
-            moves — only the photo inside ServiceHeroBackground parallaxes. */}
-        <section className="aa-container">
+        {/* Hero — full-bleed image at its natural ratio (with a parallax
+            photo layer), title overlapping its bottom edge (matches the
+            rest of the site's hero pattern, e.g. Hero.tsx). The overlay
+            text below never moves — only the photo inside
+            ServiceHeroBackground parallaxes. */}
+        <section className="w-full">
           <div className="aa-reveal relative">
             <ServiceHeroBackground
               src="/images/service-image/service_01.webp"

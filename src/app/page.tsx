@@ -4,7 +4,6 @@ import { SideTab } from "@/components/SideTab";
 import { Hero } from "@/components/Hero";
 import { Manifesto } from "@/components/Manifesto";
 import { GalleryMarquee } from "@/components/GalleryMarquee";
-import { Differentiator } from "@/components/Differentiator";
 import { ServicesHome } from "@/components/ServicesHome";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { Clients } from "@/components/Clients";
@@ -23,7 +22,6 @@ export default function Home() {
         <Hero />
         <Manifesto />
         <GalleryMarquee />
-        <Differentiator />
         <ServicesHome />
         <section className="aa-container pb-12 pt-0 md:pb-28 lg:pt-4">
           <div className="grid lg:grid-cols-12 lg:gap-5">
