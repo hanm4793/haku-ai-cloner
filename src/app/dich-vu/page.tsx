@@ -41,11 +41,15 @@ export default function ServicesPage() {
               <span>Production.</span>
             </div>
           </div>
-          <RevealTitle
-            as="h1"
-            lines={["Dịch vụ"]}
-            className="relative z-10 -mt-[10vw] text-center text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white"
-          />
+          <div className="aa-container">
+            <div className="lg:grid lg:grid-cols-12 lg:gap-5">
+              <RevealTitle
+                as="h1"
+                lines={["Dịch vụ"]}
+                className="relative z-10 -mt-[10vw] text-[clamp(4rem,13.5vw,14.63rem)] font-medium uppercase leading-[0.95] tracking-tight text-white lg:col-start-5 lg:col-span-8"
+              />
+            </div>
+          </div>
         </section>
 
         {/* Statement */}
