@@ -1,0 +1,49 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-wide.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-diag.mjs\")",
+      "Bash(netstat -ano)",
+      "PowerShell(Stop-Process -Id 9484 -Force)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/)",
+      "PowerShell(Stop-Process -Id 26728 -Force)",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-diag2.mjs\")",
+      "Bash(git commit -m ' *)",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-gallery.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-footer2.mjs\")",
+      "Bash(git add *)",
+      "Bash(curl -s -D - -o /tmp/prod.html \"https://haku-ai-cloner.vercel.app/\")",
+      "Read(//tmp/**)",
+      "Bash(rm -f /tmp/prod.html)",
+      "Bash(npx vercel *)",
+      "Bash(node -e ' *)",
+      "Bash(powershell -c 'Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\('\\\\''E:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\public\\\\images\\\\home-image\\\\home_page_14.webp'\\\\''\\); Write-Host $img.Width '\\\\''x'\\\\'' $img.Height')",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-diag3.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-multi.mjs\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/dich-vu)",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-dichvu.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-diag4.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-diag5.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-dichvu2.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-stamp2.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-stamp3.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-parallax.mjs\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:3000/du-an/vietcombank)",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-detail.mjs\")",
+      "PowerShell(Stop-Process -Id 7152 -Force)",
+      "Bash(curl -s -o /dev/null -w \"Age: %{time_total}s HTTP: %{http_code}\\\\n\" \"https://haku-ai-cloner.vercel.app/du-an/vietcombank\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-merged.mjs\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-herofull.mjs\")",
+      "Bash(git restore *)",
+      "Bash(curl -s -D - -o /dev/null \"https://haku-ai-cloner.vercel.app/\")",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-diag-reveal.mjs\")",
+      "PowerShell(Stop-Process -Id 2680 -Force)",
+      "Bash(node \"e:\\\\work\\\\personal\\\\freelance\\\\haku-ai-cloner\\\\scripts\\\\_tmp-shoot-align.mjs\")",
+      "Bash(curl -s -D - -o /dev/null \"https://haku-ai-cloner.vercel.app/dich-vu\")"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
+    ]
+  }
+}
