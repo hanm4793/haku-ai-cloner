@@ -14,11 +14,3 @@ export const MENU_LINKS: { label: string; href: string }[] = [
   { label: "dự án", href: "/du-an" },
   { label: "liên hệ", href: "/lien-he" },
 ];
-
-/** Client roster block on the home page (rendered line by line). */
-export const CLIENT_LINES: string[][] = [
-  ["Vietnam Airlines", "VietcomBank", "Vinhomes"],
-  ["Masteris Homes", "VietTheatre"],
-  ["SONHA", "NewX", "KizCITI", "The Q", "Ben Xuan"],
-  ["FENDI", "Mobiado", "MayHomes", "DojiLand"],
-];

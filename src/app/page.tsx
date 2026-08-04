@@ -10,10 +10,14 @@ import { Clients } from "@/components/Clients";
 import { Define } from "@/components/Define";
 import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
-import { getFeaturedProjects, getServices } from "@/lib/cms";
+import { getFeaturedProjects, getServices, getHomePage } from "@/lib/cms";
 
 export default async function Home() {
-  const [projects, services] = await Promise.all([getFeaturedProjects(), getServices()]);
+  const [projects, services, homePage] = await Promise.all([
+    getFeaturedProjects(),
+    getServices(),
+    getHomePage(),
+  ]);
   return (
     <div className="flex min-h-screen w-full flex-col bg-black text-white">
       <SmoothScroll />
@@ -32,7 +36,7 @@ export default async function Home() {
           </div>
           <ProjectsGrid projects={projects} />
         </section>
-        <Clients />
+        <Clients clientLines={homePage.clientLines} />
         <Define />
       </main>
       <PreFooter />

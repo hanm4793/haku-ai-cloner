@@ -95,12 +95,17 @@ interface StrapiSiteSettings {
   socials: StrapiSocialLink[];
 }
 
+interface StrapiClientLine {
+  clients: StrapiStringItem[];
+}
+
 interface StrapiHomePage {
   heroHeading: StrapiStringItem[];
   manifestoIntro: string | null;
   tonChiBody: string | null;
   tamNhinBody: string | null;
   suMenhBody: string | null;
+  clientLines: StrapiClientLine[];
 }
 
 // ---- Mappers: Strapi shape -> existing frontend types (src/types) ----
@@ -169,6 +174,8 @@ export interface HomePageContent {
   tonChiBody: string;
   tamNhinBody: string;
   suMenhBody: string;
+  /** Client roster, grouped into rows exactly as rendered (Clients.tsx). */
+  clientLines: string[][];
 }
 
 // ---- Public API ----
@@ -260,7 +267,10 @@ export async function getSiteSettings(): Promise<ContactInfo> {
 
 export async function getHomePage(): Promise<HomePageContent> {
   const json = await strapiFetch<{ data: StrapiHomePage | null }>("/home-page", {
-    populate: ["heroHeading"],
+    populate: {
+      heroHeading: true,
+      clientLines: { populate: { clients: true } },
+    },
   });
   const d = json.data;
   return {
@@ -269,5 +279,6 @@ export async function getHomePage(): Promise<HomePageContent> {
     tonChiBody: d?.tonChiBody ?? "",
     tamNhinBody: d?.tamNhinBody ?? "",
     suMenhBody: d?.suMenhBody ?? "",
+    clientLines: (d?.clientLines ?? []).map((line) => line.clients.map((c) => c.value)),
   };
 }

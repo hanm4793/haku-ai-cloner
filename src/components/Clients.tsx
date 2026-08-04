@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { clamp, subscribeScroll } from "@/lib/scrollTicker";
-import { CLIENT_LINES } from "@/lib/data";
 
 const easeOutQuint = (t: number) => 1 - Math.pow(1 - t, 5);
 const easeOutExpo = (t: number) => (t >= 1 ? 1 : 1 - Math.pow(2, -10 * t));
@@ -22,21 +21,21 @@ interface Token {
  *  bobs on its own slow current, and the whole field reacts to the cursor —
  *  words gently swim away from it while brightening and swelling as it passes,
  *  like disturbing water. Artful and interactive, not technical. */
-export function Clients() {
+export function Clients({ clientLines }: { clientLines: string[][] }) {
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const dashRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   const lines = useMemo<Token[][]>(() => {
-    const ls: Token[][] = CLIENT_LINES.map((line) =>
+    const ls: Token[][] = clientLines.map((line) =>
       line.flatMap((client, j): Token[] =>
         j > 0 ? [{ text: "|", sep: true }, { text: client }] : [{ text: client }],
       ),
     );
     ls.push([{ text: "and MORE...", light: true }]);
     return ls;
-  }, []);
+  }, [clientLines]);
   const flat = useMemo(() => lines.flat(), [lines]);
 
   const drift = useMemo(
