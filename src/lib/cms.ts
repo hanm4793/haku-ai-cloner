@@ -95,8 +95,9 @@ interface StrapiSiteSettings {
   socials: StrapiSocialLink[];
 }
 
-interface StrapiClientLine {
-  clients: StrapiStringItem[];
+interface StrapiClientEntry {
+  name: string;
+  line: number;
 }
 
 interface StrapiHomePage {
@@ -105,7 +106,22 @@ interface StrapiHomePage {
   tonChiBody: string | null;
   tamNhinBody: string | null;
   suMenhBody: string | null;
-  clientLines: StrapiClientLine[];
+  clientLines: StrapiClientEntry[];
+}
+
+/** Groups flat, ordered client entries into rows: a run of consecutive
+ *  entries sharing the same `line` number becomes one row. */
+function groupClientLines(entries: StrapiClientEntry[]): string[][] {
+  const rows: string[][] = [];
+  let currentLine: number | null = null;
+  for (const e of entries) {
+    if (currentLine === null || e.line !== currentLine) {
+      rows.push([]);
+      currentLine = e.line;
+    }
+    rows[rows.length - 1].push(e.name);
+  }
+  return rows;
 }
 
 // ---- Mappers: Strapi shape -> existing frontend types (src/types) ----
@@ -269,7 +285,7 @@ export async function getHomePage(): Promise<HomePageContent> {
   const json = await strapiFetch<{ data: StrapiHomePage | null }>("/home-page", {
     populate: {
       heroHeading: true,
-      clientLines: { populate: { clients: true } },
+      clientLines: true,
     },
   });
   const d = json.data;
@@ -279,6 +295,6 @@ export async function getHomePage(): Promise<HomePageContent> {
     tonChiBody: d?.tonChiBody ?? "",
     tamNhinBody: d?.tamNhinBody ?? "",
     suMenhBody: d?.suMenhBody ?? "",
-    clientLines: (d?.clientLines ?? []).map((line) => line.clients.map((c) => c.value)),
+    clientLines: groupClientLines(d?.clientLines ?? []),
   };
 }
