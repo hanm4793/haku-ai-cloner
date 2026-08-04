@@ -10,9 +10,10 @@ import { Clients } from "@/components/Clients";
 import { Define } from "@/components/Define";
 import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
-import { PROJECTS } from "@/lib/data";
+import { getFeaturedProjects, getServices } from "@/lib/cms";
 
-export default function Home() {
+export default async function Home() {
+  const [projects, services] = await Promise.all([getFeaturedProjects(), getServices()]);
   return (
     <div className="flex min-h-screen w-full flex-col bg-black text-white">
       <SmoothScroll />
@@ -22,14 +23,14 @@ export default function Home() {
         <Hero />
         <Manifesto />
         <GalleryMarquee />
-        <ServicesHome />
+        <ServicesHome services={services} />
         <section className="aa-container pb-12 pt-0 md:pb-28 lg:pt-4">
           <div className="grid lg:grid-cols-12 lg:gap-5">
             <p className="aa-reveal aa-eyebrow mb-6 text-[1.125rem] font-medium uppercase leading-[1.35] lg:col-start-3 lg:col-span-4 lg:mb-8 lg:text-base lg:normal-case">
               Dự án / khách hàng nổi bật
             </p>
           </div>
-          <ProjectsGrid projects={PROJECTS} />
+          <ProjectsGrid projects={projects} />
         </section>
         <Clients />
         <Define />

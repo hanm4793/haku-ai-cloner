@@ -3,19 +3,25 @@
 import { useMemo, useState } from "react";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { RevealTitle } from "@/components/RevealTitle";
-import { PROJECTS, PROJECT_FILTERS } from "@/lib/data";
+import type { Project } from "@/types";
+
+interface ProjectsExplorerProps {
+  projects: Project[];
+  categoryNames: string[];
+}
 
 /** Filter bar + mosaic grid + "XEM THÊM" — caayco-style category filtering. */
-export function ProjectsExplorer() {
-  const [filter, setFilter] = useState<(typeof PROJECT_FILTERS)[number]>("All");
+export function ProjectsExplorer({ projects, categoryNames }: ProjectsExplorerProps) {
+  const PROJECT_FILTERS = useMemo(() => ["All", ...categoryNames], [categoryNames]);
+  const [filter, setFilter] = useState<string>("All");
   const [expanded, setExpanded] = useState(false);
 
   const filtered = useMemo(
     () =>
       filter === "All"
-        ? PROJECTS
-        : PROJECTS.filter((p) => p.categories.includes(filter)),
-    [filter],
+        ? projects
+        : projects.filter((p) => p.categories.includes(filter)),
+    [filter, projects],
   );
 
   // second batch repeats the roster when "XEM THÊM" is pressed (until real

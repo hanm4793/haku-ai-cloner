@@ -1,8 +1,13 @@
-import { CONTACT } from "@/lib/data";
+import { getSiteSettings, getHomePage } from "@/lib/cms";
 import { RevealTitle } from "@/components/RevealTitle";
 import { HeroBackground } from "@/components/HeroBackground";
 
-export function Hero() {
+export async function Hero() {
+  const [CONTACT, homePage] = await Promise.all([getSiteSettings(), getHomePage()]);
+  const heroLines = homePage.heroHeading.length
+    ? homePage.heroHeading
+    : ["Beyond Creativity", "Into", "Experiences"];
+
   return (
     /* h-dvh tracks browser chrome show/hide; min-h-svh keeps a full first
        screen even when the dynamic viewport temporarily shrinks. */
@@ -14,7 +19,7 @@ export function Hero() {
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-5 text-center">
         <RevealTitle
           as="h1"
-          lines={["Beyond Creativity", "Into", "Experiences"]}
+          lines={heroLines}
           stagger={130}
           className="text-[clamp(2.25rem,5.4vw,5.06rem)] font-extrabold uppercase leading-[1.08] tracking-tight text-white"
         />

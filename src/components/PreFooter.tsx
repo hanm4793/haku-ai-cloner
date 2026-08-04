@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MENU_LINKS, CONTACT } from "@/lib/data";
+import { MENU_LINKS } from "@/lib/data";
+import { getSiteSettings } from "@/lib/cms";
 import { ArrowUpRightIcon } from "@/components/icons";
 
 interface PreFooterProps {
@@ -9,7 +10,8 @@ interface PreFooterProps {
 
 /** "— ànART® x Bạn" block + stacked nav rows + "Kết nối với ànART" bar.
  *  Mobile order matches the design: connect bar → brand line → 2×2 nav → follow. */
-export function PreFooter({ partner = "Bạn" }: PreFooterProps) {
+export async function PreFooter({ partner = "Bạn" }: PreFooterProps) {
+  const CONTACT = await getSiteSettings();
   return (
     <section className="aa-container pb-6 pt-16 md:pt-24">
       {/* Mobile: Kết nối first (full-bleed bar). Desktop: sits with Follow us below. */}

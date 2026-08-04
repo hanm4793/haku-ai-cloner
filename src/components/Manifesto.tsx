@@ -1,19 +1,13 @@
 import Image from "next/image";
+import { getHomePage } from "@/lib/cms";
 
 /** Intro line + spinning badge + Tôn chỉ / Tầm nhìn / Sứ mệnh block (home). */
-export function Manifesto() {
+export async function Manifesto() {
+  const { manifestoIntro, tonChiBody, tamNhinBody, suMenhBody } = await getHomePage();
   return (
     <section className="aa-container pb-8 pt-20 md:pb-28 md:pt-24">
-      {/* Intro sentence — explicit breaks on <=480px match the design's line
-          rhythm (leading "—" and "và" start their own lines). Slightly smaller
-          type keeps each design-line from wrapping mid-phrase. */}
       <p className="aa-reveal mx-auto max-w-3xl text-center text-[1.125rem] leading-relaxed text-white/85 max-[480px]:text-[0.9375rem] md:text-[1.40625rem]">
-        <span className="block min-[481px]:inline">Vượt khỏi điểm nhìn của thị giác </span>
-        <span className="block whitespace-nowrap min-[481px]:inline min-[481px]:whitespace-normal">
-          — mở rộng điểm chạm vào không gian,{" "}
-        </span>
-        <span className="block min-[481px]:inline">chuyển động, hình khối, âm thanh </span>
-        <span className="block min-[481px]:inline">và hơn thế nữa.</span>
+        {manifestoIntro}
       </p>
 
       {/* Spinning badge stamp — only the outer ring (with the "ànArt Creative
@@ -47,28 +41,17 @@ export function Manifesto() {
 
         <div className="aa-reveal max-w-md">
           <p className="text-base text-white/85">— Tôn chỉ (01)</p>
-          <p className="mt-3 text-sm leading-relaxed text-white/75">
-            Nghệ thuật là điểm khởi đầu — ở đó mọi ý tưởng đều phải có giá trị
-            thẩm mỹ và chiều sâu cảm nhận.
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/75">{tonChiBody}</p>
         </div>
 
         <div className="aa-reveal max-w-md">
           <p className="text-base text-white/85">— Tầm nhìn (02)</p>
-          <p className="mt-3 text-sm leading-relaxed text-white/60">
-            Trở thành đối tác thiết kế sáng tạo nơi nghệ thuật không chỉ được
-            tạo ra, mà trở thành một hệ ngôn ngữ định hình cách thương hiệu tồn
-            tại và được cảm nhận.
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/60">{tamNhinBody}</p>
         </div>
 
         <div className="aa-reveal max-w-md">
           <p className="text-base text-white/85">— Sứ mệnh (03)</p>
-          <p className="mt-3 text-sm leading-relaxed text-white/60">
-            Chuyển hoá ý tưởng thành những trải nghiệm nghệ thuật có giá trị
-            thực — nơi mỗi thiết kế, mỗi định hướng sáng tạo không chỉ đẹp, mà
-            còn tạo ra khác biệt, cảm xúc và hiệu quả cho thương hiệu.
-          </p>
+          <p className="mt-3 text-sm leading-relaxed text-white/60">{suMenhBody}</p>
         </div>
 
         <span className="aa-reveal block h-px w-10 bg-white/40" />
@@ -107,14 +90,7 @@ export function Manifesto() {
         <div className="aa-reveal text-center lg:col-start-2 lg:col-span-4 lg:-mt-16 lg:text-right">
           <p className="text-base text-white/85">— Tôn chỉ (01)</p>
           <h2 className="mt-5 text-[clamp(1.9rem,3.38vw,3.23rem)] font-normal leading-[1.22] text-white">
-            Nghệ thuật
-            <br className="hidden lg:block" /> là điểm khởi đầu
-            <br className="hidden lg:block" /> — ở đó
-            <br className="hidden lg:block" /> mọi ý tưởng
-            <br className="hidden lg:block" /> đều phải có
-            <br className="hidden lg:block" /> giá trị thẩm mỹ
-            <br className="hidden lg:block" /> và chiều sâu
-            <br className="hidden lg:block" /> cảm nhận.
+            {tonChiBody}
           </h2>
         </div>
 
@@ -153,19 +129,11 @@ export function Manifesto() {
           <p className="aa-eyebrow justify-center text-xl sm:justify-start">Chúng tôi là</p>
           <div>
             <p className="text-base text-white/85">— Tầm nhìn (02)</p>
-            <p className="mt-3 text-sm leading-relaxed text-white/60">
-              Trở thành đối tác thiết kế sáng tạo nơi nghệ thuật không chỉ được
-              tạo ra, mà trở thành một hệ ngôn ngữ định hình cách thương hiệu
-              tồn tại và được cảm nhận.
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">{tamNhinBody}</p>
           </div>
           <div>
             <p className="text-base text-white/85">— Sứ mệnh (03)</p>
-            <p className="mt-3 text-sm leading-relaxed text-white/60">
-              Chuyển hoá ý tưởng thành những trải nghiệm nghệ thuật có giá trị
-              thực — nơi mỗi thiết kế, mỗi định hướng sáng tạo không chỉ đẹp,
-              mà còn tạo ra khác biệt, cảm xúc và hiệu quả cho thương hiệu.
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">{suMenhBody}</p>
           </div>
         </div>
       </div>

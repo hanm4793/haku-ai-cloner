@@ -6,7 +6,7 @@ import { SideTab } from "@/components/SideTab";
 import { RevealTitle } from "@/components/RevealTitle";
 import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
-import { CONTACT } from "@/lib/data";
+import { getSiteSettings } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Liên hệ | ànART®",
@@ -14,7 +14,8 @@ export const metadata: Metadata = {
     "Câu chuyện của bạn sẽ truyền cảm hứng cho chúng tôi. Gửi email đến hello@anart.vn.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const CONTACT = await getSiteSettings();
   return (
     <div className="flex min-h-screen w-full flex-col bg-black text-white">
       <SmoothScroll />

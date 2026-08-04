@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { SERVICES } from "@/lib/data";
+import type { Service } from "@/types";
 
 /** Plus/minus bullet built from two equal-size bars (à la caay.co's toggle
  *  tabs) instead of the "+"/"−" glyphs — those render at mismatched visual
@@ -23,7 +23,7 @@ function PlusMinusIcon({ isPlus, className }: { isPlus: boolean; className?: str
 }
 
 /** "› Dịch vụ của ànART" statement + LĨNH VỰC TRIỂN KHAI interactive list (home). */
-export function ServicesHome() {
+export function ServicesHome({ services }: { services: Service[] }) {
   const [active, setActive] = useState(0);
 
   return (
@@ -50,7 +50,7 @@ export function ServicesHome() {
           className="aa-reveal relative hidden h-[clamp(4rem,6.75vw,6.75rem)] select-none text-right lg:col-start-3 lg:col-span-1 lg:block"
           aria-hidden
         >
-          {SERVICES.map((s, i) => (
+          {services.map((s, i) => (
             <p
               key={s.index}
               className="absolute inset-0 text-[clamp(4rem,6.75vw,6.75rem)] font-light leading-none text-aa-blue transition-all duration-500 ease-[cubic-bezier(0.3,0.86,0.36,0.95)]"
@@ -69,7 +69,7 @@ export function ServicesHome() {
             Lĩnh vực triển khai
           </p>
           <ul className="flex flex-col gap-4">
-            {SERVICES.map((s, i) => (
+            {services.map((s, i) => (
               <li key={s.index}>
                 <button
                   type="button"
@@ -103,7 +103,7 @@ export function ServicesHome() {
 
         <div className="aa-reveal hidden max-w-md lg:col-start-8 lg:col-span-5 lg:block lg:pt-16">
           <p key={active} className="text-sm leading-relaxed text-white">
-            {SERVICES[active].description}
+            {services[active].description}
           </p>
         </div>
       </div>

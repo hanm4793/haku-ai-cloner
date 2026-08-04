@@ -9,6 +9,8 @@ export interface Project {
   categories: string[];
   image: string;
   size: ProjectSize;
+  /** Whether a /du-an/[slug] case-study page exists for this project. */
+  hasCaseStudy: boolean;
 }
 
 export interface Service {
@@ -26,7 +28,7 @@ export type DetailBlock =
   | { type: "images"; images: string[] }
   /** paragraph block — "split" = heading left + copy right, "right" = copy in right column only */
   | { type: "text"; heading?: string; paragraphs: string[]; align?: "split" | "right" }
-  /** full-bleed image with the project caption + year overlaid (caay-style figure) */
+  /** full-bleed image (caay-style figure) */
   | { type: "full"; image: string };
 
 /** Full case-study content for /du-an/[slug]. */
@@ -42,8 +44,6 @@ export interface ProjectDetail {
   overview: string[];
   /** caption overlaid on full-bleed images, one entry per line */
   captionLines: string[];
-  /** year tag shown bottom-right of full images, e.g. "#2026" */
-  year: string;
   blocks: DetailBlock[];
 }
 

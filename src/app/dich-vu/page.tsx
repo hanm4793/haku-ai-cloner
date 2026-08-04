@@ -9,7 +9,7 @@ import { ServicesStamp } from "@/components/ServicesStamp";
 import { Define } from "@/components/Define";
 import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
-import { SERVICES } from "@/lib/data";
+import { getServices } from "@/lib/cms";
 
 export const metadata: Metadata = {
   title: "Dịch vụ | ànART®",
@@ -17,7 +17,8 @@ export const metadata: Metadata = {
     "Thiết kế không gian triển lãm, sự kiện / lễ hội, cảnh quan, mô hình nghệ thuật, thương hiệu và tổ chức sản xuất decor.",
 };
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const SERVICES = await getServices();
   return (
     <div className="flex min-h-screen w-full flex-col bg-black text-white">
       <SmoothScroll />

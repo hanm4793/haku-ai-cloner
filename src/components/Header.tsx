@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { MENU_LINKS, NAV_LINKS, CONTACT } from "@/lib/data";
+import { MENU_LINKS, NAV_LINKS } from "@/lib/data";
+import { useSiteSettings } from "@/lib/site-settings-context";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const CONTACT = useSiteSettings();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);

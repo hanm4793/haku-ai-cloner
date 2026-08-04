@@ -8,11 +8,12 @@ import { RevealTitle } from "@/components/RevealTitle";
 import { ProjectNav } from "@/components/ProjectNav";
 import { PreFooter } from "@/components/PreFooter";
 import { Footer } from "@/components/Footer";
-import { PROJECTS, PROJECT_DETAILS } from "@/lib/data";
-import type { DetailBlock, ProjectDetail } from "@/types";
+import { getProjects, getProjectBySlug } from "@/lib/cms";
+import type { DetailBlock, ProjectDetail, Project } from "@/types";
 
-export function generateStaticParams() {
-  return Object.keys(PROJECT_DETAILS).map((slug) => ({ slug }));
+export async function generateStaticParams() {
+  const projects = await getProjects();
+  return projects.filter((p) => p.hasCaseStudy).map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({
@@ -21,7 +22,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const detail = PROJECT_DETAILS[slug];
+  const result = await getProjectBySlug(slug);
+  const detail = result?.detail;
   if (!detail) return { title: "Dự án | ànART®" };
   const title = detail.titleLines.join(" ");
   return {
@@ -32,11 +34,11 @@ export async function generateMetadata({
 
 /** Adjacent project slug (with wraparound). Links to the detail route when a
  *  case study exists, otherwise back to the list. */
-function adjacentHref(currentSlug: string, dir: 1 | -1): string {
-  const i = PROJECTS.findIndex((p) => p.slug === currentSlug);
+function adjacentHref(projects: Project[], currentSlug: string, dir: 1 | -1): string {
+  const i = projects.findIndex((p) => p.slug === currentSlug);
   if (i === -1) return "/du-an";
-  const next = PROJECTS[(i + dir + PROJECTS.length) % PROJECTS.length];
-  return PROJECT_DETAILS[next.slug] ? `/du-an/${next.slug}` : "/du-an";
+  const next = projects[(i + dir + projects.length) % projects.length];
+  return next.hasCaseStudy ? `/du-an/${next.slug}` : "/du-an";
 }
 
 const GRID_COLS: Record<number, string> = {
@@ -155,7 +157,8 @@ export default async function ProjectDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const detail = PROJECT_DETAILS[slug];
+  const [result, projects] = await Promise.all([getProjectBySlug(slug), getProjects()]);
+  const detail = result?.detail;
   if (!detail) notFound();
 
   return (
@@ -223,8 +226,8 @@ export default async function ProjectDetailPage({
 
         {/* Prev / Next */}
         <ProjectNav
-          backHref={adjacentHref(detail.slug, -1)}
-          nextHref={adjacentHref(detail.slug, 1)}
+          backHref={adjacentHref(projects, detail.slug, -1)}
+          nextHref={adjacentHref(projects, detail.slug, 1)}
         />
       </main>
       <PreFooter />

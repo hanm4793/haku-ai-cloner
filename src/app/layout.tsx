@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { PageLoader } from "@/components/PageLoader";
+import { SiteSettingsProvider } from "@/lib/site-settings-context";
+import { getSiteSettings } from "@/lib/cms";
 import "./globals.css";
 
 const neueKaine = localFont({
@@ -40,11 +42,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteSettings = await getSiteSettings();
+
   return (
     <html
       lang="vi"
@@ -52,7 +56,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-black text-white">
         <PageLoader />
-        {children}
+        <SiteSettingsProvider value={siteSettings}>{children}</SiteSettingsProvider>
       </body>
     </html>
   );

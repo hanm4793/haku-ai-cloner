@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { CONTACT } from "@/lib/data";
+import { useSiteSettings } from "@/lib/site-settings-context";
 import { clamp } from "@/lib/scrollTicker";
 
 const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
@@ -33,6 +33,7 @@ const LETTER_JITTER = CTA_TEXT.split("").map((_, i) => ({
  *  ticks into one continuous glide.
  */
 export function Footer() {
+  const CONTACT = useSiteSettings();
   const artRef = useRef<HTMLParagraphElement>(null);
   const viewportRef = useRef<HTMLDivElement>(null);
   const trainRef = useRef<HTMLDivElement>(null);
