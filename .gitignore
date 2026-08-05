@@ -52,3 +52,4 @@ temp/
 # Design sources & raw images (large masters) — local only, not committed or deployed
 src/anart-assets/design/
 src/anart-assets/images/
+.env*
